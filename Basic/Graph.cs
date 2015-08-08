@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Basic
 {
-    class Graph
+    public class Graph
     {
         private readonly string _verticesWeigtFilePath;
         private readonly string _edgesWeighFilePath;
@@ -41,7 +41,7 @@ namespace Basic
             }
         }
 
-        private void ReadVerticesWeights(Stream straem)
+        public void ReadVerticesWeights(Stream straem)
         {
             using (var reader = new StreamReader(straem))
             {
