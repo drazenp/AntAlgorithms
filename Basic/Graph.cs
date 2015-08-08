@@ -9,8 +9,8 @@ namespace Basic
         private readonly string _verticesWeigtFilePath;
         private readonly string _edgesWeighFilePath;
 
-        public List<int> VerticesWeights { get; private set; } = new List<int>();
-        public List<int> EdgesWeights { get; private set; }
+        public List<int> VerticesWeights { get; set; } = new List<int>();
+        public int[,] EdgesWeights { get; private set; }
 
         public Graph(string verticesWeigtFilePath, string edgesWeighFilePath)
         {
@@ -58,10 +58,27 @@ namespace Basic
             }
         }
 
-        private void ReadEdgesWeights(Stream straem)
+        public void ReadEdgesWeights(Stream straem)
         {
+            if (VerticesWeights.Count <= 1)
+                throw new Exception("Number of vertices must be greter than 1.");
+
+            EdgesWeights = new int[VerticesWeights.Count, VerticesWeights.Count];
+
             using (var reader = new StreamReader(straem))
             {
+                var line = reader.ReadLine();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+
+                    // TODO: Check what to do where. -> exceptions?
+                    if (line == null) continue;
+
+                    var fileData = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    EdgesWeights[int.Parse(fileData[0]), int.Parse(fileData[1])] = int.Parse(fileData[2]);
+                }
             }
         }
     }
