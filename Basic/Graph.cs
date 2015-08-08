@@ -12,6 +12,8 @@ namespace Basic
         public List<int> VerticesWeights { get; set; } = new List<int>();
         public int[,] EdgesWeights { get; private set; }
 
+        public decimal[,] PheromoneMatrix { get; private set; }
+
         public Graph(string verticesWeigtFilePath, string edgesWeighFilePath)
         {
             _verticesWeigtFilePath = verticesWeigtFilePath;
@@ -39,6 +41,8 @@ namespace Basic
             {
                 ReadEdgesWeights(straem);
             }
+
+            InitializePheromoneMatrix();
         }
 
         public void ReadVerticesWeights(Stream straem)
@@ -83,5 +87,25 @@ namespace Basic
                 }
             }
         }
+
+        public void InitializePheromoneMatrix()
+        {
+            PheromoneMatrix = new decimal[VerticesWeights.Count, VerticesWeights.Count];
+            for (int i = 0; i < VerticesWeights.Count - 1; i++)
+            {
+                for (var j = 0; j < VerticesWeights.Count - 1; j++)
+                {
+                    PheromoneMatrix[i, j] = Constants.MinimalValueOfPheromone;
+                }
+            }
+        }
+
+        //public static void Populate<T>(this T[] arr, T value)
+        //{
+        //    for (int i = 0; i < arr.Length; i++)
+        //    {
+        //        arr[i] = value;
+        //    }
+        //}
     }
 }
