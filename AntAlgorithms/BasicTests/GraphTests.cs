@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BasicTests
 {
-    [TestClass()]
+    [TestClass]
     public class GraphTests
     {
         private const string BasicVericesWeights = @"tc
@@ -38,7 +38,7 @@ namespace BasicTests
                                                     6 8 2
                                                     7 8 3";
 
-        [TestMethod()]
+        [TestMethod]
         public void ReadVerticesWeights_CorrectFormat_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");
@@ -51,7 +51,7 @@ namespace BasicTests
             Assert.AreEqual(9, graph.VerticesWeights.Count);
         }
         
-        [TestMethod()]
+        [TestMethod]
         public void ReadEdgesWeights_CorrectFormat_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");

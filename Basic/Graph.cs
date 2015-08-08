@@ -45,6 +45,7 @@ namespace Basic
         {
             using (var reader = new StreamReader(straem))
             {
+                // Skip first line.
                 var line = reader.ReadLine();
                 while (line != null)
                 {
@@ -67,6 +68,7 @@ namespace Basic
 
             using (var reader = new StreamReader(straem))
             {
+                // Skip first line.
                 var line = reader.ReadLine();
                 while (line != null)
                 {
