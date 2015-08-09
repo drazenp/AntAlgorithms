@@ -14,7 +14,7 @@ namespace BasicTests
         [TestMethod]
         public void MaxAllowedWeight_Success()
         {
-            var options = new Options(maxNumberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1M);
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1M);
 
             var aspg = new Aspg(options, null);
 

@@ -15,22 +15,23 @@ namespace Basic
             _graph = graph;
         }
 
-        public double GetQuality()
+        public decimal GetQuality()
         {
-            throw new NotImplementedException();
+            decimal quality = Decimal.MinValue;
+
+            while (_options.NumberOfIterations > 0)
+            {
+
+            }
+
+            return quality;
         }
 
         public decimal GetMaxAllowedWeight(int[] verticesWeights)
         {
             var sumOfVerticesWeightes = verticesWeights.Sum();
-            decimal maxAllowedWeight = sumOfVerticesWeightes /_options.NumberOfRegions * (1 + _options.Delta);
+            decimal maxAllowedWeight = sumOfVerticesWeightes / _options.NumberOfRegions * (1 + _options.Delta);
             return maxAllowedWeight;
         }
-
-//% MDV - Maksimalna dozvoljena velicina
-//function Velicina = DozvoljenaVelicina(TC)
-//global ASPGOpcije
-//sumV=sum(TC);
-//Velicina=sumV/ASPGOpcije.h*(1+ASPGOpcije.Tol);
     }
 }

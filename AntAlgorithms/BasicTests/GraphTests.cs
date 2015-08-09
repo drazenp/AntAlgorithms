@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -50,12 +51,26 @@ namespace BasicTests
 
             Assert.AreEqual(9, graph.VerticesWeights.Count);
         }
-        
+
         [TestMethod]
         public void ReadEdgesWeights_CorrectFormat_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");
-            graph.VerticesWeights = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            graph.VerticesWeights = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            using (var stream = GenerateStreamFromString(BasicEdgesWeights))
+            {
+                graph.ReadEdgesWeights(stream);
+            }
+
+            Assert.AreEqual(3, graph.EdgesWeights[0, 1]);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception), "Number of vertices is not greter than 1")]
+        public void ReadEdgesWeights_CorrectFormat_Fail()
+        {
+            var graph = new Graph("baba.txt", "baba.txt");
             
             using (var stream = GenerateStreamFromString(BasicEdgesWeights))
             {
@@ -87,6 +102,24 @@ namespace BasicTests
             Assert.AreEqual(0, graph.PheromoneMatrix[0, 0]);
             Assert.AreEqual(0, graph.PheromoneMatrix[1, 1]);
             Assert.AreEqual(0, graph.PheromoneMatrix[2, 2]);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException),"Wrong file path for vertices weight was inappropriately allowed.")]
+        public void InitializeGraph_VerticesWeigtFilePath_NotExisits_Fail()
+        {
+            var graph = new Graph("baba.txt", "baba.txt");
+
+            graph.InitializeGraph();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException), "Wrong file path for edges weight was inappropriately allowed.")]
+        public void InitializeGraph_EdgesWeighFilePath_NotExisits_Fail()
+        {
+            var graph = new Graph("baba.txt", "baba.txt");
+
+            graph.InitializeGraph();
         }
 
         private static Stream GenerateStreamFromString(string s)
