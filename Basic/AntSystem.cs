@@ -3,9 +3,13 @@
     public class AntSystem
     {
         /// <summary>
-        /// vrste - broj mrava(regiona), za svakog po putanja
+        /// For each colony define it's trail.
         /// </summary>
         public decimal[,] Treil;
+
+        /// <summary>
+        /// The sum of all vrtices weights for each colony.
+        /// </summary>
         public decimal[] SumOfRegionWeight;
 
         public AntSystem(int numberOfRegions, int maxNumberOfVerticesPerTrail)
