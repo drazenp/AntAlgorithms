@@ -76,6 +76,19 @@ namespace BasicTests
             Assert.AreEqual(Constants.MinimalValueOfPheromone, graph.PheromoneMatrix[0,1]);
         }
 
+        [TestMethod]
+        public void InitializePheromoneMatrix_DiagonalZeros_Success()
+        {
+            var graph = new Graph("baba.txt", "baba.txt");
+            graph.VerticesWeights = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            graph.InitializePheromoneMatrix();
+
+            Assert.AreEqual(0, graph.PheromoneMatrix[0, 0]);
+            Assert.AreEqual(0, graph.PheromoneMatrix[1, 1]);
+            Assert.AreEqual(0, graph.PheromoneMatrix[2, 2]);
+        }
+
         private static Stream GenerateStreamFromString(string s)
         {
             MemoryStream stream = new MemoryStream();

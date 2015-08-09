@@ -95,6 +95,8 @@ namespace Basic
             {
                 for (var j = 0; j < VerticesWeights.Count - 1; j++)
                 {
+                    if (i == j) continue;
+
                     PheromoneMatrix[i, j] = Constants.MinimalValueOfPheromone;
                 }
             }
