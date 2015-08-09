@@ -10,9 +10,20 @@ namespace Basic
         private readonly string _edgesWeighFilePath;
 
         public List<int> VerticesWeights { get; set; } = new List<int>();
+
         public int[,] EdgesWeights { get; private set; }
 
         public decimal[,] PheromoneMatrix { get; private set; }
+
+        private int _numberOfVertices;
+        public int NumberOfVertices
+        {
+            get
+            {
+                return _numberOfVertices != default(int) ? _numberOfVertices : VerticesWeights.Count;
+            }
+            private set { _numberOfVertices = value; }
+        }
 
         public Graph(string verticesWeigtFilePath, string edgesWeighFilePath)
         {
@@ -36,6 +47,8 @@ namespace Basic
             {
                 ReadVerticesWeights(straem);
             }
+
+            NumberOfVertices = VerticesWeights.Count;
 
             using (var straem = File.OpenRead(_edgesWeighFilePath))
             {
@@ -65,10 +78,10 @@ namespace Basic
 
         public void ReadEdgesWeights(Stream straem)
         {
-            if (VerticesWeights.Count <= 1)
+            if (NumberOfVertices <= 1)
                 throw new Exception("Number of vertices must be greter than 1.");
 
-            EdgesWeights = new int[VerticesWeights.Count, VerticesWeights.Count];
+            EdgesWeights = new int[NumberOfVertices, NumberOfVertices];
 
             using (var reader = new StreamReader(straem))
             {
@@ -90,10 +103,10 @@ namespace Basic
 
         public void InitializePheromoneMatrix()
         {
-            PheromoneMatrix = new decimal[VerticesWeights.Count, VerticesWeights.Count];
-            for (int i = 0; i < VerticesWeights.Count - 1; i++)
+            PheromoneMatrix = new decimal[NumberOfVertices, NumberOfVertices];
+            for (int i = 0; i < NumberOfVertices - 1; i++)
             {
-                for (var j = 0; j < VerticesWeights.Count - 1; j++)
+                for (var j = 0; j < NumberOfVertices - 1; j++)
                 {
                     if (i == j) continue;
 

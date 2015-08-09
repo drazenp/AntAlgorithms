@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Basic
 {
@@ -17,5 +19,18 @@ namespace Basic
         {
             throw new NotImplementedException();
         }
+
+        public decimal GetMaxAllowedWeight(int[] verticesWeights)
+        {
+            var sumOfVerticesWeightes = verticesWeights.Sum();
+            decimal maxAllowedWeight = sumOfVerticesWeightes /_options.NumberOfRegions * (1 + _options.Delta);
+            return maxAllowedWeight;
+        }
+
+//% MDV - Maksimalna dozvoljena velicina
+//function Velicina = DozvoljenaVelicina(TC)
+//global ASPGOpcije
+//sumV=sum(TC);
+//Velicina=sumV/ASPGOpcije.h*(1+ASPGOpcije.Tol);
     }
 }

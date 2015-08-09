@@ -20,7 +20,7 @@
                 for (var j = 0; j < maxNumberOfVerticesPerTrail; j++)
                 {
                     Treil[i, j] = 1;
-                }
+                } 
             }
 
             SumOfRegionWeight = new decimal[numberOfRegions];

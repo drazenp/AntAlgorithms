@@ -1,8 +1,8 @@
 ﻿namespace Basic
 {
-    public class Options
+    public struct Options
     {
-        public int MaxNumberOfIterations;
+        public readonly int MaxNumberOfIterations;
         public readonly int NumberOfRegions;
         public readonly double Alfa;
         public readonly double Beta;
