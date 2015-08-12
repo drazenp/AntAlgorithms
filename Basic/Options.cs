@@ -2,7 +2,7 @@
 {
     public struct Options
     {
-        public readonly int NumberOfIterations;
+        public int NumberOfIterations;
         public readonly int NumberOfRegions;
         public readonly double Alfa;
         public readonly double Beta;

@@ -9,6 +9,11 @@ namespace BasicTests
         [TestMethod]
         public void GetQuality_Success()
         {
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1M);
+            var graph = new Graph(null, null);
+            var aspg = new Aspg(options, graph);
+
+            var quality = aspg.GetQuality();
         }
 
         [TestMethod]
