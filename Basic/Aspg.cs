@@ -6,11 +6,7 @@ namespace Basic
     {
         private Options _options;
         private readonly Graph _graph;
-
-        // This should be better organized.
-        private short[,] _trails;
-        public int MaxNumberOfVerticesInTrail { get; private set; }
-
+        
         public Aspg(Options options, Graph graph)
         {
             _options = options;
@@ -20,6 +16,7 @@ namespace Basic
         public decimal GetQuality()
         {
             decimal quality = decimal.MinValue;
+            int maxNumberOfVerticesInTrail = _graph.NumberOfVertices - _options.NumberOfRegions + 1;
 
             while (_options.NumberOfIterations > 0)
             {
@@ -29,8 +26,7 @@ namespace Basic
                 int[,] korak = new int[_options.NumberOfRegions, 1];
                 //ASPGOpcije.Korak = zeros(ASPGOpcije.h, 1); % prati broj cvorova u regionima
 
-                MaxNumberOfVerticesInTrail = _graph.NumberOfVertices - _options.NumberOfRegions + 1;
-                _trails = new short[_options.NumberOfRegions, MaxNumberOfVerticesInTrail];
+                var antSystem = new AntSystem(_options.NumberOfRegions, maxNumberOfVerticesInTrail);
 
 
                 _options.NumberOfIterations--;

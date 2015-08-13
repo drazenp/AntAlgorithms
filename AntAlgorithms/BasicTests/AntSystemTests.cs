@@ -9,27 +9,57 @@ namespace BasicTests
     public class AntSystemTests
     {
         [TestMethod]
-        public void Treil_AllOnesSet_Success()
+        public void Treil_AllTrailsInitilized_Success()
         {
-            var antSystem = new AntSystem(3, 7);
+            var numberOfRegions = 3;
+            var maxNumberOfVertices = 7;
+            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
 
-            var sumOfTreil = 0M;
-            foreach (var value in antSystem.Treil)
+            for (var i = 0; i < numberOfRegions; i++)
             {
-                sumOfTreil += value;
+                Assert.IsNotNull(antSystem.Treil[i]);
             }
-
-            Assert.AreEqual(21,sumOfTreil);
         }
 
         [TestMethod]
         public void SumOfWeight_AllZerosSet_Success()
         {
-            var antSystem = new AntSystem(3, 7);
+            var numberOfRegions = 3;
+            var maxNumberOfVertices = 7;
+            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
 
             var sumOfWeights = antSystem.SumOfRegionWeight.Sum();
 
-            Assert.AreEqual(3, sumOfWeights);
+            Assert.AreEqual(0M, sumOfWeights);
+        }
+
+        [TestMethod]
+        public void InitializeTreils_AllRegionsInitialized_Success()
+        {
+            var numberOfRegions = 3;
+            var maxNumberOfVertices = 7;
+            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
+
+            antSystem.InitializeTreils();
+
+            Assert.AreEqual(3, antSystem.Treil.Count);
+        }
+
+        [TestMethod]
+        public void InitializeTreils_AllRegionsInitializedInRange_Success()
+        {
+            var numberOfRegions = 3;
+            var maxNumberOfVertices = 7;
+            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
+
+            antSystem.InitializeTreils();
+
+            for (var i = 0; i < numberOfRegions; i++)
+            {
+                int velueOfFirstVerticeInRegion = antSystem.Treil[i].Single();
+                Assert.IsTrue(velueOfFirstVerticeInRegion < 8);
+                Assert.IsTrue(velueOfFirstVerticeInRegion > 0);
+            }
         }
     }
 }
