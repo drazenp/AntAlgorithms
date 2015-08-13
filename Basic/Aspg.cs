@@ -7,6 +7,10 @@ namespace Basic
         private Options _options;
         private readonly Graph _graph;
 
+        // This should be better organized.
+        private short[,] _trails;
+        public int MaxNumberOfVerticesInTrail { get; private set; }
+
         public Aspg(Options options, Graph graph)
         {
             _options = options;
@@ -25,6 +29,10 @@ namespace Basic
                 int[,] korak = new int[_options.NumberOfRegions, 1];
                 //ASPGOpcije.Korak = zeros(ASPGOpcije.h, 1); % prati broj cvorova u regionima
 
+                MaxNumberOfVerticesInTrail = _graph.NumberOfVertices - _options.NumberOfRegions + 1;
+                _trails = new short[_options.NumberOfRegions, MaxNumberOfVerticesInTrail];
+
+
                 _options.NumberOfIterations--;
             }
 
@@ -37,6 +45,8 @@ namespace Basic
             decimal maxAllowedWeight = sumOfVerticesWeightes / (decimal)_options.NumberOfRegions * (1 + _options.Delta);
             return maxAllowedWeight;
         }
+
+
 
         //Nasumican odabir sledeecog cvora
         //        function PocetneTacke(region)

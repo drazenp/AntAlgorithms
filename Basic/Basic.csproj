@@ -43,6 +43,7 @@
     <Compile Include="AntSystem.cs" />
     <Compile Include="Aspg.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
