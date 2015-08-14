@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,12 +9,14 @@ namespace BasicTests
     [TestClass]
     public class AntSystemTests
     {
+        private Random _rnd = new Random(Environment.TickCount);
+
         [TestMethod]
         public void Treil_AllTrailsInitilized_Success()
         {
             var numberOfRegions = 3;
             var maxNumberOfVertices = 7;
-            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
+            var antSystem = new AntSystem(_rnd, numberOfRegions, maxNumberOfVertices);
 
             for (var i = 0; i < numberOfRegions; i++)
             {
@@ -26,7 +29,7 @@ namespace BasicTests
         {
             var numberOfRegions = 3;
             var maxNumberOfVertices = 7;
-            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
+            var antSystem = new AntSystem(_rnd, numberOfRegions, maxNumberOfVertices);
 
             var sumOfWeights = antSystem.SumOfRegionWeight.Sum();
 
@@ -38,7 +41,7 @@ namespace BasicTests
         {
             var numberOfRegions = 3;
             var maxNumberOfVertices = 7;
-            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
+            var antSystem = new AntSystem(_rnd, numberOfRegions, maxNumberOfVertices);
 
             antSystem.InitializeTreils();
 
@@ -50,7 +53,7 @@ namespace BasicTests
         {
             var numberOfRegions = 3;
             var maxNumberOfVertices = 7;
-            var antSystem = new AntSystem(numberOfRegions, maxNumberOfVertices);
+            var antSystem = new AntSystem(_rnd, numberOfRegions, maxNumberOfVertices);
 
             antSystem.InitializeTreils();
 
@@ -60,6 +63,30 @@ namespace BasicTests
                 Assert.IsTrue(velueOfFirstVerticeInRegion < 8);
                 Assert.IsTrue(velueOfFirstVerticeInRegion > 0);
             }
+        }
+
+        [TestMethod]
+        public void InitializeTreils_FreeVertices_Success()
+        {
+            var numberOfRegions = 3;
+            var maxNumberOfVertices = 7;
+            var antSystem = new AntSystem(_rnd, numberOfRegions, maxNumberOfVertices);
+
+            antSystem.InitializeTreils();
+
+            Assert.AreEqual(maxNumberOfVertices-numberOfRegions, antSystem.freeVertices.Count);
+        }
+
+        [TestMethod]
+        public void InitializeTreils_PassersVertices_Success()
+        {
+            var numberOfRegions = 3;
+            var maxNumberOfVertices = 7;
+            var antSystem = new AntSystem(_rnd, numberOfRegions, maxNumberOfVertices);
+
+            antSystem.InitializeTreils();
+
+            Assert.AreEqual(numberOfRegions, antSystem.passedVertices.Count);
         }
     }
 }
