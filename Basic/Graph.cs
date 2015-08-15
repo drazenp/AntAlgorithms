@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Basic
 {
-    public class Graph
+    public class Graph : IGraph
     {
         private readonly string _verticesWeigtFilePath;
         private readonly string _edgesWeighFilePath;

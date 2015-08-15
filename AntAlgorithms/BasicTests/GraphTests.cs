@@ -71,13 +71,13 @@ namespace BasicTests
         public void ReadEdgesWeights_CorrectFormat_Fail()
         {
             var graph = new Graph("baba.txt", "baba.txt");
-            
+
             using (var stream = GenerateStreamFromString(BasicEdgesWeights))
             {
                 graph.ReadEdgesWeights(stream);
             }
 
-            Assert.AreEqual(3, graph.EdgesWeights[0,1]);
+            Assert.AreEqual(3, graph.EdgesWeights[0, 1]);
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace BasicTests
 
             graph.InitializePheromoneMatrix();
 
-            Assert.AreEqual(Constants.MinimalValueOfPheromone, graph.PheromoneMatrix[0,1]);
+            Assert.AreEqual(Constants.MinimalValueOfPheromone, graph.PheromoneMatrix[0, 1]);
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace BasicTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FileNotFoundException),"Wrong file path for vertices weight was inappropriately allowed.")]
+        [ExpectedException(typeof(FileNotFoundException), "Wrong file path for vertices weight was inappropriately allowed.")]
         public void InitializeGraph_VerticesWeigtFilePath_NotExisits_Fail()
         {
             var graph = new Graph("baba.txt", "baba.txt");
@@ -125,11 +125,13 @@ namespace BasicTests
         private static Stream GenerateStreamFromString(string s)
         {
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
+            using (var writer = new StreamWriter(stream))
+            {
+                writer.Write(s);
+                writer.Flush();
+                stream.Position = 0;
+                return stream;
+            }
         }
     }
 }

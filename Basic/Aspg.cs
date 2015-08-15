@@ -6,11 +6,11 @@ namespace Basic
     public class Aspg
     {
         private Options _options;
-        private readonly Graph _graph;
+        private readonly IGraph _graph;
 
         private readonly Random _rnd = new Random(Environment.TickCount);
         
-        public Aspg(Options options, Graph graph)
+        public Aspg(Options options, IGraph graph)
         {
             _options = options;
             _graph = graph;
@@ -23,12 +23,13 @@ namespace Basic
 
             while (_options.NumberOfIterations > 0)
             {
-                var antSystem = new AntSystem(_rnd, _options.NumberOfRegions, _graph.NumberOfVertices);
-                // niz zauzetih tacaka
-                int[] zauzeteTacke = new int[_graph.NumberOfVertices];
+                var antSystem = new AntSystem(_rnd, _options.NumberOfRegions, _graph);
+
                 // prati broj cvorova u regionima
                 int[,] korak = new int[_options.NumberOfRegions, 1];
                 //ASPGOpcije.Korak = zeros(ASPGOpcije.h, 1); % prati broj cvorova u regionima
+
+                //SumaTezinaCvorova(TC);
 
 
 

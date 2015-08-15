@@ -23,13 +23,12 @@ namespace Basic
 
         public HashSet<int> PassedVertices { get; }
 
-        public AntSystem(Random rnd, int numberOfRegions, int numberOfVertices)
+        public AntSystem(Random rnd, int numberOfRegions, IGraph graph)
         {
             _rnd = rnd;
             _numberOfRegions = numberOfRegions;
 
             Treil = new List<HashSet<int>>();
-            //Treil = new int[numberOfRegions,maxNumberOfVerticesPerTrail];
             for (var i = 0; i < numberOfRegions; i++)
             {
                 Treil.Add(new HashSet<int>());
@@ -37,11 +36,7 @@ namespace Basic
 
             SumOfRegionWeight = new decimal[numberOfRegions];
 
-            FreeVertices = new HashSet<int>();
-            for (var i = 0; i < numberOfVertices; i++)
-            {
-                FreeVertices.Add(i);
-            }
+            FreeVertices = new HashSet<int>(graph.VerticesWeights);
 
             PassedVertices = new HashSet<int>();
         }
@@ -58,6 +53,8 @@ namespace Basic
                 PassedVertices.Add(randomFreeVertix);
             }
         }
+
+
 
         //Nasumican odabir sledeecog cvora
         //        function PocetneTacke(region)
