@@ -31,7 +31,10 @@ namespace Basic
 
                 //SumaTezinaCvorova(TC);
 
-
+                for (int vertexIndex = _options.NumberOfRegions - 1; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
+                {
+                       
+                }
 
                 _options.NumberOfIterations--;
             }

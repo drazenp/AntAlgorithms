@@ -12,16 +12,19 @@ namespace Basic
         /// <summary>
         /// For each colony define it's trail.
         /// </summary>
-        public List<HashSet<int>> Treil; 
+        public List<HashSet<int>> Treil { get; private set; }
 
         /// <summary>
         /// The sum of all vrtices weights for each colony.
         /// </summary>
-        public decimal[] SumOfRegionWeight;
+        public decimal[] SumOfRegionWeight { get; private set; }
 
         public HashSet<int> FreeVertices { get; private set; }
 
-        public HashSet<int> PassedVertices { get; }
+        public HashSet<int> PassedVertices { get; private set; }
+
+        // Overall weight of the all colonies.
+        public int[] WeightOfColonies { get; private set; }
 
         public AntSystem(Random rnd, int numberOfRegions, IGraph graph)
         {
@@ -39,22 +42,42 @@ namespace Basic
             FreeVertices = new HashSet<int>(graph.VerticesWeights);
 
             PassedVertices = new HashSet<int>();
+
+            WeightOfColonies = new int[numberOfRegions];
         }
 
         public void InitializeTreils()
         {
-            for (int i = 0; i < _numberOfRegions; i++)
+            for (short i = 0; i < _numberOfRegions; i++)
             {
                 var randomFreeVertix = FreeVertices.Shuffle(_rnd).First();
-                FreeVertices.Remove(randomFreeVertix);
 
-                Treil[i].Add(randomFreeVertix);
-
-                PassedVertices.Add(randomFreeVertix);
+                AddFreeVertexToTreil(i, randomFreeVertix);
             }
         }
 
+        public void AddFreeVertexToTreil(short treilIndex, int vertix)
+        {
+            FreeVertices.Remove(vertix);
 
+            Treil[treilIndex].Add(vertix);
+
+            var currentWeightOfColony = WeightOfColonies[treilIndex];
+            WeightOfColonies[treilIndex] = currentWeightOfColony + vertix;
+
+            PassedVertices.Add(vertix);
+        }
+
+        /// <summary>
+        /// Based on overall weight of colony shoose the next one.
+        /// The next colony will be with the lowest weight.
+        /// </summary>
+        /// <returns></returns>
+        public int GetNextColony()
+        {
+            var colonyWithMinWeight = WeightOfColonies.Min();
+            return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
+        }
 
         //Nasumican odabir sledeecog cvora
         //        function PocetneTacke(region)
