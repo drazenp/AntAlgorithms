@@ -125,13 +125,11 @@ namespace BasicTests
         private static Stream GenerateStreamFromString(string s)
         {
             MemoryStream stream = new MemoryStream();
-            using (var writer = new StreamWriter(stream))
-            {
-                writer.Write(s);
-                writer.Flush();
-                stream.Position = 0;
-                return stream;
-            }
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }

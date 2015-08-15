@@ -25,7 +25,7 @@ namespace BasicTests
 
             var maxAllowedWeight = aspg.GetMaxAllowedWeight(new[] { 1, 2, 3, 4, 5, 1 });
 
-            Assert.AreEqual(5.5M, maxAllowedWeight);
+            Assert.AreEqual(5.8666666666666666666666666666M, maxAllowedWeight);
         }
     }
 }
