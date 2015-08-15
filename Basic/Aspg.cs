@@ -8,7 +8,7 @@ namespace Basic
         private Options _options;
         private readonly Graph _graph;
 
-        private Random _rnd = new Random(Environment.TickCount);
+        private readonly Random _rnd = new Random(Environment.TickCount);
         
         public Aspg(Options options, Graph graph)
         {
@@ -19,10 +19,11 @@ namespace Basic
         public decimal GetQuality()
         {
             decimal quality = decimal.MinValue;
-            int maxNumberOfVerticesInTrail = _graph.NumberOfVertices - _options.NumberOfRegions + 1;
+            //int maxNumberOfVerticesInTrail = _graph.NumberOfVertices - _options.NumberOfRegions + 1;
 
             while (_options.NumberOfIterations > 0)
             {
+                var antSystem = new AntSystem(_rnd, _options.NumberOfRegions, _graph.NumberOfVertices);
                 // niz zauzetih tacaka
                 int[] zauzeteTacke = new int[_graph.NumberOfVertices];
                 // prati broj cvorova u regionima

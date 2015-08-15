@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Basic
 {
     public class AntSystem
     {
+        private readonly Random _rnd;
+        private readonly int _numberOfRegions;
+
         /// <summary>
         /// For each colony define it's trail.
         /// </summary>
-        //public int[,] Treil;
-
         public List<HashSet<int>> Treil; 
 
         /// <summary>
@@ -17,12 +19,15 @@ namespace Basic
         /// </summary>
         public decimal[] SumOfRegionWeight;
 
-        public HashSet<int> freeVertices { get; private set; }
+        public HashSet<int> FreeVertices { get; private set; }
 
-        public HashSet<int> passedVertices { get; }
+        public HashSet<int> PassedVertices { get; }
 
-        public AntSystem(Random rnd, int numberOfRegions, int maxNumberOfVerticesPerTrail)
+        public AntSystem(Random rnd, int numberOfRegions, int numberOfVertices)
         {
+            _rnd = rnd;
+            _numberOfRegions = numberOfRegions;
+
             Treil = new List<HashSet<int>>();
             //Treil = new int[numberOfRegions,maxNumberOfVerticesPerTrail];
             for (var i = 0; i < numberOfRegions; i++)
@@ -31,14 +36,28 @@ namespace Basic
             }
 
             SumOfRegionWeight = new decimal[numberOfRegions];
+
+            FreeVertices = new HashSet<int>();
+            for (var i = 0; i < numberOfVertices; i++)
+            {
+                FreeVertices.Add(i);
+            }
+
+            PassedVertices = new HashSet<int>();
         }
 
         public void InitializeTreils()
         {
-            
+            for (int i = 0; i < _numberOfRegions; i++)
+            {
+                var randomFreeVertix = FreeVertices.Shuffle(_rnd).First();
+                FreeVertices.Remove(randomFreeVertix);
+
+                Treil[i].Add(randomFreeVertix);
+
+                PassedVertices.Add(randomFreeVertix);
+            }
         }
-
-
 
         //Nasumican odabir sledeecog cvora
         //        function PocetneTacke(region)

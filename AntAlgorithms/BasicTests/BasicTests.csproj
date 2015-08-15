@@ -61,6 +61,7 @@
     <Compile Include="GraphTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AspgTests.cs" />
+    <Compile Include="ExtensionMethodsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Basic\Basic.csproj">
