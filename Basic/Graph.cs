@@ -13,7 +13,7 @@ namespace Basic
 
         public int[,] EdgesWeights { get; private set; }
 
-        public decimal[,] PheromoneMatrix { get; private set; }
+        public double[,] PheromoneMatrix { get; private set; }
 
         private int _numberOfVertices;
         public int NumberOfVertices
@@ -103,7 +103,7 @@ namespace Basic
 
         public void InitializePheromoneMatrix()
         {
-            PheromoneMatrix = new decimal[NumberOfVertices, NumberOfVertices];
+            PheromoneMatrix = new double[NumberOfVertices, NumberOfVertices];
             for (int i = 0; i < NumberOfVertices - 1; i++)
             {
                 for (var j = 0; j < NumberOfVertices - 1; j++)
@@ -114,13 +114,5 @@ namespace Basic
                 }
             }
         }
-
-        //public static void Populate<T>(this T[] arr, T value)
-        //{
-        //    for (int i = 0; i < arr.Length; i++)
-        //    {
-        //        arr[i] = value;
-        //    }
-        //}
     }
 }

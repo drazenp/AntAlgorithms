@@ -8,7 +8,7 @@ namespace Basic
 
         int[,] EdgesWeights { get; }
 
-        decimal[,] PheromoneMatrix { get; }
+        double[,] PheromoneMatrix { get; }
 
         int NumberOfVertices { get; }
     }
