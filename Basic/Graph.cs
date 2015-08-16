@@ -9,7 +9,7 @@ namespace Basic
         private readonly string _verticesWeigtFilePath;
         private readonly string _edgesWeighFilePath;
 
-        public List<int> VerticesWeights { get; set; } = new List<int>();
+        public List<Vertex> VerticesWeights { get; set; } = new List<Vertex>();
 
         public int[,] EdgesWeights { get; private set; }
 
@@ -64,6 +64,7 @@ namespace Basic
             {
                 // Skip first line.
                 var line = reader.ReadLine();
+                var vertexIndex = 0;
                 while (line != null)
                 {
                     line = reader.ReadLine();
@@ -71,7 +72,8 @@ namespace Basic
                     // TODO: Check what to do where. -> exceptions?
                     if (line == null) continue;
 
-                    VerticesWeights.Add(int.Parse(line));
+                    var vertex = new Vertex(vertexIndex, int.Parse(line));
+                    VerticesWeights.Add(vertex);
                 }
             }
         }

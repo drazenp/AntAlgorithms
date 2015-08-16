@@ -13,16 +13,16 @@ namespace Basic
         /// <summary>
         /// For each colony define it's trail.
         /// </summary>
-        public List<HashSet<int>> Treil { get; private set; }
+        public List<HashSet<Vertex>> Treil { get; private set; }
 
         /// <summary>
         /// The sum of all vrtices weights for each colony.
         /// </summary>
         public decimal[] SumOfRegionWeight { get; private set; }
 
-        public HashSet<int> FreeVertices { get; private set; }
+        public HashSet<Vertex> FreeVertices { get; private set; }
 
-        public HashSet<int> PassedVertices { get; private set; }
+        public HashSet<Vertex> PassedVertices { get; private set; }
 
         // Overall weight of the all colonies.
         public int[] WeightOfColonies { get; private set; }
@@ -35,17 +35,17 @@ namespace Basic
             _numberOfRegions = numberOfRegions;
             _graph = graph;
 
-            Treil = new List<HashSet<int>>();
+            Treil = new List<HashSet<Vertex>>();
             for (var i = 0; i < numberOfRegions; i++)
             {
-                Treil.Add(new HashSet<int>());
+                Treil.Add(new HashSet<Vertex>());
             }
 
             SumOfRegionWeight = new decimal[numberOfRegions];
 
-            FreeVertices = new HashSet<int>(graph.VerticesWeights);
+            FreeVertices = new HashSet<Vertex>(graph.VerticesWeights);
 
-            PassedVertices = new HashSet<int>();
+            PassedVertices = new HashSet<Vertex>();
 
             WeightOfColonies = new int[numberOfRegions];
 
@@ -62,18 +62,18 @@ namespace Basic
             }
         }
 
-        public void AddFreeVertexToTreil(int colonyIndex, int vertix)
+        public void AddFreeVertexToTreil(int colonyIndex, Vertex vertix)
         {
             FreeVertices.Remove(vertix);
 
             Treil[colonyIndex].Add(vertix);
 
             var currentWeightOfColony = WeightOfColonies[colonyIndex];
-            WeightOfColonies[colonyIndex] = currentWeightOfColony + vertix;
+            WeightOfColonies[colonyIndex] = currentWeightOfColony + vertix.Weight;
 
             for (int i = 0; i < Treil[colonyIndex].Count; i++)
             {
-                EdgesWeightOfColonies[colonyIndex] += _graph.EdgesWeights[i, vertix];
+                EdgesWeightOfColonies[colonyIndex] += _graph.EdgesWeights[i, vertix.Index];
             }
 
             PassedVertices.Add(vertix);

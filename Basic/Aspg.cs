@@ -33,7 +33,8 @@ namespace Basic
                 {
                     var nextColony = antSystem.GetNextColony();
                     double[] probability = CalculateProbability(antSystem, nextColony);
-                    var chosenVertex = Roulette(probability);
+                    var chosenVertexIndex = Roulette(probability);
+                    var chosenVertex = _graph.VerticesWeights[chosenVertexIndex];
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
 
@@ -66,8 +67,8 @@ namespace Basic
                 var edges = 0;
                 foreach (var passedVertex in antSystem.Treil[nextColony])
                 {
-                    pheromone += _graph.PheromoneMatrix[passedVertex, i];
-                    edges += _graph.EdgesWeights[passedVertex, i];
+                    pheromone += _graph.PheromoneMatrix[passedVertex.Index, i];
+                    edges += _graph.EdgesWeights[passedVertex.Index, i];
                 }
                 pheromone /= numberOfPassedVertices;
 
