@@ -34,8 +34,7 @@ namespace Basic
                     var chosenVertex = _graph.VerticesWeights[chosenVertexIndex];
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
-
-                //SumaKriterijumaOptimalnosti(dozvola, TC);
+                
 
                 _options.NumberOfIterations--;
             }
