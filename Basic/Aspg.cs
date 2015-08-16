@@ -33,6 +33,7 @@ namespace Basic
                 {
                     var nextColony = antSystem.GetNextColony();
                     double[] probability = CalculateProbability(antSystem, nextColony);
+                    var chosenVertex = Roulette(probability);
 
                 }
 
@@ -84,6 +85,22 @@ namespace Basic
             }
 
             return probability;
+        }
+
+        public int Roulette(double[] probability)
+        {
+            var boundary = _rnd.NextDouble();
+            var currentSumOfProbability = 0D;
+            for (int i = 0; i < _graph.NumberOfVertices; i++)
+            {
+                currentSumOfProbability += probability[i];
+                if (boundary <= currentSumOfProbability)
+                {
+                    return i;
+                }
+            }
+
+            return _graph.NumberOfVertices - 1;
         }
     }
 }
