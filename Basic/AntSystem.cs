@@ -15,16 +15,14 @@ namespace Basic
         /// </summary>
         public List<HashSet<Vertex>> Treil { get; private set; }
 
-        /// <summary>
-        /// The sum of all vrtices weights for each colony.
-        /// </summary>
-        public decimal[] SumOfRegionWeight { get; private set; }
-
         public HashSet<Vertex> FreeVertices { get; private set; }
 
         public HashSet<Vertex> PassedVertices { get; private set; }
 
-        // Overall weight of the all colonies.
+        /// <summary>
+        /// The sum of all vrtices weights for each colony.
+        /// TODO: Check if should be used decimal insted int.
+        /// </summary>
         public int[] WeightOfColonies { get; private set; }
 
         public int[] EdgesWeightOfColonies { get; private set; }
@@ -40,8 +38,6 @@ namespace Basic
             {
                 Treil.Add(new HashSet<Vertex>());
             }
-
-            SumOfRegionWeight = new decimal[numberOfRegions];
 
             FreeVertices = new HashSet<Vertex>(graph.VerticesWeights);
 
@@ -109,16 +105,34 @@ namespace Basic
             var optimalityCriterions = CalculateOptimalityCriterion(maxAllowedWeight);
             var sumOfOptimalityCriterions = optimalityCriterions.Sum();
 
-            // If criterions of optimality is less then 0, the pheromones will not be set.
+            // Colony with heighes weight.
+            var colonyWithHeigWeight = Array.IndexOf(WeightOfColonies, WeightOfColonies.Max());
+
+            var pheromoneToSet = 0M;
+            // If criterions of optimality is less then 0, the minimum of pheromones will be set.
             if (sumOfOptimalityCriterions > 0)
             {
-                
+                // 0.01*(F+1.2*SistemMrava.Tezine(mrav));
+                pheromoneToSet = 0.01M * (sumOfOptimalityCriterions + 1.2M * WeightOfColonies[colonyWithHeigWeight]);
             }
             else
             {
-
+                pheromoneToSet = Constants.MinimalVelueOfPheromoneToSet;
             }
 
+            // Set new value of pheromone.
+            //...
+
+            // Save the last sum of optimality criterions.
+            //ASPGOpcije.F = F;
+
+            // 
+            /*
+            	% rh predstavlja faktor isparavanja, a sumdtau promena koja ce se obaviti nad tim poljem.
+                % U slucaju da je taj potez deo kvalitetnog re{enja, vrednost ce se povecati 
+                % za neku vrednost, dok ce u suprotnom izraz poprimiti vrednost 0
+                Problem.tau=Problem.tau*(1-ASPGOpcije.ro)+sumdtau;
+            */
         }
         /*
         	F=sum(ASPGOpcije.SumaKOptimalnosti);
@@ -157,4 +171,4 @@ namespace Basic
 	        Problem.tau=Problem.tau*(1-ASPGOpcije.ro)+sumdtau;
         */
     }
-}
+    }

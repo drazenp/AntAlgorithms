@@ -62,7 +62,7 @@ namespace BasicTests
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
-            var sumOfWeights = antSystem.SumOfRegionWeight.Sum();
+            var sumOfWeights = antSystem.WeightOfColonies.Sum();
 
             Assert.AreEqual(0M, sumOfWeights);
         }
