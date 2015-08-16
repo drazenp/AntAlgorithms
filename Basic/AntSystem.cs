@@ -89,5 +89,19 @@ namespace Basic
             var colonyWithMinWeight = WeightOfColonies.Min();
             return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
         }
+
+        public decimal[] CalculateOptimalityCriterion(decimal maxAllowedWeight)
+        {
+            var optimalityCriterions = new decimal[_numberOfRegions];
+            for (int i = 0; i < _numberOfRegions; i++)
+            {
+                optimalityCriterions[i] = EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight);
+                if (WeightOfColonies[i] <= maxAllowedWeight)
+                {
+                    optimalityCriterions[i] *= -1;
+                }
+            }
+            return optimalityCriterions;
+        }
     }
 }

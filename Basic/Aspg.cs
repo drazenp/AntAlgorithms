@@ -20,16 +20,12 @@ namespace Basic
         public decimal GetQuality()
         {
             decimal quality = decimal.MinValue;
-
+            var maxAllowedWeight = GetMaxAllowedWeight();
 
             while (_options.NumberOfIterations > 0)
             {
                 var antSystem = new AntSystem(_rnd, _options.NumberOfRegions, _graph);
-
-                // prati broj cvorova u regionima
-                int[,] korak = new int[_options.NumberOfRegions, 1];
-                //ASPGOpcije.Korak = zeros(ASPGOpcije.h, 1); % prati broj cvorova u regionima
-
+                
                 for (int vertexIndex = _options.NumberOfRegions - 1; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
                 {
                     var nextColony = antSystem.GetNextColony();
@@ -106,6 +102,5 @@ namespace Basic
 
             return _graph.NumberOfVertices - 1;
         }
-
     }
 }
