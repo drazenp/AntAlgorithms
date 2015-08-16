@@ -34,8 +34,11 @@ namespace Basic
                     var nextColony = antSystem.GetNextColony();
                     double[] probability = CalculateProbability(antSystem, nextColony);
                     var chosenVertex = Roulette(probability);
-
+                    antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
+
+                //TezinaGranaPovezanosti();
+
 
                 _options.NumberOfIterations--;
             }

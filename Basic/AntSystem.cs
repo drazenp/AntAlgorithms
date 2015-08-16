@@ -8,6 +8,7 @@ namespace Basic
     {
         private readonly Random _rnd;
         private readonly int _numberOfRegions;
+        private readonly IGraph _graph;
 
         /// <summary>
         /// For each colony define it's trail.
@@ -26,10 +27,13 @@ namespace Basic
         // Overall weight of the all colonies.
         public int[] WeightOfColonies { get; private set; }
 
+        public int[] EdgesWeightOfColonies { get; private set; }
+
         public AntSystem(Random rnd, int numberOfRegions, IGraph graph)
         {
             _rnd = rnd;
             _numberOfRegions = numberOfRegions;
+            _graph = graph;
 
             Treil = new List<HashSet<int>>();
             for (var i = 0; i < numberOfRegions; i++)
@@ -44,11 +48,13 @@ namespace Basic
             PassedVertices = new HashSet<int>();
 
             WeightOfColonies = new int[numberOfRegions];
+
+            EdgesWeightOfColonies = new int[numberOfRegions];
         }
 
         public void InitializeTreils()
         {
-            for (short i = 0; i < _numberOfRegions; i++)
+            for (var i = 0; i < _numberOfRegions; i++)
             {
                 var randomFreeVertix = FreeVertices.Shuffle(_rnd).First();
 
@@ -56,14 +62,19 @@ namespace Basic
             }
         }
 
-        public void AddFreeVertexToTreil(short treilIndex, int vertix)
+        public void AddFreeVertexToTreil(int colonyIndex, int vertix)
         {
             FreeVertices.Remove(vertix);
 
-            Treil[treilIndex].Add(vertix);
+            Treil[colonyIndex].Add(vertix);
 
-            var currentWeightOfColony = WeightOfColonies[treilIndex];
-            WeightOfColonies[treilIndex] = currentWeightOfColony + vertix;
+            var currentWeightOfColony = WeightOfColonies[colonyIndex];
+            WeightOfColonies[colonyIndex] = currentWeightOfColony + vertix;
+
+            for (int i = 0; i < Treil[colonyIndex].Count; i++)
+            {
+                EdgesWeightOfColonies[colonyIndex] += _graph.EdgesWeights[i, vertix];
+            }
 
             PassedVertices.Add(vertix);
         }
@@ -78,19 +89,5 @@ namespace Basic
             var colonyWithMinWeight = WeightOfColonies.Min();
             return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
         }
-
-        //Nasumican odabir sledeecog cvora
-        //        function PocetneTacke(region)
-        //global SistemMrava ASPGOpcije
-        //    zauzete = ASPGOpcije.ZauzeteTacke;
-        //slobodne=[1:ASPGOpcije.n]; % niz svih tacaka(na pocetku)
-        //	if sum(zauzete)>0 % ako ima zauzetih tacaka
-        //        slobodne=slobodne(zauzete(1,:)==0);
-        //    else
-        //		SistemMrava.Putovanja = zeros(ASPGOpcije.h, ASPGOpcije.BrRedova);
-        //end
-        //x = randsrc(1, 1, slobodne); %random odabir jednog cvora iz niza 'slobodne'
-        //    SistemMrava.Putovanja(region,1)=x; % dodavanje cvora u matricu putovanja
-        //    ASPGOpcije.ZauzeteTacke(x)=x; % dodavanje cvora u matricu zauzerih cvorova
     }
 }

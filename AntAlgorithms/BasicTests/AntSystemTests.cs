@@ -93,6 +93,24 @@ namespace BasicTests
         }
 
         [TestMethod]
+        public void SumaKriterijumaOptimalnosti_Initialized_Success()
+        {
+            const int numberOfRegions = 3;
+            var verticesWeights = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+            var mockGraph = new Mock<IGraph>();
+            mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
+            mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+
+            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+
+            Assert.IsNotNull(antSystem.EdgesWeightOfColonies);
+            for (int i = 0; i < numberOfRegions; i++)
+            {
+                Assert.AreEqual(0, antSystem.EdgesWeightOfColonies[i]);
+            }
+        }
+
+        [TestMethod]
         public void InitializeTreils_AllRegionsInitialized_Success()
         {
             const int numberOfRegions = 3;
@@ -100,6 +118,9 @@ namespace BasicTests
             var mockGraph = new Mock<IGraph>();
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
@@ -116,6 +137,9 @@ namespace BasicTests
             var mockGraph = new Mock<IGraph>();
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
@@ -137,6 +161,9 @@ namespace BasicTests
             var mockGraph = new Mock<IGraph>();
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
@@ -153,6 +180,9 @@ namespace BasicTests
             var mockGraph = new Mock<IGraph>();
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
@@ -169,6 +199,9 @@ namespace BasicTests
             var mockGraph = new Mock<IGraph>();
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
@@ -181,6 +214,28 @@ namespace BasicTests
         }
 
         [TestMethod]
+        public void InitializeTreils_EdgesWeightOfColoniesSet_Success()
+        {
+            const int numberOfRegions = 3;
+            var verticesWeights = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+            var mockGraph = new Mock<IGraph>();
+            mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
+            mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
+
+            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+
+            antSystem.InitializeTreils();
+
+            for (int i = 0; i < numberOfRegions; i++)
+            {
+                Assert.AreEqual(0, antSystem.EdgesWeightOfColonies[i]);
+            }
+        }
+
+        [TestMethod]
         public void AddFreeVertexToTreil_AddVertex_Success()
         {
             const int numberOfRegions = 3;
@@ -188,6 +243,9 @@ namespace BasicTests
             var mockGraph = new Mock<IGraph>();
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
@@ -208,6 +266,9 @@ namespace BasicTests
             var mockGraph = new Mock<IGraph>();
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
+            var edgesWeights = new int[verticesWeights.Count, verticesWeights.Count];
+            edgesWeights[0, 1] = 5;
+            mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
             var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
 
