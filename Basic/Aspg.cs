@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Basic
@@ -19,7 +20,7 @@ namespace Basic
         public decimal GetQuality()
         {
             decimal quality = decimal.MinValue;
-            //int maxNumberOfVerticesInTrail = _graph.NumberOfVertices - _options.NumberOfRegions + 1;
+
 
             while (_options.NumberOfIterations > 0)
             {
@@ -38,8 +39,7 @@ namespace Basic
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
 
-                //TezinaGranaPovezanosti();
-
+                //SumaKriterijumaOptimalnosti(dozvola, TC);
 
                 _options.NumberOfIterations--;
             }
@@ -47,9 +47,9 @@ namespace Basic
             return quality;
         }
 
-        public decimal GetMaxAllowedWeight(int[] verticesWeights)
+        public decimal GetMaxAllowedWeight()
         {
-            var sumOfVerticesWeightes = verticesWeights.Sum();
+            var sumOfVerticesWeightes = _graph.VerticesWeights.Select(v => v.Weight).Sum();
             decimal maxAllowedWeight = sumOfVerticesWeightes / (decimal)_options.NumberOfRegions * (1 + _options.Delta);
             return maxAllowedWeight;
         }
@@ -106,5 +106,6 @@ namespace Basic
 
             return _graph.NumberOfVertices - 1;
         }
+
     }
 }
