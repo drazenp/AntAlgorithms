@@ -34,6 +34,10 @@ namespace Basic
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
                 
+                var optimalityCriterions = antSystem.CalculateOptimalityCriterion(maxAllowedWeight);
+                var sumOfOptimalityCriterions = optimalityCriterions.Sum();
+
+
 
                 _options.NumberOfIterations--;
             }
@@ -41,10 +45,10 @@ namespace Basic
             return quality;
         }
 
-        public decimal GetMaxAllowedWeight()
+        public double GetMaxAllowedWeight()
         {
             var sumOfVerticesWeightes = _graph.VerticesWeights.Select(v => v.Weight).Sum();
-            decimal maxAllowedWeight = sumOfVerticesWeightes / (decimal)_options.NumberOfRegions * (1 + _options.Delta);
+            double maxAllowedWeight = sumOfVerticesWeightes / (double)_options.NumberOfRegions * (1 + _options.Delta);
             return maxAllowedWeight;
         }
 

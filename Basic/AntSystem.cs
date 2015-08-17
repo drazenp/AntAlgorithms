@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Basic
 {
@@ -86,9 +88,9 @@ namespace Basic
             return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
         }
 
-        public decimal[] CalculateOptimalityCriterion(decimal maxAllowedWeight)
+        public double[] CalculateOptimalityCriterion(double maxAllowedWeight)
         {
-            var optimalityCriterions = new decimal[_numberOfRegions];
+            var optimalityCriterions = new double[_numberOfRegions];
             for (int i = 0; i < _numberOfRegions; i++)
             {
                 optimalityCriterions[i] = EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight);
@@ -100,7 +102,7 @@ namespace Basic
             return optimalityCriterions;
         }
 
-        public void UpdatePhermone(decimal maxAllowedWeight)
+        public void UpdatePhermone(double maxAllowedWeight)
         {
             var optimalityCriterions = CalculateOptimalityCriterion(maxAllowedWeight);
             var sumOfOptimalityCriterions = optimalityCriterions.Sum();
@@ -108,24 +110,43 @@ namespace Basic
             // Colony with heighes weight.
             var colonyWithHeigWeight = Array.IndexOf(WeightOfColonies, WeightOfColonies.Max());
 
-            var pheromoneToSet = 0M;
             // If criterions of optimality is less then 0, the minimum of pheromones will be set.
             if (sumOfOptimalityCriterions > 0)
             {
-                // 0.01*(F+1.2*SistemMrava.Tezine(mrav));
-                pheromoneToSet = 0.01M * (sumOfOptimalityCriterions + 1.2M * WeightOfColonies[colonyWithHeigWeight]);
+                for (var indexOfRegion = 0; indexOfRegion < _numberOfRegions; indexOfRegion++)
+                {
+                    double pheromoneToSet;
+                    if (indexOfRegion == colonyWithHeigWeight)
+                    {
+                        pheromoneToSet = 0.01D * (sumOfOptimalityCriterions + 1.2D * WeightOfColonies[colonyWithHeigWeight]);
+                    }
+                    else
+                    {
+                        pheromoneToSet = Constants.MinimalVelueOfPheromoneToSet;
+                    }
+
+                    var path = Treil[indexOfRegion];
+                    foreach (var vertex1 in path)
+                    {
+                        foreach (var vertex2 in path.Skip(1))
+                        {
+                            _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] += pheromoneToSet;
+                            _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] += pheromoneToSet;
+                        }
+                    }
+                }
             }
             else
             {
-                pheromoneToSet = Constants.MinimalVelueOfPheromoneToSet;
+                for (var i = 0; i < _graph.PheromoneMatrix.GetLength(0); i++)
+                {
+                    for (var j = 0; j < _graph.PheromoneMatrix.GetLength(1); j++)
+                    {
+                        _graph.PheromoneMatrix[i, j] += Constants.MinimalVelueOfPheromoneToSet;
+                    }
+                }
             }
-
-            // Set new value of pheromone.
-            //...
-
-            // Save the last sum of optimality criterions.
-            //ASPGOpcije.F = F;
-
+            
             // 
             /*
             	% rh predstavlja faktor isparavanja, a sumdtau promena koja ce se obaviti nad tim poljem.
@@ -171,4 +192,4 @@ namespace Basic
 	        Problem.tau=Problem.tau*(1-ASPGOpcije.ro)+sumdtau;
         */
     }
-    }
+}
