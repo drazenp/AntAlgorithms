@@ -160,5 +160,20 @@ namespace Basic
                 Problem.tau=Problem.tau*(1-ASPGOpcije.ro)+sumdtau;
             */
         }
+
+        public List<HashSet<Vertex>> GetCopyOfTrails()
+        {
+            var copyTreils = new List<HashSet<Vertex>>();
+            foreach (var treil in Treil)
+            {
+                var copyTreil = new HashSet<Vertex>();
+                foreach (var vertex in treil)
+                {
+                    copyTreil.Add(new Vertex(vertex.Index, vertex.Weight));
+                }
+                copyTreils.Add(copyTreil);
+            }
+            return copyTreils;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Basic
@@ -7,8 +8,11 @@ namespace Basic
     {
         private Options _options;
         private readonly IGraph _graph;
-
+        // TODO: Make it as input parameter then aspg can be tested
         private readonly Random _rnd = new Random(Environment.TickCount);
+
+        private List<HashSet<Vertex>> _bestTrail = null;
+        private double _bestOptimalityCriterions = double.MinValue; 
 
         public Aspg(Options options, IGraph graph)
         {
@@ -36,7 +40,12 @@ namespace Basic
 
                 var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
 
-
+                // Save the best results.
+                if (_bestOptimalityCriterions > sumOfOptimalityCriterions)
+                {
+                    _bestOptimalityCriterions = sumOfOptimalityCriterions;
+                    _bestTrail = antSystem.GetCopyOfTrails();
+                }
 
                 _options.NumberOfIterations--;
             }
