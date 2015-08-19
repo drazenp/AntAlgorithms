@@ -102,7 +102,9 @@ namespace Basic
             return optimalityCriterions;
         }
 
-        public void UpdatePhermone(double maxAllowedWeight)
+        // TODO: The function must be refactored. It should not return sumOfOptimalityCriterions;
+        // ..._options.ro is missing; it must be checked if can be implemenet pheromone update in graph class.
+        public double UpdatePhermone(double maxAllowedWeight)
         {
             var optimalityCriterions = CalculateOptimalityCriterion(maxAllowedWeight);
             var sumOfOptimalityCriterions = optimalityCriterions.Sum();
@@ -130,6 +132,7 @@ namespace Basic
                     {
                         foreach (var vertex2 in path.Skip(1))
                         {
+                            // TODO: 0.1 must be replaced with _options.ro.
                             _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] = _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] * (1 - 0.1) + pheromoneToSet;
                             _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] = _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] * (1 - 0.1) + pheromoneToSet;
                         }
@@ -142,11 +145,13 @@ namespace Basic
                 {
                     for (var j = 0; j < _graph.PheromoneMatrix.GetLength(1); j++)
                     {
+                        // TODO: 0.1 must be replaced with _options.ro.
                         _graph.PheromoneMatrix[i, j] = _graph.PheromoneMatrix[i, j] * (1 - 0.1) + Constants.MinimalVelueOfPheromoneToSet;
                     }
                 }
             }
 
+            return sumOfOptimalityCriterions;
             // 
             /*
             	% rh predstavlja faktor isparavanja, a sumdtau promena koja ce se obaviti nad tim poljem.

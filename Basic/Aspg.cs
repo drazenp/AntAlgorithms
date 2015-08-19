@@ -33,9 +33,8 @@ namespace Basic
                     var chosenVertex = _graph.VerticesWeights[chosenVertexIndex];
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
-                
-                var optimalityCriterions = antSystem.CalculateOptimalityCriterion(maxAllowedWeight);
-                var sumOfOptimalityCriterions = optimalityCriterions.Sum();
+
+                var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
 
 
 
