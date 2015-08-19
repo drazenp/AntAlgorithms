@@ -130,8 +130,8 @@ namespace Basic
                     {
                         foreach (var vertex2 in path.Skip(1))
                         {
-                            _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] += pheromoneToSet;
-                            _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] += pheromoneToSet;
+                            _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] = _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] * (1 - 0.1) + pheromoneToSet;
+                            _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] = _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] * (1 - 0.1) + pheromoneToSet;
                         }
                     }
                 }
@@ -142,11 +142,11 @@ namespace Basic
                 {
                     for (var j = 0; j < _graph.PheromoneMatrix.GetLength(1); j++)
                     {
-                        _graph.PheromoneMatrix[i, j] += Constants.MinimalVelueOfPheromoneToSet;
+                        _graph.PheromoneMatrix[i, j] = _graph.PheromoneMatrix[i, j] * (1 - 0.1) + Constants.MinimalVelueOfPheromoneToSet;
                     }
                 }
             }
-            
+
             // 
             /*
             	% rh predstavlja faktor isparavanja, a sumdtau promena koja ce se obaviti nad tim poljem.
@@ -155,41 +155,5 @@ namespace Basic
                 Problem.tau=Problem.tau*(1-ASPGOpcije.ro)+sumdtau;
             */
         }
-        /*
-        	F=sum(ASPGOpcije.SumaKOptimalnosti);
-	        sumdtau=zeros(ASPGOpcije.n,ASPGOpcije.n); % matrica promene feromona obavljena na prodjenim putanjama
-	        if F>0 % u slucaju da je F manje od nule ne posipamo feromon
-		        for mrav=1:ASPGOpcije.h % za svamravog mrava - region
-			        % B=0.01*(F+1.2*SistemMrava.Tezine(mrav));
-			        [vrednost,region]=max(SistemMrava.Tezine);
-			        if mrav==region
-				        B=0.01*(F+1.2*SistemMrava.Tezine(mrav));
-			        else
-				        B=0.01*F;
-			        end
-			        temp=SistemMrava.Putovanja(mrav,:); % cvorovi koje je posetio mrav
-			        temp=temp(SistemMrava.Putovanja(mrav,:)~=0); % odstranjivanje 0-le
-			        n=length(temp);
-			        j=2;
-			        for i=1:(n-1) % za svaki od prodjenih cvorova tog mrava
-				        for l=j:n
-					        sumdtau(SistemMrava.Putovanja(mrav,i),SistemMrava.Putovanja(mrav,l))=...
-					        sumdtau(SistemMrava.Putovanja(mrav,i),SistemMrava.Putovanja(mrav,l))+B;
-					        sumdtau(SistemMrava.Putovanja(mrav,l),SistemMrava.Putovanja(mrav,i))=...
-					        sumdtau(SistemMrava.Putovanja(mrav,l),SistemMrava.Putovanja(mrav,i))+B;
-				        end
-				        j=j+1;
-			        end
-		        B=0;
-		        end
-	        else
-		        sumdtau=sumdtau+0.0000001;
-	        end
-	        ASPGOpcije.F=F;
-	        % rh predstavlja faktor isparavanja, a sumdtau promena koja ce se obaviti nad tim poljem.
-	        % U slucaju da je taj potez deo kvalitetnog re{enja, vrednost ce se povecati 
-	        % za neku vrednost, dok ce u suprotnom izraz poprimiti vrednost 0
-	        Problem.tau=Problem.tau*(1-ASPGOpcije.ro)+sumdtau;
-        */
     }
 }
