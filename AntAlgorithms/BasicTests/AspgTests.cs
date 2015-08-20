@@ -15,7 +15,7 @@ namespace BasicTests
             var graph = new Graph(null, null);
             var aspg = new Aspg(options, graph);
 
-            var quality = aspg.GetQuality();
+            //var quality = aspg.GetQuality();
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace BasicTests
 
             var maxAllowedWeight = aspg.GetMaxAllowedWeight();
 
-            Assert.AreEqual(16.5M, maxAllowedWeight);
+            Assert.AreEqual(16.5D, maxAllowedWeight);
         }
     }
 }

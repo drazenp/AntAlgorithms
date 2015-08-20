@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -40,7 +41,7 @@ namespace BasicTests
                                                     7 8 3";
 
         [TestMethod]
-        public void ReadVerticesWeights_CorrectFormat_Success()
+        public void ReadVerticesWeights_CorrectCount_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");
 
@@ -50,6 +51,24 @@ namespace BasicTests
             }
 
             Assert.AreEqual(9, graph.VerticesWeights.Count);
+        }
+
+        [TestMethod]
+        public void ReadVerticesWeights_CorrectVertexFormat_Success()
+        {
+            var graph = new Graph("baba.txt", "baba.txt");
+
+            using (var stream = GenerateStreamFromString(BasicVericesWeights))
+            {
+                graph.ReadVerticesWeights(stream);
+            }
+
+            var duplicates = graph.VerticesWeights.GroupBy(x => x.Index)
+                                  .Where(g => g.Count() > 1)
+                                  .Select(y => y.Key)
+                                  .ToList();
+
+            Assert.AreEqual(0, duplicates.Count);
         }
 
         [TestMethod]

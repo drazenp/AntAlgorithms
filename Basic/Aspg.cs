@@ -28,7 +28,8 @@ namespace Basic
             while (_options.NumberOfIterations > 0)
             {
                 var antSystem = new AntSystem(_rnd, _options.NumberOfRegions, _graph);
-                
+                antSystem.InitializeTreils();
+
                 for (int vertexIndex = _options.NumberOfRegions - 1; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
                 {
                     var nextColony = antSystem.GetNextColony();

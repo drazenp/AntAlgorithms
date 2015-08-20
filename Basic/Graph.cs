@@ -73,6 +73,7 @@ namespace Basic
                     if (line == null) continue;
 
                     var vertex = new Vertex(vertexIndex, int.Parse(line));
+                    vertexIndex++;
                     VerticesWeights.Add(vertex);
                 }
             }

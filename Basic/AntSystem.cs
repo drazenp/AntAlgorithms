@@ -40,7 +40,7 @@ namespace Basic
             {
                 Treil.Add(new HashSet<Vertex>());
             }
-
+            
             FreeVertices = new HashSet<Vertex>(graph.VerticesWeights);
 
             PassedVertices = new HashSet<Vertex>();
