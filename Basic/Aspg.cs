@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Basic
@@ -7,8 +8,11 @@ namespace Basic
     {
         private Options _options;
         private readonly IGraph _graph;
-
+        // TODO: Make it as input parameter then aspg can be tested
         private readonly Random _rnd = new Random(Environment.TickCount);
+
+        private List<HashSet<Vertex>> _bestTrail = null;
+        private double _bestOptimalityCriterions = double.MinValue; 
 
         public Aspg(Options options, IGraph graph)
         {
@@ -19,26 +23,30 @@ namespace Basic
         public decimal GetQuality()
         {
             decimal quality = decimal.MinValue;
-            //int maxNumberOfVerticesInTrail = _graph.NumberOfVertices - _options.NumberOfRegions + 1;
+            var maxAllowedWeight = GetMaxAllowedWeight();
 
             while (_options.NumberOfIterations > 0)
             {
-                var antSystem = new AntSystem(_rnd, _options.NumberOfRegions, _graph);
+                var antSystem = new AntSystem(_rnd, _options, _graph);
+                antSystem.InitializeTreils();
 
-                // prati broj cvorova u regionima
-                int[,] korak = new int[_options.NumberOfRegions, 1];
-                //ASPGOpcije.Korak = zeros(ASPGOpcije.h, 1); % prati broj cvorova u regionima
-
-                for (int vertexIndex = _options.NumberOfRegions - 1; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
+                for (var vertexIndex = _options.NumberOfRegions; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
                 {
                     var nextColony = antSystem.GetNextColony();
-                    double[] probability = CalculateProbability(antSystem, nextColony);
-                    var chosenVertex = Roulette(probability);
+                    double[] probability = antSystem.CalculateProbability(nextColony);
+                    var chosenVertexIndex = Roulette(probability);
+                    var chosenVertex = _graph.VerticesWeights[chosenVertexIndex];
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
 
-                //TezinaGranaPovezanosti();
+                var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
 
+                // Save the best results.
+                if (_bestOptimalityCriterions < sumOfOptimalityCriterions)
+                {
+                    _bestOptimalityCriterions = sumOfOptimalityCriterions;
+                    _bestTrail = antSystem.GetCopyOfTrails();
+                }
 
                 _options.NumberOfIterations--;
             }
@@ -46,48 +54,11 @@ namespace Basic
             return quality;
         }
 
-        public decimal GetMaxAllowedWeight(int[] verticesWeights)
+        public double GetMaxAllowedWeight()
         {
-            var sumOfVerticesWeightes = verticesWeights.Sum();
-            decimal maxAllowedWeight = sumOfVerticesWeightes / (decimal)_options.NumberOfRegions * (1 + _options.Delta);
+            var sumOfVerticesWeightes = _graph.VerticesWeights.Select(v => v.Weight).Sum();
+            double maxAllowedWeight = sumOfVerticesWeightes / (double)_options.NumberOfRegions * (1 + _options.Delta);
             return maxAllowedWeight;
-        }
-
-        public double[] CalculateProbability(AntSystem antSystem, int nextColony)
-        {
-            var numberOfFreeVertices = antSystem.FreeVertices.Count;
-            double[] probability = new double[numberOfFreeVertices];
-
-            var numberOfPassedVertices = antSystem.Treil[nextColony].Count;
-
-            for (int i = 0; i < numberOfFreeVertices; i++)
-            {
-                var pheromone = 0D;
-                var edges = 0;
-                foreach (var passedVertex in antSystem.Treil[nextColony])
-                {
-                    pheromone += _graph.PheromoneMatrix[passedVertex, i];
-                    edges += _graph.EdgesWeights[passedVertex, i];
-                }
-                pheromone /= numberOfPassedVertices;
-
-                if (edges == 0)
-                {
-                    probability[i] = Math.Pow(pheromone, _options.Alfa);
-                }
-                else
-                {
-                    probability[i] = Math.Pow(pheromone, _options.Alfa) + Math.Pow(edges, _options.Beta);
-                }
-            }
-
-            var probabilitySum = probability.Sum();
-            for (int i = 0; i < numberOfFreeVertices; i++)
-            {
-                probability[i] = probability[i] / probabilitySum;
-            }
-
-            return probability;
         }
 
         public int Roulette(double[] probability)

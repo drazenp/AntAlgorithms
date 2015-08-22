@@ -4,7 +4,7 @@ namespace Basic
 {
     public interface IGraph
     {
-        List<int> VerticesWeights { get; set; }
+        List<Vertex> VerticesWeights { get; set; }
 
         int[,] EdgesWeights { get; }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -40,7 +41,7 @@ namespace BasicTests
                                                     7 8 3";
 
         [TestMethod]
-        public void ReadVerticesWeights_CorrectFormat_Success()
+        public void ReadVerticesWeights_CorrectCount_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");
 
@@ -53,10 +54,39 @@ namespace BasicTests
         }
 
         [TestMethod]
+        public void ReadVerticesWeights_CorrectVertexFormat_Success()
+        {
+            var graph = new Graph("baba.txt", "baba.txt");
+
+            using (var stream = GenerateStreamFromString(BasicVericesWeights))
+            {
+                graph.ReadVerticesWeights(stream);
+            }
+
+            var duplicates = graph.VerticesWeights.GroupBy(x => x.Index)
+                                  .Where(g => g.Count() > 1)
+                                  .Select(y => y.Key)
+                                  .ToList();
+
+            Assert.AreEqual(0, duplicates.Count);
+        }
+
+        [TestMethod]
         public void ReadEdgesWeights_CorrectFormat_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");
-            graph.VerticesWeights = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            graph.VerticesWeights = new List<Vertex>
+            {
+                new Vertex(0, 4),
+                new Vertex(1, 3),
+                new Vertex(2, 8),
+                new Vertex(3, 7),
+                new Vertex(4, 5),
+                new Vertex(5, 3),
+                new Vertex(6, 6),
+                new Vertex(7, 7),
+                new Vertex(8, 2)
+            };
 
             using (var stream = GenerateStreamFromString(BasicEdgesWeights))
             {
@@ -84,7 +114,18 @@ namespace BasicTests
         public void InitializePheromoneMatrix_AllInitialized_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");
-            graph.VerticesWeights = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            graph.VerticesWeights = new List<Vertex>
+            {
+                new Vertex(0, 4),
+                new Vertex(1, 3),
+                new Vertex(2, 8),
+                new Vertex(3, 7),
+                new Vertex(4, 5),
+                new Vertex(5, 3),
+                new Vertex(6, 6),
+                new Vertex(7, 7),
+                new Vertex(8, 2)
+            };
 
             graph.InitializePheromoneMatrix();
 
@@ -95,7 +136,18 @@ namespace BasicTests
         public void InitializePheromoneMatrix_DiagonalZeros_Success()
         {
             var graph = new Graph("baba.txt", "baba.txt");
-            graph.VerticesWeights = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            graph.VerticesWeights = new List<Vertex>
+            {
+                new Vertex(0, 4),
+                new Vertex(1, 3),
+                new Vertex(2, 8),
+                new Vertex(3, 7),
+                new Vertex(4, 5),
+                new Vertex(5, 3),
+                new Vertex(6, 6),
+                new Vertex(7, 7),
+                new Vertex(8, 2)
+            };
 
             graph.InitializePheromoneMatrix();
 
