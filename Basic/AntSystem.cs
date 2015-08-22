@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Basic
 {
     public class AntSystem
     {
         private readonly Random _rnd;
-        private readonly int _numberOfRegions;
+        private readonly Options _options;
         private readonly IGraph _graph;
 
         /// <summary>
@@ -29,14 +27,14 @@ namespace Basic
 
         public int[] EdgesWeightOfColonies { get; private set; }
 
-        public AntSystem(Random rnd, int numberOfRegions, IGraph graph)
+        public AntSystem(Random rnd, Options options, IGraph graph)
         {
             _rnd = rnd;
-            _numberOfRegions = numberOfRegions;
+            _options = options;
             _graph = graph;
 
             Treil = new List<HashSet<Vertex>>();
-            for (var i = 0; i < numberOfRegions; i++)
+            for (var i = 0; i < _options.NumberOfRegions; i++)
             {
                 Treil.Add(new HashSet<Vertex>());
             }
@@ -45,14 +43,14 @@ namespace Basic
 
             PassedVertices = new HashSet<Vertex>();
 
-            WeightOfColonies = new int[numberOfRegions];
+            WeightOfColonies = new int[_options.NumberOfRegions];
 
-            EdgesWeightOfColonies = new int[numberOfRegions];
+            EdgesWeightOfColonies = new int[_options.NumberOfRegions];
         }
 
         public void InitializeTreils()
         {
-            for (var i = 0; i < _numberOfRegions; i++)
+            for (var i = 0; i < _options.NumberOfRegions; i++)
             {
                 var randomFreeVertix = FreeVertices.Shuffle(_rnd).First();
 
@@ -88,16 +86,54 @@ namespace Basic
             return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
         }
 
+        public double[] CalculateProbability(int nextColony)
+        {
+            var numberOfFreeVertices = FreeVertices.Count;
+            double[] probability = new double[_graph.NumberOfVertices];
+
+            var numberOfPassedVertices = Treil[nextColony].Count;
+
+            for (int i = 0; i < numberOfFreeVertices; i++)
+            {
+                var pheromone = 0D;
+                var edges = 0;
+                foreach (var passedVertex in Treil[nextColony])
+                {
+                    pheromone += _graph.PheromoneMatrix[passedVertex.Index, i];
+                    edges += _graph.EdgesWeights[passedVertex.Index, i];
+                }
+                pheromone /= numberOfPassedVertices;
+
+                if (edges == 0)
+                {
+                    probability[i] = Math.Pow(pheromone, _options.Alfa);
+                }
+                else
+                {
+                    probability[i] = Math.Pow(pheromone, _options.Alfa) + Math.Pow(edges, _options.Beta);
+                }
+            }
+
+            var probabilitySum = probability.Sum();
+            for (int i = 0; i < numberOfFreeVertices; i++)
+            {
+                probability[i] = probability[i] / probabilitySum;
+            }
+
+            return probability;
+        }
+
         public double[] CalculateOptimalityCriterion(double maxAllowedWeight)
         {
-            var optimalityCriterions = new double[_numberOfRegions];
-            for (int i = 0; i < _numberOfRegions; i++)
+            var optimalityCriterions = new double[_options.NumberOfRegions];
+            for (int i = 0; i < _options.NumberOfRegions; i++)
             {
                 optimalityCriterions[i] = EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight);
                 if (WeightOfColonies[i] <= maxAllowedWeight)
                 {
                     optimalityCriterions[i] *= -1;
                 }
+                // ASPGOpcije.SumaKOptimalnosti(j)=SistemMrava.Tezine(j) - 1000 * (ASPGOpcije.SumaTezina(j) - MDV) * (ASPGOpcije.SumaTezina(j) > MDV);
             }
             return optimalityCriterions;
         }
@@ -115,7 +151,7 @@ namespace Basic
             // If criterions of optimality is less then 0, the minimum of pheromones will be set.
             if (sumOfOptimalityCriterions > 0)
             {
-                for (var indexOfRegion = 0; indexOfRegion < _numberOfRegions; indexOfRegion++)
+                for (var indexOfRegion = 0; indexOfRegion < _options.NumberOfRegions; indexOfRegion++)
                 {
                     double pheromoneToSet;
                     if (indexOfRegion == colonyWithHeigWeight)

@@ -107,9 +107,9 @@ namespace Basic
         public void InitializePheromoneMatrix()
         {
             PheromoneMatrix = new double[NumberOfVertices, NumberOfVertices];
-            for (int i = 0; i < NumberOfVertices - 1; i++)
+            for (int i = 0; i < NumberOfVertices; i++)
             {
-                for (var j = 0; j < NumberOfVertices - 1; j++)
+                for (var j = 0; j < NumberOfVertices; j++)
                 {
                     if (i == j) continue;
 

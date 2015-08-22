@@ -15,7 +15,7 @@ namespace BasicTests
         [TestMethod]
         public void Treil_AllTrailsInitilized_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -32,9 +32,9 @@ namespace BasicTests
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
-            for (var i = 0; i < numberOfRegions; i++)
+            for (var i = 0; i < options.NumberOfRegions; i++)
             {
                 Assert.IsNotNull(antSystem.Treil[i]);
             }
@@ -43,7 +43,7 @@ namespace BasicTests
         [TestMethod]
         public void SumOfWeight_AllZerosSet_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -60,7 +60,7 @@ namespace BasicTests
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             var sumOfWeights = antSystem.WeightOfColonies.Sum();
 
@@ -70,7 +70,7 @@ namespace BasicTests
         [TestMethod]
         public void FreeVertices_Initialized_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -87,7 +87,7 @@ namespace BasicTests
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             Assert.AreEqual(verticesWeights.Count, antSystem.FreeVertices.Count);
         }
@@ -95,7 +95,7 @@ namespace BasicTests
         [TestMethod]
         public void WeightsOfColonies_Initialized_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -112,10 +112,10 @@ namespace BasicTests
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             Assert.IsNotNull(antSystem.WeightOfColonies);
-            for (int i = 0; i < numberOfRegions; i++)
+            for (int i = 0; i < options.NumberOfRegions; i++)
             {
                 Assert.AreEqual(0, antSystem.WeightOfColonies[i]);
             }
@@ -124,7 +124,7 @@ namespace BasicTests
         [TestMethod]
         public void PassedVertices_Initialized_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -141,7 +141,7 @@ namespace BasicTests
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             Assert.IsNotNull(antSystem.PassedVertices);
             Assert.AreEqual(0, antSystem.PassedVertices.Count);
@@ -150,7 +150,7 @@ namespace BasicTests
         [TestMethod]
         public void SumaKriterijumaOptimalnosti_Initialized_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -167,10 +167,10 @@ namespace BasicTests
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             Assert.IsNotNull(antSystem.EdgesWeightOfColonies);
-            for (int i = 0; i < numberOfRegions; i++)
+            for (int i = 0; i < options.NumberOfRegions; i++)
             {
                 Assert.AreEqual(0, antSystem.EdgesWeightOfColonies[i]);
             }
@@ -179,7 +179,7 @@ namespace BasicTests
         [TestMethod]
         public void InitializeTreils_AllRegionsInitialized_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -199,7 +199,7 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.InitializeTreils();
 
@@ -209,7 +209,7 @@ namespace BasicTests
         [TestMethod]
         public void InitializeTreils_AllRegionsInitializedInRange_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -229,11 +229,11 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.InitializeTreils();
 
-            for (var i = 0; i < numberOfRegions; i++)
+            for (var i = 0; i < options.NumberOfRegions; i++)
             {
                 int velueOfFirstVerticeInRegion = antSystem.Treil[i].Single().Weight;
                 Assert.IsTrue(velueOfFirstVerticeInRegion <= 8);
@@ -244,7 +244,7 @@ namespace BasicTests
         [TestMethod]
         public void InitializeTreils_FreeVertices_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -264,17 +264,17 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.InitializeTreils();
 
-            Assert.AreEqual(verticesWeights.Count - numberOfRegions, antSystem.FreeVertices.Count);
+            Assert.AreEqual(verticesWeights.Count - options.NumberOfRegions, antSystem.FreeVertices.Count);
         }
 
         [TestMethod]
         public void InitializeTreils_PassersVertices_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -294,17 +294,17 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.InitializeTreils();
 
-            Assert.AreEqual(numberOfRegions, antSystem.PassedVertices.Count);
+            Assert.AreEqual(options.NumberOfRegions, antSystem.PassedVertices.Count);
         }
 
         [TestMethod]
         public void InitializeTreils_ColoniesWeightsSet_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -324,11 +324,11 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.InitializeTreils();
 
-            for (int i = 0; i < numberOfRegions; i++)
+            for (int i = 0; i < options.NumberOfRegions; i++)
             {
                 Assert.AreEqual(antSystem.Treil[i].First().Weight, antSystem.WeightOfColonies[i]);
             }
@@ -337,7 +337,7 @@ namespace BasicTests
         [TestMethod]
         public void InitializeTreils_EdgesWeightOfColoniesSet_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -357,11 +357,11 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.InitializeTreils();
 
-            for (int i = 0; i < numberOfRegions; i++)
+            for (int i = 0; i < options.NumberOfRegions; i++)
             {
                 Assert.AreEqual(0, antSystem.EdgesWeightOfColonies[i]);
             }
@@ -370,7 +370,7 @@ namespace BasicTests
         [TestMethod]
         public void AddFreeVertexToTreil_AddVertex_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -390,7 +390,7 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.AddFreeVertexToTreil(0, new Vertex(1, 1));
 
@@ -404,7 +404,7 @@ namespace BasicTests
         [TestMethod]
         public void GetNextColony_AfterInitialization_Success()
         {
-            const int numberOfRegions = 3;
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -424,14 +424,14 @@ namespace BasicTests
             edgesWeights[0, 1] = 5;
             mockGraph.SetupGet(prop => prop.EdgesWeights).Returns(edgesWeights);
 
-            var antSystem = new AntSystem(_rnd, numberOfRegions, mockGraph.Object);
+            var antSystem = new AntSystem(_rnd, options, mockGraph.Object);
 
             antSystem.InitializeTreils();
 
             var nextColonyIndex = antSystem.GetNextColony();
             var nextColonyWeightSum = antSystem.WeightOfColonies[nextColonyIndex];
 
-            for (int i = 0; i < numberOfRegions; i++)
+            for (int i = 0; i < options.NumberOfRegions; i++)
             {
                 Assert.IsTrue(antSystem.WeightOfColonies[i] >= nextColonyWeightSum);
             }
