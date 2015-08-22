@@ -30,7 +30,7 @@ namespace Basic
                 var antSystem = new AntSystem(_rnd, _options, _graph);
                 antSystem.InitializeTreils();
 
-                for (int vertexIndex = _options.NumberOfRegions - 1; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
+                for (var vertexIndex = _options.NumberOfRegions; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
                 {
                     var nextColony = antSystem.GetNextColony();
                     double[] probability = antSystem.CalculateProbability(nextColony);

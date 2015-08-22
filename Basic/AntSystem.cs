@@ -93,29 +93,29 @@ namespace Basic
 
             var numberOfPassedVertices = Treil[nextColony].Count;
 
-            for (int i = 0; i < numberOfFreeVertices; i++)
+            foreach (var freeVertex in FreeVertices)
             {
                 var pheromone = 0D;
                 var edges = 0;
                 foreach (var passedVertex in Treil[nextColony])
                 {
-                    pheromone += _graph.PheromoneMatrix[passedVertex.Index, i];
-                    edges += _graph.EdgesWeights[passedVertex.Index, i];
+                    pheromone += _graph.PheromoneMatrix[passedVertex.Index, freeVertex.Index];
+                    edges += _graph.EdgesWeights[passedVertex.Index, freeVertex.Index];
                 }
                 pheromone /= numberOfPassedVertices;
 
                 if (edges == 0)
                 {
-                    probability[i] = Math.Pow(pheromone, _options.Alfa);
+                    probability[freeVertex.Index] = Math.Pow(pheromone, _options.Alfa);
                 }
                 else
                 {
-                    probability[i] = Math.Pow(pheromone, _options.Alfa) + Math.Pow(edges, _options.Beta);
+                    probability[freeVertex.Index] = Math.Pow(pheromone, _options.Alfa) + Math.Pow(edges, _options.Beta);
                 }
             }
 
             var probabilitySum = probability.Sum();
-            for (int i = 0; i < numberOfFreeVertices; i++)
+            for (int i = 0; i < _graph.NumberOfVertices; i++)
             {
                 probability[i] = probability[i] / probabilitySum;
             }
