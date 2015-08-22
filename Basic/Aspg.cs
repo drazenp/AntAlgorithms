@@ -42,7 +42,7 @@ namespace Basic
                 var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
 
                 // Save the best results.
-                if (_bestOptimalityCriterions > sumOfOptimalityCriterions)
+                if (_bestOptimalityCriterions < sumOfOptimalityCriterions)
                 {
                     _bestOptimalityCriterions = sumOfOptimalityCriterions;
                     _bestTrail = antSystem.GetCopyOfTrails();

@@ -129,10 +129,10 @@ namespace Basic
             for (int i = 0; i < _options.NumberOfRegions; i++)
             {
                 optimalityCriterions[i] = EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight);
-                if (WeightOfColonies[i] <= maxAllowedWeight)
-                {
-                    optimalityCriterions[i] *= -1;
-                }
+                //if (WeightOfColonies[i] <= maxAllowedWeight)
+                //{
+                //    optimalityCriterions[i] *= -1;
+                //}
                 // ASPGOpcije.SumaKOptimalnosti(j)=SistemMrava.Tezine(j) - 1000 * (ASPGOpcije.SumaTezina(j) - MDV) * (ASPGOpcije.SumaTezina(j) > MDV);
             }
             return optimalityCriterions;
@@ -168,9 +168,8 @@ namespace Basic
                     {
                         foreach (var vertex2 in path.Skip(1))
                         {
-                            // TODO: 0.1 must be replaced with _options.ro.
-                            _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] = _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] * (1 - 0.1) + pheromoneToSet;
-                            _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] = _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] * (1 - 0.1) + pheromoneToSet;
+                            _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] = _graph.PheromoneMatrix[vertex1.Index, vertex2.Index] * (1 - _options.Ro) + pheromoneToSet;
+                            _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] = _graph.PheromoneMatrix[vertex2.Index, vertex1.Index] * (1 - _options.Ro) + pheromoneToSet;
                         }
                     }
                 }
@@ -181,8 +180,7 @@ namespace Basic
                 {
                     for (var j = 0; j < _graph.PheromoneMatrix.GetLength(1); j++)
                     {
-                        // TODO: 0.1 must be replaced with _options.ro.
-                        _graph.PheromoneMatrix[i, j] = _graph.PheromoneMatrix[i, j] * (1 - 0.1) + Constants.MinimalVelueOfPheromoneToSet;
+                        _graph.PheromoneMatrix[i, j] = _graph.PheromoneMatrix[i, j] * (1 - _options.Ro) + Constants.MinimalVelueOfPheromoneToSet;
                     }
                 }
             }
