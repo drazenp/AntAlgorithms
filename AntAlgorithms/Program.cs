@@ -1,18 +1,20 @@
-﻿using Basic;
+﻿using System;
+using Basic;
 
 namespace AntAlgorithms
 {
-    class Program
+    static class Program
     {
-        public const string _basicEdges = "Graphs/B2.txt";
-        public const string _basicVeretxWeights = "Graphs/B1.txt";
+        private const string BasicEdges = "Graphs/B2.txt";
+        private const string BasicVeretxWeights = "Graphs/B1.txt";
 
         static void Main(string[] args)
         {
             var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
-            var graph = new Graph(_basicEdges, _basicVeretxWeights);
+            var graph = new Graph(BasicEdges, BasicVeretxWeights);
             graph.InitializeGraph();
-            var aspg = new Aspg(options, graph);
+            var rnd = new Random(Environment.TickCount);
+            var aspg = new Aspg(options, graph, rnd);
             aspg.GetQuality();
         }
     }

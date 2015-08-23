@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -13,7 +14,8 @@ namespace BasicTests
         {
             var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var graph = new Graph(null, null);
-            var aspg = new Aspg(options, graph);
+            var rnd = new Random(Environment.TickCount);
+        var aspg = new Aspg(options, graph, rnd);
 
             //var quality = aspg.GetQuality();
         }
@@ -39,7 +41,8 @@ namespace BasicTests
             mockGraph.SetupGet(prop => prop.NumberOfVertices).Returns(verticesWeights.Count);
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
 
-            var aspg = new Aspg(options, mockGraph.Object);
+            var rnd = new Random(Environment.TickCount);
+            var aspg = new Aspg(options, mockGraph.Object, rnd);
 
             var maxAllowedWeight = aspg.GetMaxAllowedWeight();
 
