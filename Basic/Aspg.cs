@@ -10,7 +10,7 @@ namespace Basic
         private readonly IGraph _graph;
         private readonly Random _rnd;
 
-        private List<HashSet<Vertex>> _bestTrail = null;
+        private List<HashSet<Vertex>> _bestTrail;
         private double _bestOptimalityCriterions = double.MinValue; 
 
         public Aspg(Options options, IGraph graph, Random rnd)
