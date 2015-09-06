@@ -1,13 +1,13 @@
 ﻿namespace AlgorithmsCore
 {
-    public struct Options
+    public class Options
     {
-        public int NumberOfIterations;
-        public readonly int NumberOfRegions;
-        public readonly double Alfa;
-        public readonly double Beta;
-        public readonly double Ro;
-        public readonly double Delta;
+        public int NumberOfIterations { get; set; }
+        public int NumberOfRegions { get; }
+        public double Alfa { get; }
+        public double Beta { get; }
+        public double Ro { get; }
+        public  double Delta { get; }
 
         public Options(int numberOfIterations, int numberOfRegions, double alfa, double beta, double ro, double delta)
         {

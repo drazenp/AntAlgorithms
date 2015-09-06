@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,10 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspgParallelOptimisation.cs" />
+    <Compile Include="OptionsParallelOptimisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MedjuRegion1.m" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlgorithmsCore\AlgorithmsCore.csproj">
+      <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
+      <Name>AlgorithmsCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

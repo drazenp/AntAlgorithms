@@ -11,8 +11,6 @@ namespace Basic
         private readonly IGraph _graph;
         private readonly Random _rnd;
 
-        private double _bestOptimalityCriterions = double.MinValue; 
-
         public Aspg(Options options, IGraph graph, Random rnd)
         {
             _options = options;
