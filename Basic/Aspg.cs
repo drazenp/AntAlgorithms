@@ -11,7 +11,6 @@ namespace Basic
         private readonly IGraph _graph;
         private readonly Random _rnd;
 
-        private List<HashSet<Vertex>> _bestTrail;
         private double _bestOptimalityCriterions = double.MinValue; 
 
         public Aspg(Options options, IGraph graph, Random rnd)
@@ -21,9 +20,9 @@ namespace Basic
             _rnd = rnd;
         }
 
-        public decimal GetQuality()
+        public Result GetQuality()
         {
-            decimal quality = decimal.MinValue;
+            var result = new Result(double.MinValue);
             var maxAllowedWeight = GetMaxAllowedWeight();
 
             while (_options.NumberOfIterations > 0)
@@ -43,16 +42,15 @@ namespace Basic
                 var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
 
                 // Save the best results.
-                if (_bestOptimalityCriterions < sumOfOptimalityCriterions)
+                if (result.Quality < sumOfOptimalityCriterions)
                 {
-                    _bestOptimalityCriterions = sumOfOptimalityCriterions;
-                    _bestTrail = antSystem.GetCopyOfTrails();
+                    result = new Result(sumOfOptimalityCriterions, antSystem.Treil);
                 }
 
                 _options.NumberOfIterations--;
             }
 
-            return quality;
+            return result;
         }
 
         public double GetMaxAllowedWeight()
