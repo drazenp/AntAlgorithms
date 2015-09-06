@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Basic
+namespace AlgorithmsCore
 {
     public class AntSystem
     {
@@ -13,19 +13,19 @@ namespace Basic
         /// <summary>
         /// For each colony define it's trail.
         /// </summary>
-        public List<HashSet<Vertex>> Treil { get; private set; }
+        public List<HashSet<Vertex>> Treil { get; }
 
-        public HashSet<Vertex> FreeVertices { get; private set; }
+        public HashSet<Vertex> FreeVertices { get; }
 
-        public HashSet<Vertex> PassedVertices { get; private set; }
+        public HashSet<Vertex> PassedVertices { get;  }
 
         /// <summary>
         /// The sum of all vrtices weights for each colony.
         /// TODO: Check if should be used decimal insted int.
         /// </summary>
-        public int[] WeightOfColonies { get; private set; }
+        public int[] WeightOfColonies { get; }
 
-        public int[] EdgesWeightOfColonies { get; private set; }
+        public int[] EdgesWeightOfColonies { get; }
 
         public AntSystem(Random rnd, Options options, IGraph graph)
         {
@@ -67,7 +67,7 @@ namespace Basic
             var currentWeightOfColony = WeightOfColonies[colonyIndex];
             WeightOfColonies[colonyIndex] = currentWeightOfColony + vertix.Weight;
 
-            for (int i = 0; i < Treil[colonyIndex].Count; i++)
+            for (var i = 0; i < Treil[colonyIndex].Count; i++)
             {
                 EdgesWeightOfColonies[colonyIndex] += _graph.EdgesWeights[i, vertix.Index];
             }
@@ -88,7 +88,6 @@ namespace Basic
 
         public double[] CalculateProbability(int nextColony)
         {
-            var numberOfFreeVertices = FreeVertices.Count;
             double[] probability = new double[_graph.NumberOfVertices];
 
             var numberOfPassedVertices = Treil[nextColony].Count;
@@ -126,14 +125,9 @@ namespace Basic
         public double[] CalculateOptimalityCriterion(double maxAllowedWeight)
         {
             var optimalityCriterions = new double[_options.NumberOfRegions];
-            for (int i = 0; i < _options.NumberOfRegions; i++)
+            for (var i = 0; i < _options.NumberOfRegions; i++)
             {
-                optimalityCriterions[i] = EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight);
-                //if (WeightOfColonies[i] <= maxAllowedWeight)
-                //{
-                //    optimalityCriterions[i] *= -1;
-                //}
-                // ASPGOpcije.SumaKOptimalnosti(j)=SistemMrava.Tezine(j) - 1000 * (ASPGOpcije.SumaTezina(j) - MDV) * (ASPGOpcije.SumaTezina(j) > MDV);
+                optimalityCriterions[i] = Math.Abs(EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight));
             }
             return optimalityCriterions;
         }
@@ -186,13 +180,6 @@ namespace Basic
             }
 
             return sumOfOptimalityCriterions;
-            // 
-            /*
-            	% rh predstavlja faktor isparavanja, a sumdtau promena koja ce se obaviti nad tim poljem.
-                % U slucaju da je taj potez deo kvalitetnog re{enja, vrednost ce se povecati 
-                % za neku vrednost, dok ce u suprotnom izraz poprimiti vrednost 0
-                Problem.tau=Problem.tau*(1-ASPGOpcije.ro)+sumdtau;
-            */
         }
 
         public List<HashSet<Vertex>> GetCopyOfTrails()

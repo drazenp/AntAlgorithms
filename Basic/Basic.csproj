@@ -40,20 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntSystem.cs" />
     <Compile Include="Aspg.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Graph.cs" />
-    <Compile Include="IGraph.cs" />
-    <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vertex.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="nacin1.m" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AlgorithmsCore\AlgorithmsCore.csproj">
+      <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
+      <Name>AlgorithmsCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Graphs\54_1.txt" />
     <Content Include="Graphs\54_2.txt" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AlgorithmsCore;
 
 namespace Basic
 {
@@ -8,16 +9,16 @@ namespace Basic
     {
         private Options _options;
         private readonly IGraph _graph;
-        // TODO: Make it as input parameter then aspg can be tested
-        private readonly Random _rnd = new Random(Environment.TickCount);
+        private readonly Random _rnd;
 
-        private List<HashSet<Vertex>> _bestTrail = null;
+        private List<HashSet<Vertex>> _bestTrail;
         private double _bestOptimalityCriterions = double.MinValue; 
 
-        public Aspg(Options options, IGraph graph)
+        public Aspg(Options options, IGraph graph, Random rnd)
         {
             _options = options;
             _graph = graph;
+            _rnd = rnd;
         }
 
         public decimal GetQuality()

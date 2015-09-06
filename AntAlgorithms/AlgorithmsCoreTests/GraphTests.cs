@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Basic;
+using AlgorithmsCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BasicTests
+namespace AlgorithmsCoreTests
 {
     [TestClass]
     public class GraphTests

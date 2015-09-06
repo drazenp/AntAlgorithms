@@ -57,13 +57,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AntSystemTests.cs" />
-    <Compile Include="GraphTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AspgTests.cs" />
-    <Compile Include="ExtensionMethodsTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AlgorithmsCore\AlgorithmsCore.csproj">
+      <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
+      <Name>AlgorithmsCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Basic\Basic.csproj">
       <Project>{CF4FC03F-5B89-4670-94E9-8703215FBD52}</Project>
       <Name>Basic</Name>
