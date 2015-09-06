@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using AlgorithmsCore;
 
-namespace Basic
+namespace AlgorithmsCore
 {
     public interface IGraph
     {

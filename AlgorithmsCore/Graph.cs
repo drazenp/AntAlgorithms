@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using AlgorithmsCore;
 
-namespace Basic
+namespace AlgorithmsCore
 {
     public class Graph : IGraph
     {

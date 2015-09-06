@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Basic;
+using AlgorithmsCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-namespace BasicTests
+namespace AlgorithmsCoreTests
 {
     [TestClass]
     public class AntSystemTests

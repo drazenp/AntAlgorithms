@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelOptimisation", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelOptimisationWithInheritance", "ParallelOptimisationWithInheritance\ParallelOptimisationWithInheritance.csproj", "{62A68DC6-3174-499B-8E4D-814C6214D86F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsCore", "..\AlgorithmsCore\AlgorithmsCore.csproj", "{A02670F3-4BEA-44B2-BD10-0700754AFF0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsCoreTests", "AlgorithmsCoreTests\AlgorithmsCoreTests.csproj", "{BFE602F0-D751-4574-93DA-1EAC4F764A17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{62A68DC6-3174-499B-8E4D-814C6214D86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62A68DC6-3174-499B-8E4D-814C6214D86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62A68DC6-3174-499B-8E4D-814C6214D86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A02670F3-4BEA-44B2-BD10-0700754AFF0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A02670F3-4BEA-44B2-BD10-0700754AFF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A02670F3-4BEA-44B2-BD10-0700754AFF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A02670F3-4BEA-44B2-BD10-0700754AFF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE602F0-D751-4574-93DA-1EAC4F764A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE602F0-D751-4574-93DA-1EAC4F764A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE602F0-D751-4574-93DA-1EAC4F764A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE602F0-D751-4574-93DA-1EAC4F764A17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

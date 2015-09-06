@@ -1,4 +1,4 @@
-﻿namespace Basic
+﻿namespace AlgorithmsCore
 {
     public class Constants
     {

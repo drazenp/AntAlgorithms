@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AlgorithmsCore\AlgorithmsCore.csproj">
+      <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
+      <Name>AlgorithmsCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Basic\Basic.csproj">
       <Project>{cf4fc03f-5b89-4670-94e9-8703215fbd52}</Project>
       <Name>Basic</Name>

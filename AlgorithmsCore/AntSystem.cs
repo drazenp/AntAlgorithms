@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Basic
+namespace AlgorithmsCore
 {
     public class AntSystem
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BasicTests
+namespace AlgorithmsCoreTests
 {
     [TestClass]
     public class ExtensionMethodsTest

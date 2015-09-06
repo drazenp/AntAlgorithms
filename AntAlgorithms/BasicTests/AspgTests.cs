@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AlgorithmsCore;
 using Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -15,7 +16,7 @@ namespace BasicTests
             var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var graph = new Graph(null, null);
             var rnd = new Random(Environment.TickCount);
-        var aspg = new Aspg(options, graph, rnd);
+            var aspg = new Aspg(options, graph, rnd);
 
             //var quality = aspg.GetQuality();
         }
