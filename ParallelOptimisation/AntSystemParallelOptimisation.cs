@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using AlgorithmsCore;
 
@@ -7,6 +8,10 @@ namespace ParallelOptimisation
     public class AntSystemParallelOptimisation : AntSystemBase
     {
         private AntSystemFragment[] AntSystemFragments { get; }
+
+        public List<HashSet<Vertex>> BestTreil { get; set; }
+
+        public double FragmentBestOptimalityCriterion { get; set; }
 
         public AntSystemParallelOptimisation(Random rnd, OptionsParallelOptimisation options, IGraph graph)
             : base(rnd, options, graph)
@@ -45,7 +50,7 @@ namespace ParallelOptimisation
             antSystemFragment.AddFreeVertexToTreil(indexOfColony, vertix);
         }
 
-        public double UpdatePhermone(double maxAllowedWeight)
+        public void UpdatePhermone(double maxAllowedWeight)
         {
             var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation) Options).NumberOfInterSections];
             for (int fragmentIndex = 0;
@@ -55,33 +60,13 @@ namespace ParallelOptimisation
                 fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion(maxAllowedWeight);
             }
 
-            var fragmentWithBestOptimalityCriterion = fragmentsOptimalityCriterion.Max();
-            var indexOffragmentWithBestQuality = Array.IndexOf(fragmentsOptimalityCriterion, fragmentWithBestOptimalityCriterion);
+            FragmentBestOptimalityCriterion = fragmentsOptimalityCriterion.Max();
+            var indexOfFragmentWithBestQuality = Array.IndexOf(fragmentsOptimalityCriterion, FragmentBestOptimalityCriterion);
 
-            UpdatePhermone(AntSystemFragments[indexOffragmentWithBestQuality], fragmentWithBestOptimalityCriterion);
+            var bestFragment = AntSystemFragments[indexOfFragmentWithBestQuality];
+            BestTreil = bestFragment.Treil;
 
-            return fragmentWithBestOptimalityCriterion;
+            UpdatePhermone(bestFragment, FragmentBestOptimalityCriterion);
         }
-
-        //public void UpdatePhermone(double sumOfOptimalityCriterions)
-        //{
-        //    UpdatePhermone(_antSystemFragment, sumOfOptimalityCriterions);
-        //}
-
-        //public double UpdatePhermone(double maxAllowedWeight)
-        //{
-        //    var fragmentsBestQuality = new AntSystemFragment[((OptionsParallelOptimisation)Options).NumberOfInterSections];
-        //    for (int fragmentIndex = 0; fragmentIndex < ((OptionsParallelOptimisation)Options).NumberOfInterSections; fragmentIndex++)
-        //    {
-        //        fragmentsBestQuality[fragmentIndex] = AntSystemFragments[fragmentIndex]
-        //    }
-        //    var fragmentWithBestQuality = AntSystemFragments;
-        //    return Array.IndexOf(antSystemFragment.WeightOfColonies, colonyWithMinWeight);
-
-        //    var antSystemFragment = AntSystemFragments[interSectionId];
-
-        //    var sumOfOptimalityCriterions = UpdatePhermone(antSystemFragment, maxAllowedWeight);
-        //    return sumOfOptimalityCriterions;
-        //}
     }
 }

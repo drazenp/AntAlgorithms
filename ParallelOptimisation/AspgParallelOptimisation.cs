@@ -42,12 +42,12 @@ namespace ParallelOptimisation
                     }
                 }
 
-                var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
+                antSystem.UpdatePhermone(maxAllowedWeight);
 
                 // Save the best results.
-                if (bestResult.Quality < sumOfOptimalityCriterions)
+                if (bestResult.Quality < antSystem.FragmentBestOptimalityCriterion)
                 {
-                    //bestResult = new Result(sumOfOptimalityCriterions, antSystem.Treil);
+                    bestResult = new Result(antSystem.FragmentBestOptimalityCriterion, antSystem.BestTreil);
                 }
 
                 _options.NumberOfIterations--;

@@ -90,7 +90,7 @@ namespace AlgorithmsCore
             {
                 optimalityCriterions[i] = Math.Abs(EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight));
             }
-
+             
             var sumOfOptimalityCriterions = optimalityCriterions.Sum();
             return sumOfOptimalityCriterions;
         }
