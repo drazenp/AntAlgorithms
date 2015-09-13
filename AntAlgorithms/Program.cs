@@ -1,7 +1,9 @@
 ﻿using System;
 using AlgorithmsCore;
+using AlgorithmsCore.Options;
 using Basic;
 using ParallelOptimisation;
+using ParallelOptimisationWithInheritance;
 
 namespace AntAlgorithms
 {
@@ -25,6 +27,12 @@ namespace AntAlgorithms
             graph.InitializeGraph();
             var aspgParallelOptimisation = new AspgParallelOptimisation(parallelOptimisationOptoins, graph, rnd);
             aspgParallelOptimisation.GetQuality();
+
+            graph = new Graph(BasicEdges, BasicVertexWeights);
+            graph.InitializeGraph();
+            var aspgParallelOptimisationWithInheritance = new AspgParallelOptimisationWithInheritance(parallelOptimisationOptoins,
+                graph, rnd);
+            aspgParallelOptimisationWithInheritance.GetQuality();
         }
     }
 }

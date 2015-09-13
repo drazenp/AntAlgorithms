@@ -1,4 +1,4 @@
-﻿namespace AlgorithmsCore
+﻿namespace AlgorithmsCore.Options
 {
     public class Options
     {

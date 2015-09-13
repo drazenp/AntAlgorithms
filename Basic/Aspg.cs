@@ -1,5 +1,6 @@
 ﻿using System;
 using AlgorithmsCore;
+using AlgorithmsCore.Options;
 
 namespace Basic
 {

@@ -7,7 +7,7 @@ namespace AlgorithmsCore
     public class AntSystemFragment
     {
         private readonly Random _rnd;
-        private readonly Options _options;
+        private readonly Options.Options _options;
         private readonly IGraph _graph;
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace AlgorithmsCore
         public int[] EdgesWeightOfColonies { get; }
 
         // TODO: Try to remove rnd and options from global variables; graph must remain at least for now.
-        public AntSystemFragment(Random rnd, Options options, IGraph graph)
+        public AntSystemFragment(Random rnd, Options.Options options, IGraph graph)
         {
             _rnd = rnd;
             _options = options;

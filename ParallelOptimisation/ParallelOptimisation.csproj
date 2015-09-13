@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="AntSystemParallelOptimisation.cs" />
     <Compile Include="AspgParallelOptimisation.cs" />
-    <Compile Include="OptionsParallelOptimisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

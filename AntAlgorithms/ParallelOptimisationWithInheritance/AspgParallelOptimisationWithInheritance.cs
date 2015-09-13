@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Linq;
 using AlgorithmsCore;
 using AlgorithmsCore.Options;
 
-namespace ParallelOptimisation
+namespace ParallelOptimisationWithInheritance
 {
-    public class AspgParallelOptimisation : AspgBase
+    public class AspgParallelOptimisationWithInheritance : AspgBase
     {
-        public AspgParallelOptimisation(OptionsParallelOptimisation options, IGraph graph, Random rnd)
+        public AspgParallelOptimisationWithInheritance(OptionsParallelOptimisation options, IGraph graph, Random rnd)
             : base (options, graph, rnd) { }
 
         public override Result GetQuality()
@@ -15,10 +14,12 @@ namespace ParallelOptimisation
             var bestResult = new Result(double.MinValue);
             var maxAllowedWeight = GetMaxAllowedWeight();
 
-            var options = (OptionsParallelOptimisation) Options;
+            AntSystemFragment previousBestFragment = null;
+
+            var options = (OptionsParallelOptimisation)Options;
             while (Options.NumberOfIterations > 0)
             {
-                var antSystem = new AntSystemParallelOptimisation(Rnd, options, Graph);
+                var antSystem = new AntSystemParallelOptimisationWithInheritance(Rnd, options, Graph, previousBestFragment);
 
                 for (short interSectionIndex = 0;
                     interSectionIndex < options.NumberOfInterSections;
@@ -36,13 +37,12 @@ namespace ParallelOptimisation
                     }
                 }
 
-                var bestFragment = antSystem.UpdatePhermone(maxAllowedWeight);
+                previousBestFragment = antSystem.UpdatePhermone(maxAllowedWeight);
 
-                var newQuality = bestFragment.GetSumOfOptimalityCriterion(maxAllowedWeight);
                 // Save the best results.
-                if (bestResult.Quality < newQuality)
+                if (bestResult.Quality < antSystem.FragmentBestOptimalityCriterion)
                 {
-                    bestResult = new Result(newQuality, bestFragment.Treil);
+                    bestResult = new Result(antSystem.FragmentBestOptimalityCriterion, antSystem.BestTreil);
                 }
 
                 Options.NumberOfIterations--;

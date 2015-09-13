@@ -4,19 +4,31 @@ using System.Linq;
 using AlgorithmsCore;
 using AlgorithmsCore.Options;
 
-namespace ParallelOptimisation
+namespace ParallelOptimisationWithInheritance
 {
-    public class AntSystemParallelOptimisation : AntSystemBase
+    public class AntSystemParallelOptimisationWithInheritance : AntSystemBase
     {
         private AntSystemFragment[] AntSystemFragments { get; }
 
-        public AntSystemParallelOptimisation(Random rnd, OptionsParallelOptimisation options, IGraph graph)
+        public List<HashSet<Vertex>> BestTreil { get; set; }
+
+        public double FragmentBestOptimalityCriterion { get; set; }
+
+        public AntSystemParallelOptimisationWithInheritance(Random rnd, OptionsParallelOptimisation options, IGraph graph, AntSystemFragment previousBestFragment)
             : base(rnd, options, graph)
         {
             AntSystemFragments = new AntSystemFragment[options.NumberOfInterSections];
-            for (var i = 0; i < options.NumberOfInterSections; i++)
+
+            short index = 0;
+            if (previousBestFragment != null)
             {
-                AntSystemFragments[i] = new AntSystemFragment(rnd, options, graph);
+                AntSystemFragments[0] = previousBestFragment;
+                index = 1;
+            }
+
+            for (; index < options.NumberOfInterSections; index++)
+            {
+                AntSystemFragments[index] = new AntSystemFragment(rnd, options, graph);
             }
         }
 
@@ -49,9 +61,9 @@ namespace ParallelOptimisation
 
         public AntSystemFragment UpdatePhermone(double maxAllowedWeight)
         {
-            var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation) Options).NumberOfInterSections];
+            var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation)Options).NumberOfInterSections];
             for (int fragmentIndex = 0;
-                fragmentIndex < ((OptionsParallelOptimisation) Options).NumberOfInterSections;
+                fragmentIndex < ((OptionsParallelOptimisation)Options).NumberOfInterSections;
                 fragmentIndex++)
             {
                 fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion(maxAllowedWeight);
