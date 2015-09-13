@@ -59,6 +59,14 @@
       <Project>{cf4fc03f-5b89-4670-94e9-8703215fbd52}</Project>
       <Name>Basic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ParallelOptimisation\ParallelOptimisation.csproj">
+      <Project>{e71c50d2-e6a4-42a0-8792-50b9b7cf873b}</Project>
+      <Name>ParallelOptimisation</Name>
+    </ProjectReference>
+    <ProjectReference Include="ParallelOptimisationWithInheritance\ParallelOptimisationWithInheritance.csproj">
+      <Project>{62a68dc6-3174-499b-8e4d-814c6214d86f}</Project>
+      <Name>ParallelOptimisationWithInheritance</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

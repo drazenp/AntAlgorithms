@@ -6,11 +6,11 @@ namespace ParallelOptimisation
 {
     public class AspgParallelOptimisation
     {
-        private Options _options;
+        private OptionsParallelOptimisation _options;
         private readonly IGraph _graph;
         private readonly Random _rnd;
 
-        public AspgParallelOptimisation(Options options, IGraph graph, Random rnd)
+        public AspgParallelOptimisation(OptionsParallelOptimisation options, IGraph graph, Random rnd)
         {
             _options = options;
             _graph = graph;
@@ -19,35 +19,41 @@ namespace ParallelOptimisation
 
         public Result GetQuality()
         {
-            var result = new Result(double.MinValue);
+            var bestResult = new Result(double.MinValue);
             var maxAllowedWeight = GetMaxAllowedWeight();
 
             while (_options.NumberOfIterations > 0)
             {
-                var antSystem = new AntSystem(_rnd, _options, _graph);
-                antSystem.InitializeTreils();
+                var antSystem = new AntSystemParallelOptimisation(_rnd, _options, _graph);
 
-                for (var vertexIndex = _options.NumberOfRegions; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
+                for (short interSectionIndex = 0;
+                    interSectionIndex < _options.NumberOfInterSections;
+                    interSectionIndex++)
                 {
-                    var nextColony = antSystem.GetNextColony();
-                    double[] probability = antSystem.CalculateProbability(nextColony);
-                    var chosenVertexIndex = Roulette(probability);
-                    var chosenVertex = _graph.VerticesWeights[chosenVertexIndex];
-                    antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
+                    for (var vertexIndex = _options.NumberOfRegions;
+                        vertexIndex < _graph.NumberOfVertices;
+                        vertexIndex++)
+                    {
+                        var nextColony = antSystem.GetNextColony(interSectionIndex);
+                        double[] probability = antSystem.CalculateProbability(interSectionIndex, nextColony);
+                        var chosenVertexIndex = Roulette(probability);
+                        var chosenVertex = _graph.VerticesWeights[chosenVertexIndex];
+                        antSystem.AddFreeVertexToTreil(interSectionIndex, nextColony, chosenVertex);
+                    }
                 }
 
                 var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
 
                 // Save the best results.
-                if (result.Quality < sumOfOptimalityCriterions)
+                if (bestResult.Quality < sumOfOptimalityCriterions)
                 {
-                    result = new Result(sumOfOptimalityCriterions, antSystem.Treil);
+                    //bestResult = new Result(sumOfOptimalityCriterions, antSystem.Treil);
                 }
 
                 _options.NumberOfIterations--;
             }
 
-            return result;
+            return bestResult;
         }
 
         public double GetMaxAllowedWeight()
@@ -57,6 +63,7 @@ namespace ParallelOptimisation
             return maxAllowedWeight;
         }
 
+        // TODO: Consider moving ths function in some kind of utility class.
         public int Roulette(double[] probability)
         {
             var boundary = _rnd.NextDouble();

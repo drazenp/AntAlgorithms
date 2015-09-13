@@ -7,7 +7,7 @@ namespace Basic
 {
     public class Aspg
     {
-        private Options _options;
+        private readonly Options _options;
         private readonly IGraph _graph;
         private readonly Random _rnd;
 
@@ -25,8 +25,7 @@ namespace Basic
 
             while (_options.NumberOfIterations > 0)
             {
-                var antSystem = new AntSystem(_rnd, _options, _graph);
-                antSystem.InitializeTreils();
+                var antSystem = new AntSystemBasic(_rnd, _options, _graph);
 
                 for (var vertexIndex = _options.NumberOfRegions; vertexIndex < _graph.NumberOfVertices; vertexIndex++)
                 {
@@ -42,7 +41,7 @@ namespace Basic
                 // Save the best results.
                 if (result.Quality < sumOfOptimalityCriterions)
                 {
-                    result = new Result(sumOfOptimalityCriterions, antSystem.Treil);
+                    result = new Result(sumOfOptimalityCriterions, antSystem.GetTrails());
                 }
 
                 _options.NumberOfIterations--;
