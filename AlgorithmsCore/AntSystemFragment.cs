@@ -73,16 +73,6 @@ namespace AlgorithmsCore
             PassedVertices.Add(vertix);
         }
 
-        //public double[] CalculateOptimalityCriterion(double maxAllowedWeight)
-        //{
-        //    var optimalityCriterions = new double[_options.NumberOfRegions];
-        //    for (var i = 0; i < _options.NumberOfRegions; i++)
-        //    {
-        //        optimalityCriterions[i] = Math.Abs(EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight));
-        //    }
-        //    return optimalityCriterions;
-        //}
-
         public double GetSumOfOptimalityCriterion(double maxAllowedWeight)
         {
             var optimalityCriterions = new double[_options.NumberOfRegions];
