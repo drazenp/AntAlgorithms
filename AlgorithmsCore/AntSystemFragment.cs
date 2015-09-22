@@ -6,7 +6,6 @@ namespace AlgorithmsCore
 {
     public class AntSystemFragment
     {
-        private readonly Random _rnd;
         private readonly Options.Options _options;
         private readonly IGraph _graph;
 
@@ -30,7 +29,6 @@ namespace AlgorithmsCore
         // TODO: Try to remove rnd and options from global variables; graph must remain at least for now.
         public AntSystemFragment(Random rnd, Options.Options options, IGraph graph)
         {
-            _rnd = rnd;
             _options = options;
             _graph = graph;
 
@@ -50,7 +48,7 @@ namespace AlgorithmsCore
 
             for (var i = 0; i < _options.NumberOfRegions; i++)
             {
-                var randomFreeVertix = FreeVertices.Shuffle(_rnd).First();
+                var randomFreeVertix = FreeVertices.Shuffle(rnd).First();
 
                 AddFreeVertexToTreil(i, randomFreeVertix);
             }

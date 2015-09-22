@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using AlgorithmsCore;
 
 namespace AlgorithmsCore
 {
@@ -108,7 +107,7 @@ namespace AlgorithmsCore
         public void InitializePheromoneMatrix()
         {
             PheromoneMatrix = new double[NumberOfVertices, NumberOfVertices];
-            for (int i = 0; i < NumberOfVertices; i++)
+            for (var i = 0; i < NumberOfVertices; i++)
             {
                 for (var j = 0; j < NumberOfVertices; j++)
                 {

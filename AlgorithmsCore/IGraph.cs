@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using AlgorithmsCore;
 
 namespace AlgorithmsCore
 {
     public interface IGraph
     {
-        List<Vertex> VerticesWeights { get; set; }
+        List<Vertex> VerticesWeights { get; }
 
-        int[,] EdgesWeights { get; }
+        int[,] EdgesWeights { get;  }
 
         double[,] PheromoneMatrix { get; }
 
