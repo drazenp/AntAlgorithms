@@ -169,7 +169,7 @@ namespace AlgorithmsCoreTests
         [ExpectedException(typeof(FileNotFoundException), "Wrong file path for edges weight was inappropriately allowed.")]
         public void InitializeGraph_EdgesWeighFilePath_NotExisits_Fail()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new Graph(System.Reflection.Assembly.GetExecutingAssembly().Location, "baba.txt");
 
             graph.InitializeGraph();
         }
