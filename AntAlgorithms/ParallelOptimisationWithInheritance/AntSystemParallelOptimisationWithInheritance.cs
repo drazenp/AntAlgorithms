@@ -49,7 +49,7 @@ namespace ParallelOptimisationWithInheritance
         {
             var antSystemFragment = AntSystemFragments[interSectionId];
 
-            var probability = CalculateProbability(antSystemFragment, nextColony);
+            var probability = antSystemFragment.CalculateProbability(nextColony);
             return probability;
         }
 

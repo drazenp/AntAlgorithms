@@ -93,5 +93,41 @@ namespace AlgorithmsCore
             var colonyWithMinWeight = WeightOfColonies.Min();
             return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
         }
+
+        public double[] CalculateProbability(int nextColony)
+        {
+            double[] probability = new double[_graph.NumberOfVertices];
+
+            var numberOfPassedVertices = Treil[nextColony].Count;
+
+            foreach (var freeVertex in FreeVertices)
+            {
+                var pheromone = 0D;
+                var edges = 0;
+                foreach (var passedVertex in Treil[nextColony])
+                {
+                    pheromone += _graph.PheromoneMatrix[passedVertex.Index, freeVertex.Index];
+                    edges += _graph.EdgesWeights[passedVertex.Index, freeVertex.Index];
+                }
+                pheromone /= numberOfPassedVertices;
+
+                if (edges == 0)
+                {
+                    probability[freeVertex.Index] = Math.Pow(pheromone, _options.Alfa);
+                }
+                else
+                {
+                    probability[freeVertex.Index] = Math.Pow(pheromone, _options.Alfa) + Math.Pow(edges, _options.Beta);
+                }
+            }
+
+            var probabilitySum = probability.Sum();
+            for (var i = 0; i < _graph.NumberOfVertices; i++)
+            {
+                probability[i] = probability[i] / probabilitySum;
+            }
+
+            return probability;
+        }
     }
 }

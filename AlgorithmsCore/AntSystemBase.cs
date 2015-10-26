@@ -15,42 +15,6 @@ namespace AlgorithmsCore
             Graph = graph;
         }
 
-        public double[] CalculateProbability(AntSystemFragment antSystemFragment, int nextColony)
-        {
-            double[] probability = new double[Graph.NumberOfVertices];
-
-            var numberOfPassedVertices = antSystemFragment.Treil[nextColony].Count;
-
-            foreach (var freeVertex in antSystemFragment.FreeVertices)
-            {
-                var pheromone = 0D;
-                var edges = 0;
-                foreach (var passedVertex in antSystemFragment.Treil[nextColony])
-                {
-                    pheromone += Graph.PheromoneMatrix[passedVertex.Index, freeVertex.Index];
-                    edges += Graph.EdgesWeights[passedVertex.Index, freeVertex.Index];
-                }
-                pheromone /= numberOfPassedVertices;
-
-                if (edges == 0)
-                {
-                    probability[freeVertex.Index] = Math.Pow(pheromone, Options.Alfa);
-                }
-                else
-                {
-                    probability[freeVertex.Index] = Math.Pow(pheromone, Options.Alfa) + Math.Pow(edges, Options.Beta);
-                }
-            }
-
-            var probabilitySum = probability.Sum();
-            for (var i = 0; i < Graph.NumberOfVertices; i++)
-            {
-                probability[i] = probability[i] / probabilitySum;
-            }
-
-            return probability;
-        }
-
         // TODO: The function must be refactored. It should not return sumOfOptimalityCriterions.
         // TODO: It must be checked if can be implemenet pheromone update in graph class.
         public void UpdatePhermone(AntSystemFragment antSystemFragment, double sumOfOptimalityCriterions)

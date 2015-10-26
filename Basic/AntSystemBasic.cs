@@ -34,7 +34,7 @@ namespace Basic
 
         public double[] CalculateProbability(int nextColony)
         {
-            var probability = CalculateProbability(_antSystemFragment, nextColony);
+            var probability = _antSystemFragment.CalculateProbability(nextColony);
             return probability;
         }
 
