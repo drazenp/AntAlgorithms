@@ -9,24 +9,13 @@ namespace AlgorithmsCore
         protected readonly Options.Options Options;
         protected readonly IGraph Graph;
 
-        protected AntSystemBase(Random rnd, Options.Options options, IGraph graph)
+        public AntSystemBase(Random rnd, Options.Options options, IGraph graph)
         {
             Options = options;
             Graph = graph;
         }
-        
-        /// <summary>
-        /// Based on overall weight of colony shoose the next one.
-        /// The next colony will be with the lowest weight.
-        /// </summary>
-        /// <returns></returns>
-        protected int GetNextColony(AntSystemFragment antSystemFragment)
-        {
-            var colonyWithMinWeight = antSystemFragment.WeightOfColonies.Min();
-            return Array.IndexOf(antSystemFragment.WeightOfColonies, colonyWithMinWeight);
-        }
 
-        protected double[] CalculateProbability(AntSystemFragment antSystemFragment, int nextColony)
+        public double[] CalculateProbability(AntSystemFragment antSystemFragment, int nextColony)
         {
             double[] probability = new double[Graph.NumberOfVertices];
 
@@ -64,10 +53,10 @@ namespace AlgorithmsCore
 
         // TODO: The function must be refactored. It should not return sumOfOptimalityCriterions.
         // TODO: It must be checked if can be implemenet pheromone update in graph class.
-        protected void UpdatePhermone(AntSystemFragment antSystemFragment, double sumOfOptimalityCriterions)
+        public void UpdatePhermone(AntSystemFragment antSystemFragment, double sumOfOptimalityCriterions)
         {
             // Colony with heighes weight.
-            var colonyWithHeigWeight = Array.IndexOf(antSystemFragment.WeightOfColonies, antSystemFragment.WeightOfColonies.Max());
+            var colonyWithHighestWeight = Array.IndexOf(antSystemFragment.WeightOfColonies, antSystemFragment.WeightOfColonies.Max());
 
             // If criterions of optimality is less then 0, the minimum of pheromones will be set.
             if (sumOfOptimalityCriterions > 0)
@@ -75,9 +64,9 @@ namespace AlgorithmsCore
                 for (var indexOfRegion = 0; indexOfRegion < Options.NumberOfRegions; indexOfRegion++)
                 {
                     double pheromoneToSet;
-                    if (indexOfRegion == colonyWithHeigWeight)
+                    if (indexOfRegion == colonyWithHighestWeight)
                     {
-                        pheromoneToSet = 0.01D * (sumOfOptimalityCriterions + 1.2D * antSystemFragment.WeightOfColonies[colonyWithHeigWeight]);
+                        pheromoneToSet = 0.01D * (sumOfOptimalityCriterions + 1.2D * antSystemFragment.WeightOfColonies[colonyWithHighestWeight]);
                     }
                     else
                     {

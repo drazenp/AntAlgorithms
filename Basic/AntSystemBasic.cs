@@ -28,7 +28,7 @@ namespace Basic
         /// <returns></returns>
         public int GetNextColony()
         {
-            var nextColonyId = GetNextColony(_antSystemFragment);
+            var nextColonyId = _antSystemFragment.GetNextColony();
             return nextColonyId;
         }
 

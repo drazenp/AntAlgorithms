@@ -41,7 +41,7 @@ namespace ParallelOptimisationWithInheritance
         public int GetNextColony(short interSectionId)
         {
             var antSystemFragment = AntSystemFragments[interSectionId];
-            var nextColonyId = GetNextColony(antSystemFragment);
+            var nextColonyId = antSystemFragment.GetNextColony();
             return nextColonyId;
         }
 

@@ -82,5 +82,16 @@ namespace AlgorithmsCore
             var sumOfOptimalityCriterions = optimalityCriterions.Sum();
             return sumOfOptimalityCriterions;
         }
+
+        /// <summary>
+        /// Based on overall weight of colony shoose the next one.
+        /// The next colony will be with the lowest weight.
+        /// </summary>
+        /// <returns>The ID of the next colony.</returns>
+        public int GetNextColony()
+        {
+            var colonyWithMinWeight = WeightOfColonies.Min();
+            return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
+        }
     }
 }
