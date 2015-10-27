@@ -54,6 +54,11 @@ namespace ParallelOptimisation
             antSystemFragment.AddFreeVertexToTreil(indexOfColony, vertix);
         }
 
+        /// <summary>
+        /// Update pheromone on graph based on quality.
+        /// </summary>
+        /// <param name="maxAllowedWeight"></param>
+        /// <returns>The fragment with best quality.</returns>
         public AntSystemFragment UpdatePhermone(double maxAllowedWeight)
         {
             var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation)_options).NumberOfInterSections];

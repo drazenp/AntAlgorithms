@@ -27,12 +27,13 @@ namespace Basic
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
 
-                var sumOfOptimalityCriterions = antSystem.UpdatePhermone(maxAllowedWeight);
+                var bestFragment = antSystem.UpdatePhermone(maxAllowedWeight);
 
+                var newQuality = bestFragment.GetSumOfOptimalityCriterion(maxAllowedWeight);
                 // Save the best results.
-                if (result.Quality < sumOfOptimalityCriterions)
+                if (result.Quality < newQuality)
                 {
-                    result = new Result(sumOfOptimalityCriterions, antSystem.GetTrails());
+                    result = new Result(newQuality, bestFragment.Treil);
                 }
 
                 Options.NumberOfIterations--;

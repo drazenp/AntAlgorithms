@@ -5,7 +5,7 @@ using AlgorithmsCore.Options;
 
 namespace Basic
 {
-    public class AntSystemBasic
+    public class AntSystemBasic : IAntSystem
     {
         private readonly Options _options;
         private readonly IGraph _graph;
@@ -44,17 +44,11 @@ namespace Basic
             return probability;
         }
 
-        public double UpdatePhermone(double maxAllowedWeight)
+        public AntSystemFragment UpdatePhermone(double maxAllowedWeight)
         {
             var sumOfOptimalityCriterions = _antSystemFragment.GetSumOfOptimalityCriterion(maxAllowedWeight);
             _graph.UpdatePhermone(_antSystemFragment, _options, sumOfOptimalityCriterions);
-            return sumOfOptimalityCriterions;
-        }
-
-        public List<HashSet<Vertex>> GetTrails()
-        {
-            var trails = _antSystemFragment.Treil;
-            return trails;
+            return _antSystemFragment;
         }
     }
 }

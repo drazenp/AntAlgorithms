@@ -46,6 +46,7 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="FileLoader.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="IAntSystem.cs" />
     <Compile Include="IAspg.cs" />
     <Compile Include="IDataLoader.cs" />
     <Compile Include="IGraph.cs" />
