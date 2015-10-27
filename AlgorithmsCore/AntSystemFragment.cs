@@ -121,7 +121,14 @@ namespace AlgorithmsCore
                 }
             }
 
+            // In case probabilitySum is 0 is replaced with 1 since it's not possible to devide by zero.
+            //   The results will be the same.
+            // TODO: Check if probabilitySum can be replaced by constant.
             var probabilitySum = probability.Sum();
+            if (Math.Abs(probabilitySum) < 0.0001)
+            {
+                probabilitySum = 1;
+            }
             for (var i = 0; i < _graph.NumberOfVertices; i++)
             {
                 probability[i] = probability[i] / probabilitySum;

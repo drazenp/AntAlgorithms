@@ -272,7 +272,7 @@ namespace AlgorithmsCoreTests
 
             var probability = antSystem.CalculateProbability(1);
 
-
+            Assert.AreEqual(probability[0], 0);
         }
     }
 }
