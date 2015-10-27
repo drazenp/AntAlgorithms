@@ -6,13 +6,20 @@ using AlgorithmsCore.Options;
 
 namespace ParallelOptimisation
 {
-    public class AntSystemParallelOptimisation : AntSystemBase
+    public class AntSystemParallelOptimisation
     {
+        private Random _rnd;
+        private readonly Options _options;
+        private readonly IGraph _graph;
+
         private AntSystemFragment[] AntSystemFragments { get; }
 
         public AntSystemParallelOptimisation(Random rnd, OptionsParallelOptimisation options, IGraph graph)
-            : base(rnd, options, graph)
         {
+            _rnd = rnd;
+            _graph = graph;
+            _options = options;
+
             AntSystemFragments = new AntSystemFragment[options.NumberOfInterSections];
             for (var i = 0; i < options.NumberOfInterSections; i++)
             {
@@ -49,9 +56,9 @@ namespace ParallelOptimisation
 
         public AntSystemFragment UpdatePhermone(double maxAllowedWeight)
         {
-            var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation) Options).NumberOfInterSections];
+            var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation)_options).NumberOfInterSections];
             for (int fragmentIndex = 0;
-                fragmentIndex < ((OptionsParallelOptimisation) Options).NumberOfInterSections;
+                fragmentIndex < ((OptionsParallelOptimisation)_options).NumberOfInterSections;
                 fragmentIndex++)
             {
                 fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion(maxAllowedWeight);
@@ -62,7 +69,7 @@ namespace ParallelOptimisation
 
             var bestFragment = AntSystemFragments[indexOfFragmentWithBestQuality];
 
-            UpdatePhermone(bestFragment, fragmentBestOptimalityCriterion);
+            _graph.UpdatePhermone(bestFragment, _options, fragmentBestOptimalityCriterion);
 
             return bestFragment;
         }

@@ -11,5 +11,8 @@ namespace AlgorithmsCore
         double[,] PheromoneMatrix { get; }
 
         int NumberOfVertices { get; }
+
+        void UpdatePhermone(AntSystemFragment antSystemFragment, Options.Options options,
+            double sumOfOptimalityCriterions);
     }
 }

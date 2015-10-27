@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AlgorithmsCore
 {
@@ -114,6 +115,49 @@ namespace AlgorithmsCore
                     if (i == j) continue;
 
                     PheromoneMatrix[i, j] = Constants.MinimalValueOfPheromone;
+                }
+            }
+        }
+
+        public void UpdatePhermone(AntSystemFragment antSystemFragment, Options.Options options, double sumOfOptimalityCriterions)
+        {
+            // Colony with heighes weight.
+            var colonyWithHighestWeight = Array.IndexOf(antSystemFragment.WeightOfColonies, antSystemFragment.WeightOfColonies.Max());
+
+            // If criterions of optimality is less then 0, the minimum of pheromones will be set.
+            if (sumOfOptimalityCriterions > 0)
+            {
+                for (var indexOfRegion = 0; indexOfRegion < options.NumberOfRegions; indexOfRegion++)
+                {
+                    double pheromoneToSet;
+                    if (indexOfRegion == colonyWithHighestWeight)
+                    {
+                        pheromoneToSet = 0.01D * (sumOfOptimalityCriterions + 1.2D * antSystemFragment.WeightOfColonies[colonyWithHighestWeight]);
+                    }
+                    else
+                    {
+                        pheromoneToSet = Constants.MinimalVelueOfPheromoneToSet;
+                    }
+
+                    var path = antSystemFragment.Treil[indexOfRegion];
+                    foreach (var vertex1 in path)
+                    {
+                        foreach (var vertex2 in path.Skip(1))
+                        {
+                            PheromoneMatrix[vertex1.Index, vertex2.Index] = PheromoneMatrix[vertex1.Index, vertex2.Index] * (1 - options.Ro) + pheromoneToSet;
+                            PheromoneMatrix[vertex2.Index, vertex1.Index] = PheromoneMatrix[vertex2.Index, vertex1.Index] * (1 - options.Ro) + pheromoneToSet;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (var i = 0; i < PheromoneMatrix.GetLength(0); i++)
+                {
+                    for (var j = 0; j < PheromoneMatrix.GetLength(1); j++)
+                    {
+                        PheromoneMatrix[i, j] = PheromoneMatrix[i, j] * (1 - options.Ro) + Constants.MinimalVelueOfPheromoneToSet;
+                    }
                 }
             }
         }
