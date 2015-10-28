@@ -6,7 +6,7 @@ using AlgorithmsCore.Options;
 
 namespace ParallelOptimisationWithInheritance
 {
-    public class AntSystemParallelOptimisationWithInheritance
+    public class AntSystemParallelOptimisationWithInheritance : IAntSystemParallelOptimisation
     {
         private Random _rnd;
         private readonly Options _options;

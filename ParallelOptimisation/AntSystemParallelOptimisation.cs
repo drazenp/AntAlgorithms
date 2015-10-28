@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using AlgorithmsCore;
 using AlgorithmsCore.Options;
 
 namespace ParallelOptimisation
 {
-    public class AntSystemParallelOptimisation
+    public class AntSystemParallelOptimisation : IAntSystemParallelOptimisation
     {
         private Random _rnd;
         private readonly Options _options;
