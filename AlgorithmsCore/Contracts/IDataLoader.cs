@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AlgorithmsCore
+namespace AlgorithmsCore.Contracts
 {
     interface IDataLoader
     {

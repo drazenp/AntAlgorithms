@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace AlgorithmsCore
+namespace AlgorithmsCore.Contracts
 {
     public abstract class AspgBase
     {

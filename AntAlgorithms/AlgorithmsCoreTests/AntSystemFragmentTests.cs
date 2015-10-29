@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AlgorithmsCore;
+using AlgorithmsCore.Contracts;
 using AlgorithmsCore.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

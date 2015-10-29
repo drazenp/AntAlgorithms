@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AlgorithmsCore;
+using AlgorithmsCore.Contracts;
 using AlgorithmsCore.Options;
 using Basic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

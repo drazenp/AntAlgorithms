@@ -1,4 +1,4 @@
-﻿namespace AlgorithmsCore
+﻿namespace AlgorithmsCore.Contracts
 {
     public interface IAntSystem
     {

@@ -46,11 +46,11 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="FileLoader.cs" />
     <Compile Include="Graph.cs" />
-    <Compile Include="IAntSystem.cs" />
-    <Compile Include="IAntSystemParallelOptimisation.cs" />
-    <Compile Include="IAspg.cs" />
-    <Compile Include="IDataLoader.cs" />
-    <Compile Include="IGraph.cs" />
+    <Compile Include="Contracts\IAntSystem.cs" />
+    <Compile Include="Contracts\IAntSystemParallelOptimisation.cs" />
+    <Compile Include="Contracts\IAspg.cs" />
+    <Compile Include="Contracts\IDataLoader.cs" />
+    <Compile Include="Contracts\IGraph.cs" />
     <Compile Include="Options\Options.cs" />
     <Compile Include="Options\OptionsParallelOptimisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
