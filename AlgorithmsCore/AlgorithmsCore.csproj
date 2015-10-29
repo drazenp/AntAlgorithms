@@ -51,6 +51,7 @@
     <Compile Include="Contracts\IAspg.cs" />
     <Compile Include="Contracts\IDataLoader.cs" />
     <Compile Include="Contracts\IGraph.cs" />
+    <Compile Include="GraphWithLoader.cs" />
     <Compile Include="Options\Options.cs" />
     <Compile Include="Options\OptionsParallelOptimisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

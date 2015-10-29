@@ -12,7 +12,7 @@ namespace AlgorithmsCore.Contracts
 
         int NumberOfVertices { get; }
 
-        void UpdatePhermone(AntSystemFragment antSystemFragment, Options.Options options,
+        void UpdatePhermone(int[] weightOfColonies, List<HashSet<Vertex>> treil, Options.Options options,
             double sumOfOptimalityCriterions);
     }
 }

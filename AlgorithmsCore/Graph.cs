@@ -120,10 +120,10 @@ namespace AlgorithmsCore
             }
         }
 
-        public void UpdatePhermone(AntSystemFragment antSystemFragment, Options.Options options, double sumOfOptimalityCriterions)
+        public void UpdatePhermone(int[] weightOfColonies, List<HashSet<Vertex>> treil, Options.Options options, double sumOfOptimalityCriterions)
         {
             // Colony with heighes weight.
-            var colonyWithHighestWeight = Array.IndexOf(antSystemFragment.WeightOfColonies, antSystemFragment.WeightOfColonies.Max());
+            var colonyWithHighestWeight = Array.IndexOf(weightOfColonies, weightOfColonies.Max());
 
             // If criterions of optimality is less then 0, the minimum of pheromones will be set.
             if (sumOfOptimalityCriterions > 0)
@@ -133,14 +133,14 @@ namespace AlgorithmsCore
                     double pheromoneToSet;
                     if (indexOfRegion == colonyWithHighestWeight)
                     {
-                        pheromoneToSet = 0.01D * (sumOfOptimalityCriterions + 1.2D * antSystemFragment.WeightOfColonies[colonyWithHighestWeight]);
+                        pheromoneToSet = 0.01D * (sumOfOptimalityCriterions + 1.2D * weightOfColonies[colonyWithHighestWeight]);
                     }
                     else
                     {
                         pheromoneToSet = Constants.MinimalVelueOfPheromoneToSet;
                     }
 
-                    var path = antSystemFragment.Treil[indexOfRegion];
+                    var path = treil[indexOfRegion];
                     foreach (var vertex1 in path)
                     {
                         foreach (var vertex2 in path.Skip(1))

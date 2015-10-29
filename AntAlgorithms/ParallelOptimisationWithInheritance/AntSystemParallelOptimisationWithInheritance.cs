@@ -82,7 +82,7 @@ namespace ParallelOptimisationWithInheritance
 
             var bestFragment = AntSystemFragments[indexOfFragmentWithBestQuality];
 
-            _graph.UpdatePhermone(bestFragment, _options, fragmentBestOptimalityCriterion);
+            _graph.UpdatePhermone(bestFragment.WeightOfColonies, bestFragment.Treil, _options, fragmentBestOptimalityCriterion);
 
             return bestFragment;
         }

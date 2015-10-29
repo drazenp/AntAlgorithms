@@ -48,7 +48,7 @@ namespace Basic
         public AntSystemFragment UpdatePhermone(double maxAllowedWeight)
         {
             var sumOfOptimalityCriterions = _antSystemFragment.GetSumOfOptimalityCriterion(maxAllowedWeight);
-            _graph.UpdatePhermone(_antSystemFragment, _options, sumOfOptimalityCriterions);
+            _graph.UpdatePhermone(_antSystemFragment.WeightOfColonies, _antSystemFragment.Treil, _options, sumOfOptimalityCriterions);
             return _antSystemFragment;
         }
     }
