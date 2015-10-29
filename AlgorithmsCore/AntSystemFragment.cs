@@ -20,7 +20,7 @@ namespace AlgorithmsCore
 
         /// <summary>
         /// The sum of all vrtices weights for each colony.
-        /// TODO: Check if should be used decimal insted int.
+        /// TODO: Check if should be used double insted int.
         /// </summary>
         public int[] WeightOfColonies { get; }
 
