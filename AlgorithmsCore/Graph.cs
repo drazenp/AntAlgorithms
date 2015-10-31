@@ -141,13 +141,14 @@ namespace AlgorithmsCore
                     }
 
                     var path = treil[indexOfRegion];
-                    foreach (var vertex1 in path)
+
+                    var verexCombination = path.SelectMany((value, index) => path.Skip(index + 1),
+                               (first, second) => new { first, second });
+
+                    foreach (var combination in verexCombination)
                     {
-                        foreach (var vertex2 in path.Skip(1))
-                        {
-                            PheromoneMatrix[vertex1.Index, vertex2.Index] = PheromoneMatrix[vertex1.Index, vertex2.Index] * (1 - options.Ro) + pheromoneToSet;
-                            PheromoneMatrix[vertex2.Index, vertex1.Index] = PheromoneMatrix[vertex2.Index, vertex1.Index] * (1 - options.Ro) + pheromoneToSet;
-                        }
+                        PheromoneMatrix[combination.first.Index, combination.second.Index] = PheromoneMatrix[combination.first.Index, combination.second.Index] * (1 - options.Ro) + pheromoneToSet;
+                        PheromoneMatrix[combination.second.Index, combination.first.Index] = PheromoneMatrix[combination.second.Index, combination.first.Index] * (1 - options.Ro) + pheromoneToSet;
                     }
                 }
             }
@@ -162,5 +163,18 @@ namespace AlgorithmsCore
                 }
             }
         }
+
+        /*
+        public double GetUpdatedPheromoneOnOneEdge(int firstIndex , int secondIndex, double evaporation)
+        {
+            var currentPheromoneValue = PheromoneMatrix[firstIndex, secondIndex];
+            var newPheromoneValue = currentPheromoneValue*(1 - evaporation);
+            if (newPheromoneValue < 0.0001)
+            {
+                return 0.0001;
+            }
+            return newPheromoneValue;
+        }
+        */
     }
 }

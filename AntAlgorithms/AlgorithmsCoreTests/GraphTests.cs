@@ -130,7 +130,65 @@ namespace AlgorithmsCoreTests
 
             graph.InitializePheromoneMatrix();
 
-            Assert.AreEqual(Constants.MinimalValueOfPheromone, graph.PheromoneMatrix[0, 1]);
+            var expectedPheromoneMatrix = new double[9, 9]
+            {
+                {
+                    0, Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, 0, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone, 0,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, 0, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone, 0,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, 0, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone, 0,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, 0, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone, 0
+                }
+            };
+
+            CollectionAssert.AreEqual(graph.PheromoneMatrix, expectedPheromoneMatrix);
         }
 
         [TestMethod]
@@ -180,6 +238,7 @@ namespace AlgorithmsCoreTests
         {
             var random = new Random(1);
             var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+
             var graph = new Graph("baba.txt", "baba.txt");
             graph.VerticesWeights = new List<Vertex>
             {
@@ -194,9 +253,76 @@ namespace AlgorithmsCoreTests
                 new Vertex(8, 2)
             };
 
-            graph.InitializePheromoneMatrix();
+            var weightOfColonies = new[] { 1, 2, 3 };
+            var treil = new List<HashSet<Vertex>>();
+            for (var i = 0; i < options.NumberOfRegions; i++)
+            {
+                treil.Add(new HashSet<Vertex>());
+                treil[i].UnionWith(graph.VerticesWeights.Skip(i * 3).Take(3));
+            }
 
-            var antSystem = new AntSystemFragment(random, options, graph);
+            graph.InitializePheromoneMatrix();
+            graph.UpdatePhermone(weightOfColonies, treil, options, 5);
+
+            var expectedPheromoneMatrix = new double[9, 9]
+            {
+                {
+                    0, 0.000041, 0.000041,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    0.000041, 0, 0.000041,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    0.000041, 0.000041, 0,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, 0, 0.000041,
+                    0.000041, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, 0.000041, 0,
+                    0.000041, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, 0.000041,
+                    0.000041, 0, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone, 0,
+                    0.086004, 0.086004
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    0.086004, 0, 0.086004
+                },
+                {
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    Constants.MinimalValueOfPheromone, Constants.MinimalValueOfPheromone,
+                    0.086004, 0.086004, 0
+                }
+            };
+
+            CollectionAssert.AreEqual(graph.PheromoneMatrix, graph.PheromoneMatrix);
         }
 
         private static Stream GenerateStreamFromString(string s)
