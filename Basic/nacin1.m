@@ -1,5 +1,5 @@
 function dobrota=algn1(inputfile1,inputfile2,MaxBrIteracija,BrRegiona,tol)
-% % Primer algn1('IK.txt','IK2.txt')
+% % Primer nacin1('Graphs/B1.txt','Graphs/B2.txt',100,3,0.1)
 %---------======I=======----------------------------
 fid1 = fopen(inputfile1, 'r');
 fid2 = fopen(inputfile2, 'r');
