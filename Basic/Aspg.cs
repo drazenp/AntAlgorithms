@@ -18,13 +18,13 @@ namespace Basic
 
             while (Options.NumberOfIterations > 0)
             {
-                _log.Debug("Iteration: " + Options.NumberOfIterations);
+                Log.Debug("Iteration: " + Options.NumberOfIterations);
                 var antSystem = new AntSystemBasic(Rnd, Options, Graph);
 
                 for (var vertexIndex = Options.NumberOfRegions; vertexIndex < Graph.NumberOfVertices; vertexIndex++)
                 {
                     var nextColony = antSystem.GetNextColony();
-                    double[] probability = antSystem.CalculateProbability(nextColony);
+                    decimal[] probability = antSystem.CalculateProbability(nextColony);
                     var chosenVertexIndex = Roulette(probability);
                     var chosenVertex = Graph.VerticesWeights[chosenVertexIndex];
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);

@@ -10,7 +10,7 @@
         /// <returns>The ID of the next colony of the inter section.</returns>
         int GetNextColony(short interSectionId);
 
-        double[] CalculateProbability(short interSectionId, int nextColony);
+        decimal[] CalculateProbability(short interSectionId, int nextColony);
         void AddFreeVertexToTreil(short interSectionId, int indexOfColony, Vertex vertix);
 
         /// <summary>

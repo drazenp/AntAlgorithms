@@ -11,7 +11,7 @@
         /// <returns></returns>
         int GetNextColony();
 
-        double[] CalculateProbability(int nextColony);
+        decimal[] CalculateProbability(int nextColony);
         AntSystemFragment UpdatePhermone(double maxAllowedWeight);
     }
 }

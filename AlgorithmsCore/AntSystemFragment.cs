@@ -8,7 +8,7 @@ namespace AlgorithmsCore
 {
     public class AntSystemFragment
     {
-        static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly Options.Options _options;
         private readonly IGraph _graph;
@@ -63,7 +63,7 @@ namespace AlgorithmsCore
             FreeVertices.Remove(vertix);
 
             Treil[colonyIndex].Add(vertix);
-            _log.DebugFormat($"Vertex i: {vertix.Index}, w: {vertix.Weight}");
+            Log.DebugFormat($"Vertex i: {vertix.Index}, w: {vertix.Weight}");
 
             var currentWeightOfColony = WeightOfColonies[colonyIndex];
             WeightOfColonies[colonyIndex] = currentWeightOfColony + vertix.Weight;
@@ -99,9 +99,9 @@ namespace AlgorithmsCore
             return Array.IndexOf(WeightOfColonies, colonyWithMinWeight);
         }
 
-        public double[] CalculateProbability(int nextColony)
+        public decimal[] CalculateProbability(int nextColony)
         {
-            double[] probability = new double[_graph.NumberOfVertices];
+            decimal[] probability = new decimal[_graph.NumberOfVertices];
 
             var numberOfPassedVertices = Treil[nextColony].Count;
 
@@ -118,11 +118,11 @@ namespace AlgorithmsCore
 
                 if (edges == 0)
                 {
-                    probability[freeVertex.Index] = Math.Pow(pheromone, _options.Alfa);
+                    probability[freeVertex.Index] = (decimal)Math.Pow(pheromone, _options.Alfa);
                 }
                 else
                 {
-                    probability[freeVertex.Index] = Math.Pow(pheromone, _options.Alfa) + Math.Pow(edges, _options.Beta);
+                    probability[freeVertex.Index] = (decimal)Math.Pow(pheromone, _options.Alfa) + (decimal)Math.Pow(edges, _options.Beta);
                 }
             }
 
@@ -130,7 +130,7 @@ namespace AlgorithmsCore
             //   The results will be the same.
             // TODO: Check if probabilitySum can be replaced by constant.
             var probabilitySum = probability.Sum();
-            if (Math.Abs(probabilitySum) < 0.0001)
+            if (Math.Abs(probabilitySum) == 0M)
             {
                 probabilitySum = 1;
             }

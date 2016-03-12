@@ -39,7 +39,7 @@ namespace Basic
             return nextColonyId;
         }
 
-        public double[] CalculateProbability(int nextColony)
+        public decimal[] CalculateProbability(int nextColony)
         {
             var probability = _antSystemFragment.CalculateProbability(nextColony);
             return probability;

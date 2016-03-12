@@ -52,7 +52,7 @@
     <Compile Include="Graph.cs" />
     <Compile Include="Contracts\IAntSystem.cs" />
     <Compile Include="Contracts\IAntSystemParallelOptimisation.cs" />
-    <Compile Include="Contracts\IAspg.cs" />
+    <Compile Include="Contracts\AspgBase.cs" />
     <Compile Include="Contracts\IDataLoader.cs" />
     <Compile Include="Contracts\IGraph.cs" />
     <Compile Include="GraphWithLoader.cs" />

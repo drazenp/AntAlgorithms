@@ -6,7 +6,7 @@ namespace AlgorithmsCore.Contracts
 {
     public abstract class AspgBase
     {
-        protected static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected readonly Options.Options Options;
         protected readonly IGraph Graph;
@@ -28,13 +28,13 @@ namespace AlgorithmsCore.Contracts
             return maxAllowedWeight;
         }
 
-        public int Roulette(double[] probability)
+        protected int Roulette(decimal[] probability)
         {
-            var boundary = Rnd.NextDouble();
-            var currentSumOfProbability = 0D;
-            for (int i = 0; i < Graph.NumberOfVertices; i++)
+            var boundary = (decimal)Rnd.NextDouble();
+            var currentSumOfProbability = 0M;
+            for (var i = 0; i < Graph.NumberOfVertices; i++)
             {
-                currentSumOfProbability += probability[i];
+                currentSumOfProbability = currentSumOfProbability + probability[i];
                 if (boundary <= currentSumOfProbability)
                 {
                     return i;

@@ -40,7 +40,7 @@ namespace ParallelOptimisation
             return nextColonyId;
         }
 
-        public double[] CalculateProbability(short interSectionId, int nextColony)
+        public decimal[] CalculateProbability(short interSectionId, int nextColony)
         {
             var antSystemFragment = AntSystemFragments[interSectionId];
 

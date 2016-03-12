@@ -30,7 +30,7 @@ namespace ParallelOptimisation
                         vertexIndex++)
                     {
                         var nextColony = antSystem.GetNextColony(interSectionIndex);
-                        double[] probability = antSystem.CalculateProbability(interSectionIndex, nextColony);
+                        decimal[] probability = antSystem.CalculateProbability(interSectionIndex, nextColony);
                         var chosenVertexIndex = Roulette(probability);
                         var chosenVertex = Graph.VerticesWeights[chosenVertexIndex];
                         antSystem.AddFreeVertexToTreil(interSectionIndex, nextColony, chosenVertex);
