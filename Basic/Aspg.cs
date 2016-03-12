@@ -7,8 +7,9 @@ namespace Basic
 {
     public class Aspg : AspgBase
     {
-        public Aspg(Options options, IGraph graph, Random rnd) 
-            : base (options, graph, rnd) { }
+        public Aspg(Options options, IGraph graph, Random rnd)
+            : base(options, graph, rnd)
+        { }
 
         public override Result GetQuality()
         {
@@ -17,6 +18,7 @@ namespace Basic
 
             while (Options.NumberOfIterations > 0)
             {
+                _log.Debug("Iteration: " + Options.NumberOfIterations);
                 var antSystem = new AntSystemBasic(Rnd, Options, Graph);
 
                 for (var vertexIndex = Options.NumberOfRegions; vertexIndex < Graph.NumberOfVertices; vertexIndex++)

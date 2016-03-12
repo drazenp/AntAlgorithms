@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Linq;
+using log4net;
 
 namespace AlgorithmsCore.Contracts
 {
     public abstract class AspgBase
     {
+        protected static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected readonly Options.Options Options;
         protected readonly IGraph Graph;
         protected readonly Random Rnd;
 
-        public AspgBase(Options.Options options, IGraph graph, Random rnd)
+        protected AspgBase(Options.Options options, IGraph graph, Random rnd)
         {
             Options = options;
             Graph = graph;

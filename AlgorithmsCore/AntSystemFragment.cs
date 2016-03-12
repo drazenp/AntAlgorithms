@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using AlgorithmsCore.Contracts;
+using log4net;
 
 namespace AlgorithmsCore
 {
     public class AntSystemFragment
     {
+        static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly Options.Options _options;
         private readonly IGraph _graph;
 
@@ -60,6 +63,7 @@ namespace AlgorithmsCore
             FreeVertices.Remove(vertix);
 
             Treil[colonyIndex].Add(vertix);
+            _log.DebugFormat($"Vertex i: {vertix.Index}, w: {vertix.Weight}");
 
             var currentWeightOfColony = WeightOfColonies[colonyIndex];
             WeightOfColonies[colonyIndex] = currentWeightOfColony + vertix.Weight;
