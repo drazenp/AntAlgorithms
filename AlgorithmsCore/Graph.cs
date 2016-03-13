@@ -138,7 +138,7 @@ namespace AlgorithmsCore
                     }
                     else
                     {
-                        pheromoneToSet = Constants.MinimalVelueOfPheromoneToSet;
+                        pheromoneToSet = 0.01D * sumOfOptimalityCriterions;
                     }
 
                     var path = treil[indexOfRegion];
