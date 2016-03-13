@@ -10,7 +10,7 @@ namespace AntAlgorithms
 {
     static class Program
     {
-        static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private const string BasicEdges = "Graphs/B2.txt";
         private const string BasicVertexWeights = "Graphs/B1.txt";
@@ -19,7 +19,7 @@ namespace AntAlgorithms
         {
             log4net.Config.XmlConfigurator.Configure();
 
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new Options(numberOfIterations: 5, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var graph = new Graph(BasicEdges, BasicVertexWeights);
             graph.InitializeGraph();
             var rnd = new Random(Environment.TickCount);

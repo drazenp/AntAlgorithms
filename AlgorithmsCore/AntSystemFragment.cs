@@ -81,10 +81,19 @@ namespace AlgorithmsCore
             var optimalityCriterions = new double[_options.NumberOfRegions];
             for (var i = 0; i < _options.NumberOfRegions; i++)
             {
-                optimalityCriterions[i] = Math.Abs(EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight));
+                if (WeightOfColonies[i] < maxAllowedWeight)
+                {
+                    optimalityCriterions[i] = EdgesWeightOfColonies[i];
+                }
+                else
+                {
+                    optimalityCriterions[i] = EdgesWeightOfColonies[i] - 1000 * (WeightOfColonies[i] - maxAllowedWeight);
+                }
+                Log.DebugFormat($"Region [{i}] | op: [{optimalityCriterions[i]}] | edgw: [{EdgesWeightOfColonies[i]}] | colw: [{WeightOfColonies[i]}]");
             }
-             
+            
             var sumOfOptimalityCriterions = optimalityCriterions.Sum();
+            Log.DebugFormat($"sumOfOptimalityCriterions: {sumOfOptimalityCriterions}");
             return sumOfOptimalityCriterions;
         }
 

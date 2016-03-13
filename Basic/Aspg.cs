@@ -33,6 +33,8 @@ namespace Basic
                 var bestFragment = antSystem.UpdatePhermone(maxAllowedWeight);
 
                 var newQuality = bestFragment.GetSumOfOptimalityCriterion(maxAllowedWeight);
+                Log.Debug($"New quality: {newQuality}");
+
                 // Save the best results.
                 if (result.Quality < newQuality)
                 {
@@ -41,6 +43,7 @@ namespace Basic
 
                 Options.NumberOfIterations--;
             }
+            Log.Debug($"Best result: {result.Quality}");
 
             return result;
         }
