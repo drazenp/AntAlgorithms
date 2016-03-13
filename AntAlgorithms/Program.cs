@@ -19,7 +19,7 @@ namespace AntAlgorithms
         {
             log4net.Config.XmlConfigurator.Configure();
 
-            var options = new Options(numberOfIterations: 5, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var graph = new Graph(BasicEdges, BasicVertexWeights);
             graph.InitializeGraph();
             var rnd = new Random(Environment.TickCount);

@@ -102,6 +102,7 @@ namespace AlgorithmsCore
                     var fileData = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     EdgesWeights[int.Parse(fileData[0]), int.Parse(fileData[1])] = int.Parse(fileData[2]);
+                    EdgesWeights[int.Parse(fileData[1]), int.Parse(fileData[0])] = int.Parse(fileData[2]);
                 }
             }
         }
