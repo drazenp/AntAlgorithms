@@ -282,7 +282,7 @@ namespace AlgorithmsCoreTests
 
             var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
 
-            var sumOfOptimalityCriterion = antSystem.GetSumOfOptimalityCriterion();
+            var sumOfOptimalityCriterion = antSystem.SumOfOptimalityCriterion;
 
             Assert.AreEqual(6000, sumOfOptimalityCriterion);
         }

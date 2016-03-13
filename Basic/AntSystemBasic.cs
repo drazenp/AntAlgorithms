@@ -47,7 +47,7 @@ namespace Basic
 
         public AntSystemFragment UpdatePhermone()
         {
-            var sumOfOptimalityCriterions = _antSystemFragment.GetSumOfOptimalityCriterion();
+            var sumOfOptimalityCriterions = _antSystemFragment.SumOfOptimalityCriterion;
             _graph.UpdatePhermone(_antSystemFragment.WeightOfColonies, _antSystemFragment.Treil, _options, sumOfOptimalityCriterions);
             return _antSystemFragment;
         }

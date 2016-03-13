@@ -65,7 +65,7 @@ namespace ParallelOptimisation
                 fragmentIndex < ((OptionsParallelOptimisation)_options).NumberOfInterSections;
                 fragmentIndex++)
             {
-                fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion();
+                fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].SumOfOptimalityCriterion;
             }
 
             double fragmentBestOptimalityCriterion = fragmentsOptimalityCriterion.Max();

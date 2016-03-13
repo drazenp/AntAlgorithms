@@ -38,7 +38,7 @@ namespace ParallelOptimisation
 
                 var bestFragment = antSystem.UpdatePhermone();
 
-                var newQuality = bestFragment.GetSumOfOptimalityCriterion();
+                var newQuality = bestFragment.SumOfOptimalityCriterion;
                 // Save the best results.
                 if (bestResult.Quality < newQuality)
                 {

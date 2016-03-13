@@ -30,6 +30,20 @@ namespace AlgorithmsCore
 
         public int[] EdgesWeightOfColonies { get; }
 
+        private double? _sumOfOptimalityCriterion;
+
+        public double SumOfOptimalityCriterion
+        {
+            get
+            {
+                if (_sumOfOptimalityCriterion == null)
+                {
+                    _sumOfOptimalityCriterion = GetSumOfOptimalityCriterion();
+                }
+                return _sumOfOptimalityCriterion.Value;
+            }
+        }
+
         // TODO: Try to remove rnd and options from global variables; graph must remain at least for now.
         public AntSystemFragment(Random rnd, Options.Options options, IGraph graph)
         {
@@ -85,7 +99,7 @@ namespace AlgorithmsCore
             PassedVertices.Add(vertix);
         }
 
-        public double GetSumOfOptimalityCriterion()
+        private double GetSumOfOptimalityCriterion()
         {
             double maxAllowedWeight = GetMaxAllowedWeight();
             var optimalityCriterions = new double[_options.NumberOfRegions];

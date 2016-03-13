@@ -31,7 +31,7 @@ namespace Basic
 
                 var bestFragment = antSystem.UpdatePhermone();
 
-                var newQuality = bestFragment.GetSumOfOptimalityCriterion();
+                var newQuality = bestFragment.SumOfOptimalityCriterion;
                 Log.Debug($"New quality: {newQuality}");
 
                 // Save the best results.
