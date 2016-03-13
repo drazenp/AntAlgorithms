@@ -163,6 +163,8 @@ namespace AlgorithmsCore
                     }
                 }
             }
+
+            Utility.LogDoubleMatrixAsTable(PheromoneMatrix);
         }
 
         /*
