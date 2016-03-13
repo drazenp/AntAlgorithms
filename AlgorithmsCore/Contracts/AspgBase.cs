@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using log4net;
 
 namespace AlgorithmsCore.Contracts
@@ -27,7 +26,7 @@ namespace AlgorithmsCore.Contracts
             var currentSumOfProbability = 0M;
             for (var i = 0; i < Graph.NumberOfVertices; i++)
             {
-                currentSumOfProbability = currentSumOfProbability + probability[i];
+                currentSumOfProbability += probability[i];
                 if (boundary <= currentSumOfProbability)
                 {
                     return i;

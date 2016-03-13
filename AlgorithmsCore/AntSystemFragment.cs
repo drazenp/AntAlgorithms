@@ -70,9 +70,6 @@ namespace AlgorithmsCore
 
                 AddFreeVertexToTreil(i, randomFreeVertix);
             }
-            //AddFreeVertexToTreil(0, FreeVertices.ElementAt(0));
-            //AddFreeVertexToTreil(1, FreeVertices.ElementAt(0));
-            //AddFreeVertexToTreil(2, FreeVertices.ElementAt(0));
         }
 
         public void AddFreeVertexToTreil(int colonyIndex, Vertex vertix)
@@ -85,16 +82,10 @@ namespace AlgorithmsCore
             var currentWeightOfColony = WeightOfColonies[colonyIndex];
             WeightOfColonies[colonyIndex] = currentWeightOfColony + vertix.Weight;
 
-            for (var i = 0; i < Treil[colonyIndex].Count; i++)
+            foreach (var passedVertex in Treil[colonyIndex])
             {
-                EdgesWeightOfColonies[colonyIndex] += _graph.EdgesWeights[i, vertix.Index];
+                EdgesWeightOfColonies[colonyIndex] += _graph.EdgesWeights[passedVertex.Index, vertix.Index];
             }
-
-            //for (var i = 0; i < _graph.PheromoneMatrix.GetLength(0); i++)
-            //{
-            //    _graph.PheromoneMatrix[i, vertix.Index] = 0;
-            //    _graph.PheromoneMatrix[vertix.Index, i] = 0;
-            //}
             
             PassedVertices.Add(vertix);
         }
