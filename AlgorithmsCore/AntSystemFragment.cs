@@ -56,6 +56,9 @@ namespace AlgorithmsCore
 
                 AddFreeVertexToTreil(i, randomFreeVertix);
             }
+            //AddFreeVertexToTreil(0, FreeVertices.ElementAt(0));
+            //AddFreeVertexToTreil(1, FreeVertices.ElementAt(0));
+            //AddFreeVertexToTreil(2, FreeVertices.ElementAt(0));
         }
 
         public void AddFreeVertexToTreil(int colonyIndex, Vertex vertix)
@@ -73,11 +76,18 @@ namespace AlgorithmsCore
                 EdgesWeightOfColonies[colonyIndex] += _graph.EdgesWeights[i, vertix.Index];
             }
 
+            //for (var i = 0; i < _graph.PheromoneMatrix.GetLength(0); i++)
+            //{
+            //    _graph.PheromoneMatrix[i, vertix.Index] = 0;
+            //    _graph.PheromoneMatrix[vertix.Index, i] = 0;
+            //}
+            
             PassedVertices.Add(vertix);
         }
 
-        public double GetSumOfOptimalityCriterion(double maxAllowedWeight)
+        public double GetSumOfOptimalityCriterion()
         {
+            double maxAllowedWeight = GetMaxAllowedWeight();
             var optimalityCriterions = new double[_options.NumberOfRegions];
             for (var i = 0; i < _options.NumberOfRegions; i++)
             {
@@ -97,6 +107,13 @@ namespace AlgorithmsCore
             return sumOfOptimalityCriterions;
         }
 
+        private double GetMaxAllowedWeight()
+        {
+            var sumOfVerticesWeightes = _graph.VerticesWeights.Select(v => v.Weight).Sum();
+            double maxAllowedWeight = sumOfVerticesWeightes / (double)_options.NumberOfRegions * (1 + _options.Delta);
+            return maxAllowedWeight;
+        }
+
         /// <summary>
         /// Based on overall weight of colony shoose the next one.
         /// The next colony will be with the lowest weight.
@@ -113,6 +130,8 @@ namespace AlgorithmsCore
             decimal[] probability = new decimal[_graph.NumberOfVertices];
 
             var numberOfPassedVertices = Treil[nextColony].Count;
+
+            //Utility.LogDoubleMatrixAsTable(_graph.PheromoneMatrix);
 
             foreach (var freeVertex in FreeVertices)
             {
@@ -131,7 +150,7 @@ namespace AlgorithmsCore
                 }
                 else
                 {
-                    probability[freeVertex.Index] = (decimal)Math.Pow(pheromone, _options.Alfa) + (decimal)Math.Pow(edges, _options.Beta);
+                    probability[freeVertex.Index] = (decimal)Math.Pow(pheromone, _options.Alfa) * (decimal)Math.Pow(edges, _options.Beta);
                 }
             }
 
@@ -148,6 +167,7 @@ namespace AlgorithmsCore
                 probability[i] = probability[i] / probabilitySum;
             }
 
+            //Utility.LogDecimalArrayAsList(probability);
             return probability;
         }
     }

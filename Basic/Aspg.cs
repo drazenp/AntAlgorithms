@@ -14,7 +14,6 @@ namespace Basic
         public override Result GetQuality()
         {
             var result = new Result(double.MinValue);
-            var maxAllowedWeight = GetMaxAllowedWeight();
 
             while (Options.NumberOfIterations > 0)
             {
@@ -30,9 +29,9 @@ namespace Basic
                     antSystem.AddFreeVertexToTreil(nextColony, chosenVertex);
                 }
 
-                var bestFragment = antSystem.UpdatePhermone(maxAllowedWeight);
+                var bestFragment = antSystem.UpdatePhermone();
 
-                var newQuality = bestFragment.GetSumOfOptimalityCriterion(maxAllowedWeight);
+                var newQuality = bestFragment.GetSumOfOptimalityCriterion();
                 Log.Debug($"New quality: {newQuality}");
 
                 // Save the best results.

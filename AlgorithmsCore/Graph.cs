@@ -164,7 +164,7 @@ namespace AlgorithmsCore
                 }
             }
 
-            Utility.LogDoubleMatrixAsTable(PheromoneMatrix);
+            //Utility.LogDoubleMatrixAsTable(PheromoneMatrix);
         }
 
         /*

@@ -16,8 +16,7 @@
         /// <summary>
         /// Update pheromone on graph based on quality.
         /// </summary>
-        /// <param name="maxAllowedWeight"></param>
         /// <returns>The fragment with best quality.</returns>
-        AntSystemFragment UpdatePhermone(double maxAllowedWeight);
+        AntSystemFragment UpdatePhermone();
     }
 }

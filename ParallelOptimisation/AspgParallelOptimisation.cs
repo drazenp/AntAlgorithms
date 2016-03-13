@@ -14,7 +14,6 @@ namespace ParallelOptimisation
         public override Result GetQuality()
         {
             var bestResult = new Result(double.MinValue);
-            var maxAllowedWeight = GetMaxAllowedWeight();
 
             var options = (OptionsParallelOptimisation) Options;
             while (Options.NumberOfIterations > 0)
@@ -37,9 +36,9 @@ namespace ParallelOptimisation
                     }
                 }
 
-                var bestFragment = antSystem.UpdatePhermone(maxAllowedWeight);
+                var bestFragment = antSystem.UpdatePhermone();
 
-                var newQuality = bestFragment.GetSumOfOptimalityCriterion(maxAllowedWeight);
+                var newQuality = bestFragment.GetSumOfOptimalityCriterion();
                 // Save the best results.
                 if (bestResult.Quality < newQuality)
                 {

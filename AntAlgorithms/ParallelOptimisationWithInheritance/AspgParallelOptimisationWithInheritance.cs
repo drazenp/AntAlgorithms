@@ -13,7 +13,6 @@ namespace ParallelOptimisationWithInheritance
         public override Result GetQuality()
         {
             var bestResult = new Result(double.MinValue);
-            var maxAllowedWeight = GetMaxAllowedWeight();
 
             AntSystemFragment previousBestFragment = null;
 
@@ -38,7 +37,7 @@ namespace ParallelOptimisationWithInheritance
                     }
                 }
 
-                previousBestFragment = antSystem.UpdatePhermone(maxAllowedWeight);
+                previousBestFragment = antSystem.UpdatePhermone();
 
                 // Save the best results.
                 if (bestResult.Quality < antSystem.FragmentBestOptimalityCriterion)

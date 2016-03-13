@@ -67,14 +67,14 @@ namespace ParallelOptimisationWithInheritance
             antSystemFragment.AddFreeVertexToTreil(indexOfColony, vertix);
         }
 
-        public AntSystemFragment UpdatePhermone(double maxAllowedWeight)
+        public AntSystemFragment UpdatePhermone()
         {
             var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation)_options).NumberOfInterSections];
             for (var fragmentIndex = 0;
                 fragmentIndex < ((OptionsParallelOptimisation)_options).NumberOfInterSections;
                 fragmentIndex++)
             {
-                fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion(maxAllowedWeight);
+                fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion();
             }
 
             double fragmentBestOptimalityCriterion = fragmentsOptimalityCriterion.Max();

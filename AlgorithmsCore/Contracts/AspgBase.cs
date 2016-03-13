@@ -21,13 +21,6 @@ namespace AlgorithmsCore.Contracts
 
         public abstract Result GetQuality();
 
-        public double GetMaxAllowedWeight()
-        {
-            var sumOfVerticesWeightes = Graph.VerticesWeights.Select(v => v.Weight).Sum();
-            double maxAllowedWeight = sumOfVerticesWeightes / (double)Options.NumberOfRegions * (1 + Options.Delta);
-            return maxAllowedWeight;
-        }
-
         protected int Roulette(decimal[] probability)
         {
             var boundary = (decimal)Rnd.NextDouble();

@@ -26,18 +26,18 @@ namespace AntAlgorithms
             var aspg = new Aspg(options, graph, rnd);
             var resultBasic = aspg.GetQuality();
 
-            var parallelOptimisationOptoins = 
-                new OptionsParallelOptimisation(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D, numberOfInterSections:5);
-            graph = new Graph(BasicEdges, BasicVertexWeights);
-            graph.InitializeGraph();
-            var aspgParallelOptimisation = new AspgParallelOptimisation(parallelOptimisationOptoins, graph, rnd);
-            var resultParallelOptimisation = aspgParallelOptimisation.GetQuality();
+            //var parallelOptimisationOptoins = 
+            //    new OptionsParallelOptimisation(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D, numberOfInterSections:5);
+            //graph = new Graph(BasicEdges, BasicVertexWeights);
+            //graph.InitializeGraph();
+            //var aspgParallelOptimisation = new AspgParallelOptimisation(parallelOptimisationOptoins, graph, rnd);
+            //var resultParallelOptimisation = aspgParallelOptimisation.GetQuality();
 
-            graph = new Graph(BasicEdges, BasicVertexWeights);
-            graph.InitializeGraph();
-            var aspgParallelOptimisationWithInheritance = new AspgParallelOptimisationWithInheritance(parallelOptimisationOptoins,
-                graph, rnd);
-            var resultParallelOptimisationWithInheritance = aspgParallelOptimisationWithInheritance.GetQuality();
+            //graph = new Graph(BasicEdges, BasicVertexWeights);
+            //graph.InitializeGraph();
+            //var aspgParallelOptimisationWithInheritance = new AspgParallelOptimisationWithInheritance(parallelOptimisationOptoins,
+            //    graph, rnd);
+            //var resultParallelOptimisationWithInheritance = aspgParallelOptimisationWithInheritance.GetQuality();
         }
     }
 }

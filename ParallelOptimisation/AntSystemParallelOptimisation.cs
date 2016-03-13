@@ -57,16 +57,15 @@ namespace ParallelOptimisation
         /// <summary>
         /// Update pheromone on graph based on quality.
         /// </summary>
-        /// <param name="maxAllowedWeight"></param>
         /// <returns>The fragment with best quality.</returns>
-        public AntSystemFragment UpdatePhermone(double maxAllowedWeight)
+        public AntSystemFragment UpdatePhermone()
         {
             var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation)_options).NumberOfInterSections];
-            for (int fragmentIndex = 0;
+            for (var fragmentIndex = 0;
                 fragmentIndex < ((OptionsParallelOptimisation)_options).NumberOfInterSections;
                 fragmentIndex++)
             {
-                fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion(maxAllowedWeight);
+                fragmentsOptimalityCriterion[fragmentIndex] = AntSystemFragments[fragmentIndex].GetSumOfOptimalityCriterion();
             }
 
             double fragmentBestOptimalityCriterion = fragmentsOptimalityCriterion.Max();

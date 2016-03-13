@@ -10,10 +10,10 @@ namespace AlgorithmsCore
     {
         private static ILog Log { get; } = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static void LogDoubleMatrixAsTable(double[,] array)
+        public static void LogDoubleMatrixAsTable(double[,] matrix)
         {
-            var rowLength = array.GetLength(0);
-            var colLength = array.GetLength(1);
+            var rowLength = matrix.GetLength(0);
+            var colLength = matrix.GetLength(1);
 
             var line = new StringBuilder();
             for (var i = 0; i < rowLength; i++)
@@ -21,9 +21,19 @@ namespace AlgorithmsCore
                 line.Append(Environment.NewLine);
                 for (var j = 0; j < colLength; j++)
                 {
-                    line.Append(array[i, j].ToString(CultureInfo.InvariantCulture).PadLeft(10, ' '));
+                    line.Append(matrix[i, j].ToString(CultureInfo.InvariantCulture).PadLeft(32, ' '));
                 }
                 line.Append(Environment.NewLine);
+            }
+            Log.Debug(line);
+        }
+
+        public static void LogDecimalArrayAsList(decimal[] array)
+        {
+            var line = new StringBuilder(Environment.NewLine);
+            foreach (decimal item in array)
+            {
+                line.Append(item.ToString(CultureInfo.InvariantCulture).PadLeft(32, ' '));
             }
             Log.Debug(line);
         }
