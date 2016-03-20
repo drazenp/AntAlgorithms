@@ -63,13 +63,13 @@
     <Compile Include="AntSystemFragmentTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AlgorithmsCore\AlgorithmsCore.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlgorithmsCore\AlgorithmsCore.csproj">
       <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
       <Name>AlgorithmsCore</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

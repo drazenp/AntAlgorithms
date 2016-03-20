@@ -49,8 +49,8 @@
     <None Include="MedjuRegion2.m" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AlgorithmsCore\AlgorithmsCore.csproj">
-      <Project>{A02670F3-4BEA-44B2-BD10-0700754AFF0D}</Project>
+    <ProjectReference Include="..\AlgorithmsCore\AlgorithmsCore.csproj">
+      <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
       <Name>AlgorithmsCore</Name>
     </ProjectReference>
   </ItemGroup>

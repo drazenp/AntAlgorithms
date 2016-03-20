@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CF4FC03F-5B89-4670-94E9-8703215FBD52}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{4699845E-D528-4B8F-8282-528302F9F24E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Basic</RootNamespace>
-    <AssemblyName>Basic</AssemblyName>
+    <RootNamespace>AntAlgorithms</RootNamespace>
+    <AssemblyName>AntAlgorithms</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +25,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\AntAlgorithms\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <HintPath>packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -45,12 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntSystemBasic.cs" />
-    <Compile Include="Aspg.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="nacin1.m" />
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -58,16 +60,18 @@
       <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
       <Name>AlgorithmsCore</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Graphs\54_1.txt" />
-    <Content Include="Graphs\54_2.txt" />
-    <Content Include="Graphs\B1.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Graphs\B2.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\Basic\Basic.csproj">
+      <Project>{cf4fc03f-5b89-4670-94e9-8703215fbd52}</Project>
+      <Name>Basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParallelOptimisationWithInheritance\ParallelOptimisationWithInheritance.csproj">
+      <Project>{62a68dc6-3174-499b-8e4d-814c6214d86f}</Project>
+      <Name>ParallelOptimisationWithInheritance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParallelOptimisation\ParallelOptimisation.csproj">
+      <Project>{e71c50d2-e6a4-42a0-8792-50b9b7cf873b}</Project>
+      <Name>ParallelOptimisation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
