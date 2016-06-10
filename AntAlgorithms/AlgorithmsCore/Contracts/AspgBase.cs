@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Reflection;
 using log4net;
 
 namespace AlgorithmsCore.Contracts
 {
     public abstract class AspgBase
     {
-        protected static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         protected readonly Options.Options Options;
         protected readonly IGraph Graph;

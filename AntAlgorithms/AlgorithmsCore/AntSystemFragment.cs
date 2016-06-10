@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using AlgorithmsCore.Contracts;
 using log4net;
 
@@ -8,7 +9,7 @@ namespace AlgorithmsCore
 {
     public class AntSystemFragment
     {
-        static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly Options.Options _options;
         private readonly IGraph _graph;

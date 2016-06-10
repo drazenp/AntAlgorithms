@@ -1,23 +1,23 @@
 ﻿using System;
+using System.Reflection;
 using AlgorithmsCore;
 using AlgorithmsCore.Options;
-using Basic;
 using log4net;
-using ParallelOptimisation;
+using log4net.Config;
 using ParallelOptimisationWithInheritance;
 
 namespace AntAlgorithms
 {
     static class Program
     {
-        static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private const string BasicEdges = "Graphs/B2.txt";
         private const string BasicVertexWeights = "Graphs/B1.txt";
 
         static void Main(string[] args)
         {
-            log4net.Config.XmlConfigurator.Configure();
+            XmlConfigurator.Configure();
 
             var rnd = new Random(Environment.TickCount);
 

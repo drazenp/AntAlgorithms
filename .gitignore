@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/AntAlgorithms/ParallelOptimisationWithInheritance/obj/Debug
+/AntAlgorithms/ParallelOptimisationWithInheritance/bin/Debug
+/AntAlgorithms/ParallelOptimisation/obj/Debug
+/AntAlgorithms/AlgorithmsCore/bin/Debug
+/AntAlgorithms/AlgorithmsCore/obj/Debug
+/AntAlgorithms/ParallelOptimisation/bin/Debug
+/AntAlgorithms/packages
+/AntAlgorithms/BasicTests/bin/Debug
+/AntAlgorithms/Basic/obj/Debug
+/AntAlgorithms/Basic/bin/Debug
+/AntAlgorithms/AntAlgorithms/packages
+/AntAlgorithms/AntAlgorithms/obj/Debug
+/AntAlgorithms/AntAlgorithms/bin/Debug
+/AntAlgorithms/AlgorithmsCoreTests/obj/Debug
+/AntAlgorithms/AlgorithmsCoreTests/bin/Debug
+/AntAlgorithms/BasicTests/obj/Debug

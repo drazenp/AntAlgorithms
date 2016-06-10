@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using AlgorithmsCore;
 using AlgorithmsCore.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -228,7 +229,7 @@ namespace AlgorithmsCoreTests
         [ExpectedException(typeof(FileNotFoundException), "Wrong file path for edges weight was inappropriately allowed.")]
         public void InitializeGraph_EdgesWeighFilePath_NotExisits_Fail()
         {
-            var graph = new Graph(System.Reflection.Assembly.GetExecutingAssembly().Location, "baba.txt");
+            var graph = new Graph(Assembly.GetExecutingAssembly().Location, "baba.txt");
 
             graph.InitializeGraph();
         }
