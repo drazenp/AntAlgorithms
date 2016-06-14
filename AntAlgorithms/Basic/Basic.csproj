@@ -54,8 +54,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Graphs\54_1.txt" />
-    <Content Include="Graphs\54_2.txt" />
+    <Content Include="Graphs\54_1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Graphs\54_2.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Graphs\B1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

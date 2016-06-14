@@ -15,10 +15,6 @@ namespace ParallelOptimisationWithInheritance
 
         private AntSystemFragment[] AntSystemFragments { get; }
 
-        public List<HashSet<Vertex>> BestTreil { get; set; }
-
-        public double FragmentBestOptimalityCriterion { get; set; }
-
         public AntSystemParallelOptimisationWithInheritance(Random rnd, OptionsParallelOptimisation options, IGraph graph, AntSystemFragment previousBestFragment)
         {
             _rnd = rnd;

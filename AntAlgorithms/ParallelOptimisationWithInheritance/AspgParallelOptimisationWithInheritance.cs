@@ -39,10 +39,11 @@ namespace ParallelOptimisationWithInheritance
 
                 previousBestFragment = antSystem.UpdatePhermone();
 
+                var newQuality = previousBestFragment.SumOfOptimalityCriterion;
                 // Save the best results.
-                if (bestResult.Quality < antSystem.FragmentBestOptimalityCriterion)
+                if (bestResult.Quality < newQuality)
                 {
-                    bestResult = new Result(antSystem.FragmentBestOptimalityCriterion, antSystem.BestTreil);
+                    bestResult = new Result(newQuality, previousBestFragment.Treil);
                 }
 
                 Options.NumberOfIterations--;
