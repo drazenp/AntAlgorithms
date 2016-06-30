@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Reflection;
 using AlgorithmsCore;
 using AlgorithmsCore.Options;
+using Basic;
 using log4net;
 using log4net.Config;
 using ParallelOptimisation;
@@ -25,18 +26,26 @@ namespace AntAlgorithms
 
             var rnd = new Random(Environment.TickCount);
 
-            //var options = new Options(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
-            //var graph = new Graph(BasicEdges, BasicVertexWeights);
+            //var options = new BaseOptions(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            //var graph = new BasicGraph(BasicEdges, BasicVertexWeights);
             //graph.InitializeGraph();
             //var aspg = new Aspg(options, graph, rnd);
             //var resultBasic = aspg.GetQuality();
 
-            var parallelOptimisationOptoins =
-                new OptionsParallelOptimisation(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D, numberOfInterSections: 5);
-            var graph = new Graph(AdvancedVertexWeights, AdvancedEdges);
+            var options = new BaseOptions(numberOfIterations: 10, numberOfRegions: 8, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var dataLoader = new FileLoader("Graphs/miles500.col");
+            var graph = new DimacsGraph(dataLoader);
             graph.InitializeGraph();
-            var aspgParallelOptimisation = new AspgParallelOptimisation(parallelOptimisationOptoins, graph, rnd);
-            var resultParallelOptimisation = aspgParallelOptimisation.GetQuality();
+            var aspg = new Aspg(options, graph, rnd);
+            var resultBasic = aspg.GetQuality();
+            var globlaCost = graph.NumberOfEdges - resultBasic.BestCost;
+
+            //var parallelOptimisationOptoins =
+            //    new OptionsParallelOptimisation(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D, numberOfInterSections: 5);
+            //var graph = new Graph(AdvancedVertexWeights, AdvancedEdges);
+            //graph.InitializeGraph();
+            //var aspgParallelOptimisation = new AspgParallelOptimisation(parallelOptimisationOptoins, graph, rnd);
+            //var resultParallelOptimisation = aspgParallelOptimisation.GetQuality();
 
             //var parallelOptimisationWithInheritanceOptoins =
             //    new OptionsParallelOptimisation(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D, numberOfInterSections: 5);

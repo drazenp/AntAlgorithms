@@ -9,10 +9,10 @@ namespace ParallelOptimisation
     public class AntSystemParallelOptimisation : IAntSystemParallelOptimisation
     {
         private Random _rnd;
-        private readonly Options _options;
+        private readonly BaseOptions _options;
         private readonly IGraph _graph;
 
-        private AntSystemFragment[] AntSystemFragments { get; }
+        private WeightedAntSystemFragment[] AntSystemFragments { get; }
 
         public AntSystemParallelOptimisation(Random rnd, OptionsParallelOptimisation options, IGraph graph)
         {
@@ -20,10 +20,10 @@ namespace ParallelOptimisation
             _graph = graph;
             _options = options;
 
-            AntSystemFragments = new AntSystemFragment[options.NumberOfInterSections];
+            AntSystemFragments = new WeightedAntSystemFragment[options.NumberOfInterSections];
             for (var i = 0; i < options.NumberOfInterSections; i++)
             {
-                AntSystemFragments[i] = new AntSystemFragment(rnd, options, graph);
+                AntSystemFragments[i] = new WeightedAntSystemFragment(rnd, options, graph);
             }
         }
 
@@ -58,7 +58,7 @@ namespace ParallelOptimisation
         /// Update pheromone on graph based on quality.
         /// </summary>
         /// <returns>The fragment with best quality.</returns>
-        public AntSystemFragment UpdatePhermone()
+        public WeightedAntSystemFragment UpdatePhermone()
         {
             var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation)_options).NumberOfInterSections];
             for (var fragmentIndex = 0;

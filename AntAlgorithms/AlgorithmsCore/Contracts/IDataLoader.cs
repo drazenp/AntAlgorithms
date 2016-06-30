@@ -2,7 +2,7 @@
 
 namespace AlgorithmsCore.Contracts
 {
-    interface IDataLoader
+    public interface IDataLoader
     {
         IEnumerable<string> LoadData();
     }

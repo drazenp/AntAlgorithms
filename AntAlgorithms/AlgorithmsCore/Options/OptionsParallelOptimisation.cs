@@ -1,6 +1,6 @@
 ﻿namespace AlgorithmsCore.Options
 {
-    public class OptionsParallelOptimisation : Options
+    public class OptionsParallelOptimisation : BaseOptions
     {
         public short NumberOfInterSections { get; }
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelOptimisationWithInheritance", "ParallelOptimisationWithInheritance\ParallelOptimisationWithInheritance.csproj", "{62A68DC6-3174-499B-8E4D-814C6214D86F}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicTests", "BasicTests\BasicTests.csproj", "{9379834C-3F24-4D0F-BF11-94DAB5FE6FD6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsCore", "AlgorithmsCore\AlgorithmsCore.csproj", "{A02670F3-4BEA-44B2-BD10-0700754AFF0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntAlgorithmsAnalize", "AntAlgorithmsAnalize\AntAlgorithmsAnalize.csproj", "{E7136A4A-A3E4-4026-BD7E-423E0662CA21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{A02670F3-4BEA-44B2-BD10-0700754AFF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A02670F3-4BEA-44B2-BD10-0700754AFF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A02670F3-4BEA-44B2-BD10-0700754AFF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7136A4A-A3E4-4026-BD7E-423E0662CA21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7136A4A-A3E4-4026-BD7E-423E0662CA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7136A4A-A3E4-4026-BD7E-423E0662CA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7136A4A-A3E4-4026-BD7E-423E0662CA21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

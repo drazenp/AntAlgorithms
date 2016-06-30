@@ -1,5 +1,4 @@
-﻿using System;
-using AlgorithmsCore;
+﻿using AlgorithmsCore;
 using AlgorithmsCore.Contracts;
 using AlgorithmsCore.Options;
 
@@ -7,19 +6,15 @@ namespace Basic
 {
     public class AntSystemBasic : IAntSystem
     {
-        private readonly Options _options;
+        private readonly BaseOptions _options;
         private readonly IGraph _graph;
+        private readonly BaseAntSystemFragment _antSystemFragment;
 
-        //TODO: AntSystemFragment DI here!!!!!
-        private AntSystemFragment _antSystemFragment;
-        //TODO: AntSystemFragment DI here!!!!!
-
-        public AntSystemBasic(Random rnd, Options options, IGraph graph) 
+        public AntSystemBasic(BaseAntSystemFragment antSystemFragment, BaseOptions options, IGraph graph) 
         {
             _graph = graph;
             _options = options;
-
-            _antSystemFragment = new AntSystemFragment(rnd, _options, _graph);
+            _antSystemFragment = antSystemFragment;
         }
 
         public void AddFreeVertexToTreil(int indexOfColony, Vertex vertix)
@@ -44,10 +39,10 @@ namespace Basic
             return probability;
         }
 
-        public AntSystemFragment UpdatePhermone()
+        public BaseAntSystemFragment UpdatePhermone()
         {
             var sumOfOptimalityCriterions = _antSystemFragment.SumOfOptimalityCriterion;
-            _graph.UpdatePhermone(_antSystemFragment.WeightOfColonies, _antSystemFragment.Treil, _options, sumOfOptimalityCriterions);
+            _graph.UpdatePhermone(_antSystemFragment.ColoniesConnections, _antSystemFragment.Treil, _options, sumOfOptimalityCriterions);
             return _antSystemFragment;
         }
     }

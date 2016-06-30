@@ -10,11 +10,11 @@ namespace ParallelOptimisationWithInheritance
         public AspgParallelOptimisationWithInheritance(OptionsParallelOptimisation options, IGraph graph, Random rnd)
             : base (options, graph, rnd) { }
 
-        public override Result GetQuality()
+        public override ResultData GetQuality()
         {
             var bestResult = new Result(double.MinValue);
 
-            AntSystemFragment previousBestFragment = null;
+            WeightedAntSystemFragment previousBestFragment = null;
 
             var options = (OptionsParallelOptimisation)Options;
             while (Options.NumberOfIterations > 0)
@@ -49,7 +49,8 @@ namespace ParallelOptimisationWithInheritance
                 Options.NumberOfIterations--;
             }
 
-            return bestResult;
+            //return bestResult;
+            return null;
         }
     }
 }

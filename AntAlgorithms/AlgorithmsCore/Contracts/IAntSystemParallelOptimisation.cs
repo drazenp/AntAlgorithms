@@ -17,6 +17,6 @@
         /// Update pheromone on graph based on quality.
         /// </summary>
         /// <returns>The fragment with best quality.</returns>
-        AntSystemFragment UpdatePhermone();
+        WeightedAntSystemFragment UpdatePhermone();
     }
 }

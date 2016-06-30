@@ -12,6 +12,6 @@
         int GetNextColony();
 
         decimal[] CalculateProbability(int nextColony);
-        AntSystemFragment UpdatePhermone();
+        BaseAntSystemFragment UpdatePhermone();
     }
 }

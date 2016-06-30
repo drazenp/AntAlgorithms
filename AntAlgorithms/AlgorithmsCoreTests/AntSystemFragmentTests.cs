@@ -16,7 +16,7 @@ namespace AlgorithmsCoreTests
         public void Treil_AllTrailsInitilized_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -34,7 +34,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             for (var i = 0; i < options.NumberOfRegions; i++)
             {
@@ -46,7 +46,7 @@ namespace AlgorithmsCoreTests
         public void InitializeTreils_AllRegionsInitializedInRange_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -64,7 +64,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             for (var i = 0; i < options.NumberOfRegions; i++)
             {
@@ -78,7 +78,7 @@ namespace AlgorithmsCoreTests
         public void SumOfWeight_AllZerosSet_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -96,7 +96,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             var sumOfWeights = antSystem.WeightOfColonies.Sum();
 
@@ -107,7 +107,7 @@ namespace AlgorithmsCoreTests
         public void FreeVertices_Initialized_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -125,7 +125,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             Assert.AreEqual(6, antSystem.FreeVertices.Count);
         }
@@ -134,7 +134,7 @@ namespace AlgorithmsCoreTests
         public void WeightsOfColonies_Initialized_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -152,7 +152,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             Assert.IsNotNull(antSystem.WeightOfColonies);
 
@@ -171,7 +171,7 @@ namespace AlgorithmsCoreTests
         public void PassedVertices_Initialized_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -189,7 +189,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             Assert.IsNotNull(antSystem.PassedVertices);
             Assert.AreEqual(3, antSystem.PassedVertices.Count);
@@ -199,7 +199,7 @@ namespace AlgorithmsCoreTests
         public void AddFreeVertexToTreil_AddVertex_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -217,7 +217,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             antSystem.AddFreeVertexToTreil(0, antSystem.FreeVertices.First());
 
@@ -231,7 +231,7 @@ namespace AlgorithmsCoreTests
         public void SumaKriterijumaOptimalnosti_Initialized_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -249,7 +249,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             Assert.IsNotNull(antSystem.EdgesWeightOfColonies);
             for (var i = 0; i < options.NumberOfRegions; i++)
@@ -262,7 +262,7 @@ namespace AlgorithmsCoreTests
         public void GetSumOfOptimalityCriterion_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -280,7 +280,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             var sumOfOptimalityCriterion = antSystem.SumOfOptimalityCriterion;
 
@@ -291,7 +291,7 @@ namespace AlgorithmsCoreTests
         public void GetNextColoy_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -309,7 +309,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             var nextColonyId = antSystem.GetNextColony();
 
@@ -320,7 +320,7 @@ namespace AlgorithmsCoreTests
         public void GetNextColony_AfterInitialization_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -338,7 +338,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             var nextColonyIndex = antSystem.GetNextColony();
             var nextColonyWeightSum = antSystem.WeightOfColonies[nextColonyIndex];
@@ -353,7 +353,7 @@ namespace AlgorithmsCoreTests
         public void GetNextColony_AddVertex_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -371,7 +371,7 @@ namespace AlgorithmsCoreTests
             mockGraph.SetupGet(prop => prop.VerticesWeights).Returns(verticesWeights);
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             antSystem.AddFreeVertexToTreil(0, antSystem.FreeVertices.First());
 
@@ -388,7 +388,7 @@ namespace AlgorithmsCoreTests
         public void CalculateProbability_Success()
         {
             var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
             var verticesWeights = new List<Vertex>
                     {
                         new Vertex(0, 4),
@@ -407,7 +407,7 @@ namespace AlgorithmsCoreTests
             mockGraph.Setup(prop => prop.EdgesWeights).Returns(new int[verticesWeights.Count, verticesWeights.Count]);
             mockGraph.Setup(prop => prop.PheromoneMatrix).Returns(new double[verticesWeights.Count, verticesWeights.Count]);
 
-            var antSystem = new AntSystemFragment(random, options, mockGraph.Object);
+            var antSystem = new WeightedAntSystemFragment(random, options, mockGraph.Object);
 
             var probability = antSystem.CalculateProbability(1);
 

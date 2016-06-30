@@ -10,7 +10,7 @@ namespace ParallelOptimisation
         public AspgParallelOptimisation(OptionsParallelOptimisation options, IGraph graph, Random rnd)
             : base (options, graph, rnd) { }
 
-        public override Result GetQuality()
+        public override ResultData GetQuality()
         {
             var bestResult = new Result(double.MinValue);
 
@@ -47,7 +47,8 @@ namespace ParallelOptimisation
                 Options.NumberOfIterations--;
             }
 
-            return bestResult;
+            //return bestResult;
+            return null;
         }
     }
 }

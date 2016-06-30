@@ -10,7 +10,14 @@ namespace AlgorithmsCore
         public int[,] EdgesWeights { get; }
         public double[,] PheromoneMatrix { get; }
         public int NumberOfVertices { get; }
-        public void UpdatePhermone(int[] weightOfColonies, List<HashSet<Vertex>> treil, Options.Options options, double sumOfOptimalityCriterions)
+        public int NumberOfEdges { get; }
+
+        public void UpdatePhermone(int[] weightOfColonies, List<HashSet<Vertex>> treil, Options.BaseOptions options, double sumOfOptimalityCriterions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InitializeGraph()
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using AlgorithmsCore;
 using AlgorithmsCore.Contracts;
 using AlgorithmsCore.Options;
@@ -7,18 +8,24 @@ namespace Basic
 {
     public class Aspg : AspgBase
     {
-        public Aspg(Options options, IGraph graph, Random rnd)
-            : base(options, graph, rnd)
-        { }
+        public Aspg(BaseOptions options, IGraph graph, Random rnd)
+            : base(options, graph, rnd) { }
 
-        public override Result GetQuality()
+        public override ResultData GetQuality()
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             var result = new Result(double.MinValue);
+            var bestCostIteration = 0;
 
             while (Options.NumberOfIterations > 0)
             {
                 Log.Debug("Iteration: " + Options.NumberOfIterations);
-                var antSystem = new AntSystemBasic(Rnd, Options, Graph);
+
+                //var antSystemFragment = new UnweightedBalancedAntSystemFragment(Rnd, Options, Graph);
+                var antSystemFragment = new WeightedAntSystemFragment(Rnd, Options, Graph);
+                var antSystem = new AntSystemBasic(antSystemFragment, Options, Graph);
 
                 for (var vertexIndex = Options.NumberOfRegions; vertexIndex < Graph.NumberOfVertices; vertexIndex++)
                 {
@@ -32,19 +39,25 @@ namespace Basic
                 var bestFragment = antSystem.UpdatePhermone();
 
                 var newQuality = bestFragment.SumOfOptimalityCriterion;
-                Log.Debug($"New quality: {newQuality}");
+                Console.WriteLine($"New quality: {newQuality}");
+                //Log.Debug($"New quality: {newQuality}");
 
                 // Save the best results.
                 if (result.Quality < newQuality)
                 {
                     result = new Result(newQuality, bestFragment.Treil);
+                    bestCostIteration = Options.NumberOfIterations;
                 }
 
                 Options.NumberOfIterations--;
             }
-            Log.Debug($"Best result: {result.Quality}");
+            stopwatch.Stop();
 
-            return result;
+            //Log.Debug($"Best result: {result.Quality}");
+
+            var qualityResult = new ResultData((int)result.Quality, bestCostIteration, stopwatch.ElapsedMilliseconds);
+
+            return qualityResult;
         }
     }
 }

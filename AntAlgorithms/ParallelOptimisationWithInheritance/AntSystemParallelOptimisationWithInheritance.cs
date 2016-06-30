@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using AlgorithmsCore;
 using AlgorithmsCore.Contracts;
@@ -10,18 +9,18 @@ namespace ParallelOptimisationWithInheritance
     public class AntSystemParallelOptimisationWithInheritance : IAntSystemParallelOptimisation
     {
         private Random _rnd;
-        private readonly Options _options;
+        private readonly BaseOptions _options;
         private readonly IGraph _graph;
 
-        private AntSystemFragment[] AntSystemFragments { get; }
+        private WeightedAntSystemFragment[] AntSystemFragments { get; }
 
-        public AntSystemParallelOptimisationWithInheritance(Random rnd, OptionsParallelOptimisation options, IGraph graph, AntSystemFragment previousBestFragment)
+        public AntSystemParallelOptimisationWithInheritance(Random rnd, OptionsParallelOptimisation options, IGraph graph, WeightedAntSystemFragment previousBestFragment)
         {
             _rnd = rnd;
             _graph = graph;
             _options = options;
 
-            AntSystemFragments = new AntSystemFragment[options.NumberOfInterSections];
+            AntSystemFragments = new WeightedAntSystemFragment[options.NumberOfInterSections];
 
             short index = 0;
             if (previousBestFragment != null)
@@ -32,7 +31,7 @@ namespace ParallelOptimisationWithInheritance
 
             for (; index < options.NumberOfInterSections; index++)
             {
-                AntSystemFragments[index] = new AntSystemFragment(rnd, options, _graph);
+                AntSystemFragments[index] = new WeightedAntSystemFragment(rnd, options, _graph);
             }
         }
 
@@ -63,7 +62,7 @@ namespace ParallelOptimisationWithInheritance
             antSystemFragment.AddFreeVertexToTreil(indexOfColony, vertix);
         }
 
-        public AntSystemFragment UpdatePhermone()
+        public WeightedAntSystemFragment UpdatePhermone()
         {
             var fragmentsOptimalityCriterion = new double[((OptionsParallelOptimisation)_options).NumberOfInterSections];
             for (var fragmentIndex = 0;

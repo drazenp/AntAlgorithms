@@ -45,18 +45,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AntSystemFragment.cs" />
+    <Compile Include="DimacsGraph.cs" />
+    <Compile Include="ResultData.cs" />
+    <Compile Include="UnweightedBalancedAntSystemFragment.cs" />
+    <Compile Include="WeightedAntSystemFragment.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Contracts\BaseAntSystemFragment.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="FileLoader.cs" />
-    <Compile Include="Graph.cs" />
+    <Compile Include="BasicGraph.cs" />
     <Compile Include="Contracts\IAntSystem.cs" />
     <Compile Include="Contracts\IAntSystemParallelOptimisation.cs" />
     <Compile Include="Contracts\AspgBase.cs" />
     <Compile Include="Contracts\IDataLoader.cs" />
     <Compile Include="Contracts\IGraph.cs" />
     <Compile Include="GraphWithLoader.cs" />
-    <Compile Include="Options\Options.cs" />
+    <Compile Include="Options\BaseOptions.cs" />
     <Compile Include="Options\OptionsParallelOptimisation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />

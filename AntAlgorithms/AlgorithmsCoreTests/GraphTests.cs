@@ -45,7 +45,7 @@ namespace AlgorithmsCoreTests
         [TestMethod]
         public void ReadVerticesWeights_CorrectCount_Success()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
 
             using (var stream = GenerateStreamFromString(BasicVericesWeights))
             {
@@ -58,7 +58,7 @@ namespace AlgorithmsCoreTests
         [TestMethod]
         public void ReadVerticesWeights_CorrectVertexFormat_Success()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
 
             using (var stream = GenerateStreamFromString(BasicVericesWeights))
             {
@@ -76,7 +76,7 @@ namespace AlgorithmsCoreTests
         [TestMethod]
         public void ReadEdgesWeights_CorrectFormat_Success()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
             graph.VerticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -102,7 +102,7 @@ namespace AlgorithmsCoreTests
         [ExpectedException(typeof(Exception), "Number of vertices is not greter than 1")]
         public void ReadEdgesWeights_CorrectFormat_Fail()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
 
             using (var stream = GenerateStreamFromString(BasicEdgesWeights))
             {
@@ -115,7 +115,7 @@ namespace AlgorithmsCoreTests
         [TestMethod]
         public void InitializePheromoneMatrix_AllInitialized_Success()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
             graph.VerticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -195,7 +195,7 @@ namespace AlgorithmsCoreTests
         [TestMethod]
         public void InitializePheromoneMatrix_DiagonalZeros_Success()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
             graph.VerticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),
@@ -220,7 +220,7 @@ namespace AlgorithmsCoreTests
         [ExpectedException(typeof(FileNotFoundException), "Wrong file path for vertices weight was inappropriately allowed.")]
         public void InitializeGraph_VerticesWeigtFilePath_NotExisits_Fail()
         {
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
 
             graph.InitializeGraph();
         }
@@ -229,7 +229,7 @@ namespace AlgorithmsCoreTests
         [ExpectedException(typeof(FileNotFoundException), "Wrong file path for edges weight was inappropriately allowed.")]
         public void InitializeGraph_EdgesWeighFilePath_NotExisits_Fail()
         {
-            var graph = new Graph(Assembly.GetExecutingAssembly().Location, "baba.txt");
+            var graph = new BasicGraph(Assembly.GetExecutingAssembly().Location, "baba.txt");
 
             graph.InitializeGraph();
         }
@@ -237,10 +237,9 @@ namespace AlgorithmsCoreTests
         [TestMethod]
         public void InitializeGraph_UpdatePheromone_Success()
         {
-            var random = new Random(1);
-            var options = new Options(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
 
-            var graph = new Graph("baba.txt", "baba.txt");
+            var graph = new BasicGraph("baba.txt", "baba.txt");
             graph.VerticesWeights = new List<Vertex>
             {
                 new Vertex(0, 4),

@@ -8,18 +8,18 @@ namespace AlgorithmsCore.Contracts
     {
         protected static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        protected readonly Options.Options Options;
+        protected readonly Options.BaseOptions Options;
         protected readonly IGraph Graph;
         protected readonly Random Rnd;
 
-        protected AspgBase(Options.Options options, IGraph graph, Random rnd)
+        protected AspgBase(Options.BaseOptions options, IGraph graph, Random rnd)
         {
             Options = options;
             Graph = graph;
             Rnd = rnd;
         }
 
-        public abstract Result GetQuality();
+        public abstract ResultData GetQuality();
 
         protected int Roulette(decimal[] probability)
         {
