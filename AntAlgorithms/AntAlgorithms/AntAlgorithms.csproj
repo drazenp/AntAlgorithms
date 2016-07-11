@@ -60,6 +60,10 @@
       <Project>{a02670f3-4bea-44b2-bd10-0700754aff0d}</Project>
       <Name>AlgorithmsCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BasicUnweighted\BasicUnweighted.csproj">
+      <Project>{bf85bf4e-9fb6-4c43-b62c-87d07e3abdd3}</Project>
+      <Name>BasicUnweighted</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Basic\Basic.csproj">
       <Project>{cf4fc03f-5b89-4670-94e9-8703215fbd52}</Project>
       <Name>Basic</Name>

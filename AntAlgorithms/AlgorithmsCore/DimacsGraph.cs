@@ -3,11 +3,15 @@ using System;
 using System.Collections.Generic;
 using AlgorithmsCore.Options;
 using System.Linq;
+using System.Reflection;
+using log4net;
 
 namespace AlgorithmsCore
 {
     public class DimacsGraph : IGraph
     {
+        public static ILog Log { get; } = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly IDataLoader _dataLoader;
 
         public List<Vertex> VerticesWeights { get; set; } = new List<Vertex>();
@@ -68,6 +72,18 @@ namespace AlgorithmsCore
 
                         EdgesWeights[vertexID, connectedVertexID] = 1;
                         EdgesWeights[connectedVertexID, vertexID] = 1;
+
+                        var vertex = VerticesWeights.Single(v => v.Index == vertexID);
+                        if (!vertex.ConnectedEdges.Contains(connectedVertexID))
+                        {
+                            vertex.ConnectedEdges.Add(connectedVertexID);
+                        }
+
+                        var connectedVertex = VerticesWeights.Single(v => v.Index == connectedVertexID);
+                        if (!connectedVertex.ConnectedEdges.Contains(vertexID))
+                        {
+                            connectedVertex.ConnectedEdges.Add(vertexID);
+                        }
                         break;
                 }
             }
@@ -91,17 +107,18 @@ namespace AlgorithmsCore
         {
             // Colony with heighes weight.
             var colonyWithHighestWeight = Array.IndexOf(weightOfColonies, weightOfColonies.Max());
+            var optimalityCriterion = weightOfColonies.Sum();
 
             for (var indexOfRegion = 0; indexOfRegion < options.NumberOfRegions; indexOfRegion++)
             {
                 double pheromoneToSet;
                 if (indexOfRegion == colonyWithHighestWeight)
                 {
-                    pheromoneToSet = 0.01D * (sumOfOptimalityCriterions + 1.2D * weightOfColonies[colonyWithHighestWeight]);
+                    pheromoneToSet = 0.01D * (optimalityCriterion + 1.2D * weightOfColonies[colonyWithHighestWeight]);
                 }
                 else
                 {
-                    pheromoneToSet = 0.01D * sumOfOptimalityCriterions;
+                    pheromoneToSet = 0.01D * optimalityCriterion;
                 }
 
                 for (int i = 0; i < NumberOfVertices; i++)

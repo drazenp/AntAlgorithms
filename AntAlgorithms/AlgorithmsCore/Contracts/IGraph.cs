@@ -1,5 +1,7 @@
 ﻿using AlgorithmsCore.Options;
 using System.Collections.Generic;
+using System.Reflection;
+using log4net;
 
 namespace AlgorithmsCore.Contracts
 {

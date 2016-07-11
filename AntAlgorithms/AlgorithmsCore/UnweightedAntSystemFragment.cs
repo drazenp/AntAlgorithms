@@ -5,9 +5,9 @@ using AlgorithmsCore.Options;
 
 namespace AlgorithmsCore
 {
-    public class UnweightedBalancedAntSystemFragment : BaseAntSystemFragment
+    public class UnweightedAntSystemFragment : BaseAntSystemFragment
     {
-        public UnweightedBalancedAntSystemFragment(Random rnd, BaseOptions options, IGraph graph)
+        public UnweightedAntSystemFragment(Random rnd, BaseOptions options, IGraph graph)
             : base(rnd, options, graph)
         {
             for (var i = 0; i < _options.NumberOfRegions; i++)
@@ -20,22 +20,28 @@ namespace AlgorithmsCore
 
         protected override double GetSumOfOptimalityCriterion()
         {
+            var globalCost = 0;
             for (var i = 0; i < _options.NumberOfRegions; i++)
             {
                 var path = Treil[i];
+
+                foreach (var vertex in path)
+                {
+                    var differentColorCount = _graph.VerticesWeights.Single(v => v.Index == vertex.Index).ConnectedEdges.Count(edge => path.All(v => v.Index != edge));
+                    globalCost += differentColorCount;
+                }
+
                 var verexCombination = path.SelectMany((value, index) => path.Skip(index + 1),
                                                        (first, second) => new { first, second });
 
                 foreach (var combination in verexCombination)
                 {
                     var edgeWeight = _graph.EdgesWeights[combination.first.Index, combination.second.Index];
-                    Log.DebugFormat($"[{i}] first<{combination.first.Index}> second<{combination.second.Index}> |{edgeWeight}|");
                     ColoniesConnections[i] += edgeWeight;
                 }
             }
 
-            var sumOfOptimalityCriterions = ColoniesConnections.Sum();
-            Log.DebugFormat($"SumOfOptimalityCriterions: {sumOfOptimalityCriterions}");
+            var sumOfOptimalityCriterions = globalCost / 2;
             return sumOfOptimalityCriterions;
         }
 
@@ -76,6 +82,7 @@ namespace AlgorithmsCore
                 }
                 else
                 {
+                    Log.DebugFormat($"edges: {edges}");
                     probability[freeVertex.Index] = (decimal)Math.Pow(pheromone, _options.Alfa) * (decimal)Math.Pow(edges, _options.Beta);
                 }
             }

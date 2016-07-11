@@ -76,7 +76,7 @@
     <Compile Include="AntSystemFragmentTests.cs" />
     <Compile Include="OptimalityCriterionTest.cs" />
     <Compile Include="TestAssemblyInitialize.cs" />
-    <Compile Include="UnweightedBalancedAntSystemFragmentFake.cs" />
+    <Compile Include="UnweightedAntSystemFragmentFake.cs" />
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\System.fakes" />

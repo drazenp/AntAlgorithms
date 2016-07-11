@@ -9,7 +9,7 @@ using AlgorithmsCore.Options;
 
 namespace AlgorithmsCoreTests
 {
-    class UnweightedBalancedAntSystemFragmentFake : UnweightedBalancedAntSystemFragment
+    class UnweightedAntSystemFragmentFake : UnweightedAntSystemFragment
     {
         public void SetTreil(int colonyIndex, Vertex vertex)
         {
@@ -25,7 +25,7 @@ namespace AlgorithmsCoreTests
             }
         }
 
-        public UnweightedBalancedAntSystemFragmentFake(Random rnd, BaseOptions options, IGraph graph) : base(rnd, options, graph)
+        public UnweightedAntSystemFragmentFake(Random rnd, BaseOptions options, IGraph graph) : base(rnd, options, graph)
         {
         }
     }

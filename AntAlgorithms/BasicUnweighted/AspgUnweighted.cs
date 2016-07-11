@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using AlgorithmsCore;
 using AlgorithmsCore.Contracts;
 using AlgorithmsCore.Options;
 
-namespace Basic
+namespace BasicUnweighted
 {
-    public class Aspg : AspgBase
+    public class AspgUnweighted : AspgBase
     {
-        public Aspg(BaseOptions options, IGraph graph, Random rnd)
+        public AspgUnweighted(BaseOptions options, IGraph graph, Random rnd)
             : base(options, graph, rnd) { }
-        
+
         public override ResultData GetQuality()
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            var result = new Result(double.MinValue);
+            var result = new Result(double.MaxValue);
             var bestCostIteration = 0;
 
             while (Options.NumberOfIterations > 0)
             {
-                Log.Debug("Iteration: " + Options.NumberOfIterations);
+                //Log.Debug("Iteration: " + _options.NumberOfIterations);
                 
-                var antSystemFragment = new WeightedAntSystemFragment(Rnd, Options, Graph);
-                var antSystem = new AntSystemBasic(antSystemFragment, Options, Graph);
+                var antSystemFragment = new UnweightedAntSystemFragment(Rnd, Options, Graph);
+                var antSystem = new AntSystemBasicUnweighted(antSystemFragment, Options, Graph);
 
                 for (var vertexIndex = Options.NumberOfRegions; vertexIndex < Graph.NumberOfVertices; vertexIndex++)
                 {
@@ -42,7 +44,7 @@ namespace Basic
                 //Log.Debug($"New quality: {newQuality}");
 
                 // Save the best results.
-                if (result.Quality < newQuality)
+                if (result.Quality > newQuality)
                 {
                     result = new Result(newQuality, bestFragment.Treil);
                     bestCostIteration = Options.NumberOfIterations;

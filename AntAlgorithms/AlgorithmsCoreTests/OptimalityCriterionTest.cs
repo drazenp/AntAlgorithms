@@ -87,7 +87,7 @@ namespace AlgorithmsCoreTests
         #endregion
         
         [TestMethod]
-        public void DimacsMyciel4_GetSumOfOptimalityCriterion()
+        public void DimacsMyciel4_GetSumOfOptimalityCriterion_34()
         {
             var loaderMock = new Mock<IDataLoader>();
             loaderMock.Setup(m => m.LoadData()).Returns(_myciel4);
@@ -102,7 +102,7 @@ namespace AlgorithmsCoreTests
 
             var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 2, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
 
-            var fragment = new UnweightedBalancedAntSystemFragmentFake(randomMock, options, graph);
+            var fragment = new UnweightedAntSystemFragmentFake(randomMock, options, graph);
             fragment.ClearTreil();
             fragment.Treil[0].Add(new Vertex(4, 1));
             fragment.Treil[0].Add(new Vertex(8, 1));
@@ -131,8 +131,55 @@ namespace AlgorithmsCoreTests
 
             var globalCost = fragment.SumOfOptimalityCriterion;
 
-            Assert.AreEqual(68, graph.NumberOfEdges - globalCost);
+            Assert.AreEqual(34, globalCost);
+        }
 
+        [TestMethod]
+        public void DimacsMyciel4_GetSumOfOptimalityCriterion_28()
+        {
+            var loaderMock = new Mock<IDataLoader>();
+            loaderMock.Setup(m => m.LoadData()).Returns(_myciel4);
+
+            var graph = new DimacsGraph(loaderMock.Object);
+            graph.InitializeGraph();
+
+            var randomMock = new StubRandom()
+            {
+                NextInt32Int32 = (a, b) => 1
+            };
+
+            var options = new BaseOptions(numberOfIterations: 100, numberOfRegions: 2, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+
+            var fragment = new UnweightedAntSystemFragmentFake(randomMock, options, graph);
+            fragment.ClearTreil();
+            fragment.Treil[0].Add(new Vertex(3, 1));
+            fragment.Treil[0].Add(new Vertex(16, 1));
+            fragment.Treil[0].Add(new Vertex(9, 1));
+            fragment.Treil[0].Add(new Vertex(10, 1));
+            fragment.Treil[0].Add(new Vertex(5, 1));
+            fragment.Treil[0].Add(new Vertex(21, 1));
+            fragment.Treil[0].Add(new Vertex(8, 1));
+            fragment.Treil[0].Add(new Vertex(7, 1));
+            fragment.Treil[0].Add(new Vertex(15, 1));
+            fragment.Treil[0].Add(new Vertex(6, 1));
+            fragment.Treil[0].Add(new Vertex(11, 1));
+            fragment.Treil[0].Add(new Vertex(20, 1));
+
+            fragment.Treil[1].Add(new Vertex(22, 1));
+            fragment.Treil[1].Add(new Vertex(19, 1));
+            fragment.Treil[1].Add(new Vertex(12, 1));
+            fragment.Treil[1].Add(new Vertex(0, 1));
+            fragment.Treil[1].Add(new Vertex(17, 1));
+            fragment.Treil[1].Add(new Vertex(14, 1));
+            fragment.Treil[1].Add(new Vertex(2, 1));
+            fragment.Treil[1].Add(new Vertex(4, 1));
+            fragment.Treil[1].Add(new Vertex(1, 1));
+            fragment.Treil[1].Add(new Vertex(13, 1));
+            fragment.Treil[1].Add(new Vertex(18, 1));
+
+            var globalCost = fragment.SumOfOptimalityCriterion;
+
+            Assert.AreEqual(28, globalCost);
         }
     }
 }

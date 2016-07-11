@@ -15,9 +15,11 @@ namespace AlgorithmsCore.Contracts
 
         protected readonly IGraph _graph;
 
+        protected readonly Random _rnd;
+
         public HashSet<Vertex> FreeVertices { get; }
 
-        public HashSet<Vertex> PassedVertices { get; }
+        public HashSet<Vertex> PassedVertices { get; }  
 
         private double? _sumOfOptimalityCriterion;
         public double SumOfOptimalityCriterion
@@ -50,6 +52,7 @@ namespace AlgorithmsCore.Contracts
         {
             _options = options;
             _graph = graph;
+            _rnd = rnd;
 
             Treil = new List<HashSet<Vertex>>();
             for (var i = 0; i < _options.NumberOfRegions; i++)
