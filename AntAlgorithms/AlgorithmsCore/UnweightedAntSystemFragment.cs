@@ -52,7 +52,7 @@ namespace AlgorithmsCore
             Treil[colonyIndex].Add(vertix);
             WeightOfColonies[colonyIndex]++;
 
-            Log.DebugFormat($"Vertex <{vertix.Index}> add for colony <{colonyIndex}>");
+            //Log.DebugFormat($"Vertex <{vertix.Index}> add for colony <{colonyIndex}>");
 
             PassedVertices.Add(vertix);
         }
@@ -82,7 +82,6 @@ namespace AlgorithmsCore
                 }
                 else
                 {
-                    Log.DebugFormat($"edges: {edges}");
                     probability[freeVertex.Index] = (decimal)Math.Pow(pheromone, _options.Alfa) * (decimal)Math.Pow(edges, _options.Beta);
                 }
             }

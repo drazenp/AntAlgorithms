@@ -125,10 +125,14 @@ namespace AlgorithmsCore
                 {
                     for (int j = 0; j < NumberOfVertices; j++)
                     {
-                        PheromoneMatrix[i, j] = PheromoneMatrix[i, j]*(1 - options.Ro);
+                        var pheromone = PheromoneMatrix[i, j];
+                        if (pheromone > Constants.MinimalValueOfPheromone)
+                        {
+                            PheromoneMatrix[i, j] = pheromone * options.ToEvaporate;
+                        }
                     }
                 }
-
+                
                 var path = treil[indexOfRegion];
 
                 var verexCombination = path.SelectMany((value, index) => path.Skip(index + 1),
@@ -140,6 +144,7 @@ namespace AlgorithmsCore
                     PheromoneMatrix[combination.second.Index, combination.first.Index] = PheromoneMatrix[combination.second.Index, combination.first.Index] + pheromoneToSet;
                 }
             }
+            //Utility.LogDoubleMatrixAsTable(PheromoneMatrix);
         }
     }
 }

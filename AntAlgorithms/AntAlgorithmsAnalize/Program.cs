@@ -1,7 +1,7 @@
 ﻿using System;
 using AlgorithmsCore;
 using AlgorithmsCore.Options;
-using Basic;
+using BasicUnweighted;
 
 namespace AntAlgorithmsAnalize
 {
@@ -36,13 +36,13 @@ namespace AntAlgorithmsAnalize
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(graphOptions);
 
-                var aspg = new Aspg(graphOptions, inputGraph, rnd);
+                var aspg = new AspgUnweighted(graphOptions, inputGraph, rnd);
                 var resultBasic = aspg.GetQuality();
 
                 var analyzeResult = new AnalyzeResult
                 {
                     AnalyzeID = analyzeData.ID,
-                    BestCost = analyzeData.NumberOfEdges - resultBasic.BestCost,
+                    BestCost = resultBasic.BestCost,
                     BestCostIteration = resultBasic.BestCostIteration,
                     Duration = resultBasic.ElapsedMilliseconds,
                     StartDate = startDate,
@@ -58,12 +58,12 @@ namespace AntAlgorithmsAnalize
             }
 
             //var options = new BaseOptions(numberOfIterations: 10, numberOfRegions: 2, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
-            //var dataLoader = new FileLoader("Graphs/C.txt");
+            //var dataLoader = new FileLoader("C.txt");
             //var graph = new DimacsGraph(dataLoader);
             //graph.InitializeGraph();
-            //var aspg = new Aspg(options, graph, rnd);
+            //var aspg = new AspgUnweighted(options, graph, rnd);
             //var resultBasic = aspg.GetQuality();
-            //var globlaCost = graph.NumberOfEdges - resultBasic.Quality;
+            //var globlaCost = resultBasic.BestCost;
         }
     }
 }

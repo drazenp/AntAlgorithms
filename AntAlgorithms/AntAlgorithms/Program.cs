@@ -27,19 +27,18 @@ namespace AntAlgorithms
 
             var rnd = new Random(Environment.TickCount);
 
-            var options = new BaseOptions(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
-            var graph = new BasicGraph(BasicEdges, BasicVertexWeights);
-            graph.InitializeGraph();
-            var aspg = new Aspg(options, graph, rnd);
-            var resultBasic = aspg.GetQuality();
-
-            //var options = new BaseOptions(numberOfIterations: 10, numberOfRegions: 2, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
-            //var dataLoader = new FileLoader("Graphs/myciel4.col");
-            //var graph = new DimacsGraph(dataLoader);
+            //var options = new BaseOptions(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            //var graph = new BasicGraph(BasicEdges, BasicVertexWeights);
             //graph.InitializeGraph();
-            //var aspg = new AspgUnweighted(options, graph, rnd);
+            //var aspg = new Aspg(options, graph, rnd);
             //var resultBasic = aspg.GetQuality();
-            //var globlaCost = graph.NumberOfEdges - resultBasic.BestCost;
+
+            var options = new BaseOptions(numberOfIterations: 50, numberOfRegions: 2, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D);
+            var dataLoader = new FileLoader("Graphs/myciel4.col");
+            var graph = new DimacsGraph(dataLoader);
+            graph.InitializeGraph();
+            var aspg = new AspgUnweighted(options, graph, rnd);
+            var resultBasic = aspg.GetQuality();
 
             //var parallelOptimisationOptoins =
             //    new OptionsParallelOptimisation(numberOfIterations: 10, numberOfRegions: 3, alfa: 1, beta: 5, ro: 0.6, delta: 0.1D, numberOfInterSections: 5);

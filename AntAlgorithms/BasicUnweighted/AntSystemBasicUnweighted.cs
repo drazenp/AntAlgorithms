@@ -41,7 +41,8 @@ namespace BasicUnweighted
 
         public BaseAntSystemFragment UpdatePhermone()
         {
-            _graph.UpdatePhermone(_antSystemFragment.ColoniesConnections, _antSystemFragment.Treil, _options, 0);
+            var sumOfOptimalityCriterions = _antSystemFragment.SumOfOptimalityCriterion;
+            _graph.UpdatePhermone(_antSystemFragment.ColoniesConnections, _antSystemFragment.Treil, _options, sumOfOptimalityCriterions);
             return _antSystemFragment;
         }
     }

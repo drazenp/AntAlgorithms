@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using AlgorithmsCore;
 using AlgorithmsCore.Contracts;
 using AlgorithmsCore.Options;
@@ -40,8 +39,10 @@ namespace BasicUnweighted
                 var bestFragment = antSystem.UpdatePhermone();
 
                 var newQuality = bestFragment.SumOfOptimalityCriterion;
-                Console.WriteLine($"New quality: {newQuality}");
+
+                //Console.WriteLine($"New quality: {newQuality}");
                 //Log.Debug($"New quality: {newQuality}");
+                //Log.Debug($"Trail count: {bestFragment.Treil.Sum(c => c.Count)}");
 
                 // Save the best results.
                 if (result.Quality > newQuality)

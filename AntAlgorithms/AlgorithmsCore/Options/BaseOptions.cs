@@ -8,6 +8,7 @@
         public double Beta { get; }
         public double Ro { get; }
         public  double Delta { get; }
+        public double ToEvaporate { get; }
 
         public BaseOptions(int numberOfIterations, int numberOfRegions, double alfa, double beta, double ro, double delta)
         {
@@ -17,6 +18,7 @@
             Beta = beta;
             Ro = ro;
             Delta = delta;
+            ToEvaporate = 1 - ro;
         }
     }
 }
